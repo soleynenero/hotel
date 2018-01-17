@@ -6,25 +6,23 @@
     use \DateTime; // pour utiliser la classe Date de PHP dans notre classe expireToken
 
     class Controller {
-
         public function sendMail(array $user, array $message){
-
             global $app;
             try {
                 $mail = $app["mail"];
                 //Server settings (à récupéer depuis les informations de notre serveur/hébergeur)
                 $mail->SMTPDebug = 0;                                 // Enable verbose debug output
                 $mail->isSMTP();                                      // Set mailer to use SMTP
-                $mail->Host = 'provolone.o2switch.net';  // Specify main and backup SMTP servers
+                $mail->Host = 'smtp-mail.outlook.com';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'eleve@lyknowledge.fr';                 // SMTP username
-                $mail->Password = 'zoubida22?';                           // SMTP password
-                $mail->SMTPSecure = 'ssl';                            // mode de sécurité
-                $mail->Port = 465;                                    // TCP port to connect to
+                $mail->Username = 'hotelgrandsvoisins@outlook.com';                 // SMTP username
+                $mail->Password = 'webforce2018';                           // SMTP password
+                $mail->SMTPSecure = 'tls';                            // mode de sécurité
+                $mail->Port = 587;                                    // TCP port to connect to
             
                 //Recipients (qui est l'expéditeur)
-                $mail->setFrom('eleve@lyknowledge.fr', 'Hotel3'); // l'adresse de l'expéditeur (nous). Le 2ème argument est un alias qui s'affichera dans le mail
-                $mail->addAddress($user["address"], $user['name']); // l'adresse du destinataire. + alias en 2ème arg (en général le nom)
+                $mail->setFrom('hotelgrandsvoisins@outlook.com', 'alo'); // l'adresse de l'expéditeur (nous). Le 2ème argument est un alias qui s'affichera dans le mail
+                $mail->addAddress("kergoals@gmail.com", 'alex'); // l'adresse du destinataire. + alias en 2ème arg (en général le nom)
                 
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
@@ -38,12 +36,9 @@
                 return false;
             }
         }
-
         public function generateToken(){
             return substr( md5( uniqid().mt_rand() ), 0, 22);
-
         }
-
         
         public function expireToken(){
             $dateNow = new DateTime();
