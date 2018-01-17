@@ -1,9 +1,28 @@
 {% extends "layout_admin.html.twig" %}
 
 {% block content %}
-    
-<div class="banner">    	   
-    <p>Ceci est la page Gestion des Membres.</p>                
-</div>
+
+    <h3 class="text-center">Gestion des membres</h3>
+    {# sachant que c'est un tableau multidimentionnel il faut que je fasse 2 boucles for pour afficher mes informations #}
+    <table class="table">
+        <tr>
+            <th>Prenom</th>
+            <th>Nom</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th>Code postal</th>
+        </tr>
+        
+        {% for membre in membres %}
+            <tr>
+            {% for m in membre %}
+                <td>{{ m }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        
+    </table>
 
 {% endblock %}

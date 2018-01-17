@@ -257,10 +257,8 @@ $app->get('/admin', function() use($app)
 
 
 
-$app->get('admin/gestion_membres', function() use($app)
-{
-    return $app['twig']->render('basic/gestion_membres.html.twig', array());
-})->bind('gestion_membres');
+$app->get('admin/gestion_membres', "Hotel\Controller\GestionMembreController::affichageMembreAction")
+->bind('gestion_membres');
 
 $app->post('/admin/gestion_membres', function() use($app)
 {
@@ -290,10 +288,8 @@ $app->post('/admin/gestion_reservations', function() use($app)
 /************************************************* */
 
 
-$app->get('admin/gestion_chambres', function() use($app)
-{
-    return $app['twig']->render('basic/gestion_chambres.html.twig', array());
-})->bind('gestion_chambres');
+$app->get('admin/gestion_chambres', "Hotel\Controller\GestionChambreController::affichageChambreAction")
+->bind('gestion_chambres');
 
 $app->post('/admin/gestion_chambres', function() use($app)
 {

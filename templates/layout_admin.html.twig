@@ -66,12 +66,12 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home / Site <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ path ('Home') }}">Accéder au site </a></li>
+                  <li><a href="{{ path ('Home') }}"><i class="fa fa-home"></i> Accueil site {#<span class="fa fa-chevron-down"></span>#}</a>
+                    {# <ul class="nav child_menu">
+                      <li><a >Accéder au site </a></li>
                       <li><a href="">Accéder à la page X </a></li>
                       <li><a href="">Accéder à la page X </a></li>
-                    </ul>
+                    </ul> #}
                   </li>
                   <li><a><i class="fa fa-edit"></i> Gestion Administrative <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -135,7 +135,7 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-                
+          {% block content %}{% endblock %}
 
         </div>
         <!-- /page content -->
