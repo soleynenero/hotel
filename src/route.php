@@ -89,7 +89,8 @@ $app->post('/connexion', "Hotel\Controller\ConnexionController::login")
 $app->post('/oubli_mdp', function() use($app)
 {
     return $app['twig']->render('basic/oubli_mdp.html.twig', array());
-})->bind('oubli_mdp');
+})
+->bind('oubli_mdp');
 
 
 

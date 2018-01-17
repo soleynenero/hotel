@@ -24,22 +24,22 @@ use Symfony\Component\HttpFoundation\Response;
 // /* *********function********************* */
 
 // // function verifParam
-//  function verifParam($request, $verifRequest = array()): array{
+ function verifParam($request, $verifRequest = array()): array{
 
-//     $error = false;
-//     $messageError = "";
+    $error = false;
+    $messageError = "";
 
-//     foreach($verifRequest as $key => $val) {
-//         if( !$request->has($val) || trim($request->get($val)) == ""){ // si la $val n'existe pas et qu'elle est vide
-//             $error = true;
-//             $messageError .= " $val, ";
-//             echo '<div class="alert alert-danger col-md-8 col-md-offset-2 text-center">les champs sont vides</div>';
-//         } 
+    foreach($verifRequest as $key => $val) {
+        if( !$request->has($val) || trim($request->get($val)) == ""){ // si la $val n'existe pas et qu'elle est vide
+            $error = true;
+            $messageError .= " $val, ";
+            echo '<div class="alert alert-danger col-md-8 col-md-offset-2 text-center">les champs sont vides</div>';
+        } 
         
-//     }
+    }
     
-//     return array("error" => $error, "message" => $messageError);
-// }
+    return array("error" => $error, "message" => $messageError);
+}
 
 
 // /* *******midleware******************* */
