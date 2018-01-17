@@ -243,12 +243,17 @@ $app->get('/services', function() use($app)
 
 
 /*************************************** */
-/******* ROUTES  SECTION GESTION *********/
+/**** ROUTES  SECTION GESTION ADMIN *****/
 /************************************** */
-$app->get('/admin', function() use($app)
-{
-    return $app['twig']->render('index_admin.html.twig', array());
-})->bind('admin');
+
+$app->get('admin', "Hotel\Model\InfosAdminDAO::selectAllUser")
+->bind('admin');
+
+
+// $app->get('/admin', function() use($app)
+// {
+//     return $app['twig']->render('InfosAdminDAO.php', array());
+// })->bind('admin');
 
 
 /************************************************* */
