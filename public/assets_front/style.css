@@ -1,42 +1,14 @@
-/* PARTIE PRE-GENERE DU TEMPLATE*/
-body{
-    background-color: #fff;
-    font-family: 'Raleway', sans-serif;
-    font-size: 15px;
-    line-height: 15px; 
-    color: #73726C;
-}
+body{background-color: #fff;font-family: 'Raleway', sans-serif;font-size: 15px;line-height: 15px; color: #73726C;}
 
 
 
-.btn , a , a:hover{
-    text-decoration: none;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    outline:0 ;
-}
+.btn,a,a:hover{text-decoration: none;-webkit-transition: all 0.3s ease-in-out;-moz-transition: all 0.3s ease-in-out;-ms-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;outline:0 ;}
 
-h1,h2,h3,h4,h5,h6{
-    font-family:'Old Standard TT', serif;
-    line-height: 1em;
-    margin: 0;
-}
-h1{
-    font-size: 5em;
-}
-h1.title , h2{
-    font-size: 2em;
-    line-height: 3em;
-}
-h3{
-    font-size: 1.5em;
-    margin-bottom: 0.70em;
-}
-h4{
-    font-size: 1.25em; margin-bottom: 0.75em;}
+h1,h2,h3,h4,h5,h6{font-family:'Old Standard TT', serif;line-height: 1em;margin: 0;}
+h1{font-size: 5em;}
+h1.title,h2{font-size: 2em;line-height: 3em;}
+h3{font-size: 1.5em; margin-bottom: 0.70em;}
+h4{font-size: 1.25em; margin-bottom: 0.75em;}
 p{margin-bottom: 1em;line-height: 1.5em;}
 
 
@@ -157,80 +129,14 @@ body::-webkit-scrollbar {
     ::-webkit-scrollbar-track {
        background: #ccc; 
 /*        -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); 
-
         -webkit-border-radius: 10px;
         border-radius: 10px;*/
-                }
-                /* Handle */
-                
-                 ::-webkit-scrollbar-thumb {
-                    /*        -webkit-border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+/*        -webkit-border-radius: 10px;
         border-radius: 10px;*/
-
-                    background: #bfa145;
-                }
-                
-                 ::-webkit-scrollbar-thumb:window-inactive {
-                    background: #ddd;
-                }
-                /*responsive starts here*/
-                
-                @media (max-width: 991px) {}
-                
-                @media (max-width: 767px) {
-                    .navbar-toggle {
-                        margin-top: 23px;
-                    }
-                    .navbar-default .navbar-toggle {
-                        background-color: #bfa145;
-                    }
-                    .navbar-default .navbar-toggle:hover,
-                    .navbar-default .navbar-toggle:focus {
-                        background-color: #5F5021;
-                    }
-                    .navbar-default .navbar-toggle .icon-bar {
-                        background-color: #fff;
-                    }
-                    .navbar-nav>li>a {
-                        line-height: 1em;
-                    }
-                    h1 {
-                        font-size: 2em;
-                    }
-                    .banner p {
-                        font: 300 1em/1em 'Old Standard TT', serif;
-                    }
-                    .banner .arrow-nav {
-                        margin-left: -22px;
-                        height: 3em;
-                        width: 3em;
-                        bottom: -1.5em;
-                    }
-                    .banner .arrow-nav i {
-                        font-size: 2em;
-                        line-height: 45px;
-                    }
-                    .spacer {
-                        padding: 4em 0;
-                    }
-                    .reserve-info h3 {
-                        margin-top: 2em;
-                    }
-                    .services div.col-sm-4 {
-                        margin-bottom: 2em;
-                    }
-                    footer.spacer {
-                        padding: 1em 0 3em 0;
-                    }
-                    footer h4 {
-                        margin-top: 2em;
-                    }
-                    .room-features .size-price {
-                        margin-bottom: 2em;
-                    }
-                }
-                /***********************************************************************
-
         background:#bfa145; 
     }
     ::-webkit-scrollbar-thumb:window-inactive {
@@ -265,7 +171,7 @@ body::-webkit-scrollbar {
     footer h4{margin-top: 2em;}
 
     .room-features .size-price{margin-bottom: 2em;}
- 
+}
 /***********************************************************************
 /***********************************************************************
 *********************  FIN PARTIE PRE-GENERER **************************
