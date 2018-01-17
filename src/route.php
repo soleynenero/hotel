@@ -60,10 +60,10 @@ $app->get('/inscription', function() use($app)
 // peut etre mettre un lien vers la page login si l'utilisateur a deja un compte
 })->bind('inscription');
  
-$app->post('/inscription','Webforce\Controller\AuthentificationController::InscriptionAction')->before($verifParamInscription);
+$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')->before($verifParamInscription);
 
 /**************************** Validate token email *********** */
-$app->get("/verif/{token}/", 'Webforce\Controller\AuthentificationController::verifEmailAction');
+$app->get("/verif/{token}/", 'Hotel\Controller\AuthentificationController::verifEmailAction');
 
 
 
