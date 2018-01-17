@@ -1,9 +1,45 @@
 {% extends "layout.html.twig" %}
 
-{% block content %}
-    
-<div class="banner">    	   
-    <p>Ceci est la page Profil Membre.</p>                
-</div>
 
+{% block navProfil %}
+{% if connect != false %}
+    <div class="navbar_profil col-md-4 infoProfil">
+        <ul class="navbar">
+            <li><a href="{{ path ('profil_membre') }}">Mes Informations</a></li>
+            <li><a href="{{ path ('reservation') }}">Mes Réservations</a></li>
+            <li><a href="{{ path ('modificationInfos') }}">Modification du profil</a></li>
+            <li><a href="{{ path ('modificationMdp') }}">Modification du mot de passe</a></li>
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block infoProfil %}
+    <div class="col-md-offset-1 col-md-6 text-center infoProfil">
+        {# affichage des infos de mon utilisateur #}
+        <h4>Qui suis-je ?</h4>
+        <hr>
+        <p>
+            prenom : {{ prenom }} <br>
+            nom : {{ nom }} <br>
+        </p>
+
+        <hr>  
+        <h4>Me contacter</h4>
+        <hr>
+
+        <p>
+            telephone : {{ telephone }} <br>
+            email : {{ email }} <br>
+        </p>
+
+        <hr>
+        <h4>Mon adresse</h4>
+        <hr>
+        <p>
+            adresse : {{ adresse }} <br>
+            ville : {{ ville }} <br>
+            code postal : {{ code_postal }} <br>
+        </p>
+    </div>
 {% endblock %}

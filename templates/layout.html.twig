@@ -1,41 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="fr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Holiday Crown | Best hotel in Dubai</title>
+<title>Hôtel Webforce 3 | Bienvenue</title>
 
-<!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800|Old+Standard+TT' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800' rel='stylesheet' type='text/css'>
 
-<!-- font awesome -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800|Old+Standard+TT' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800' rel='stylesheet' type='text/css'>
 
-<!-- bootstrap -->
-<link rel="stylesheet" href="{{ asset('assets_front/bootstrap/css/bootstrap.min.css') }}" />
+    <!-- font awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-<!-- uniform -->
-<link type="text/css" rel="stylesheet" href="{{ asset('assets_front/uniform/css/uniform.default.min.css') }}" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{{ asset('assets_front/bootstrap/css/bootstrap.min.css') }}" />
 
-<!-- animate.css -->
-<link rel="stylesheet" href="{{ asset('assets_front/wow/animate.css') }}" />
+    <!-- uniform -->
+    <link type="text/css" rel="stylesheet" href="{{ asset('assets_front/uniform/css/uniform.default.min.css') }}" />
 
-<!-- gallery -->
-<link rel="stylesheet" href="{{ asset('assets_front/gallery/blueimp-gallery.min.css') }}">
+    <!-- animate.css -->
+    <link rel="stylesheet" href="{{ asset('assets_front/wow/animate.css') }}" />
 
-<!-- favicon -->
-<link rel="shortcut icon" href="{{ asset('assets_front/images/favicon.png" type="image/x-icon') }}">
-<link rel="icon" href="{{ asset('assets_front/images/favicon.png" type="image/x-icon') }}">
+    <!-- gallery -->
+    <link rel="stylesheet" href="{{ asset('assets_front/gallery/blueimp-gallery.min.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets_front/style.css') }}">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ asset('assets_front/images/favicon.png" type="image/x-icon') }}">
+    <link rel="icon" href="{{ asset('assets_front/images/favicon.png" type="image/x-icon') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets_front/style.css') }}">
 
 </head>
 
 <body id="home">
 
 
-<!-- top 
+    <!-- top 
   <form class="navbar-form navbar-left newsletter" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Enter Your Email Id Here">
@@ -44,108 +46,110 @@
     </form>
  top -->
 
-<!-- header -->
-<nav class="navbar  navbar-default" role="navigation">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ path ('Home') }}"><img src="{{ asset('assets_front/images/logo.png') }}"  alt="holiday crown"></a>
+
+    <!-- header -->
+    <nav class="navbar  navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path ('Home') }}"><img src="{{ asset('assets_front/images/logo.png') }}" alt="holiday crown"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                {% block menuNav %}
+                    {% include 'include/menu_nav.html.twig' ignore missing %}
+                {% endblock %}
+
+            </div>
+            <!-- Wnavbar-collapse -->
+        </div>
+        <!-- container-fluid -->
+    </nav>
+    <!-- header -->
+
+    {% block content %}{% endblock %}
+    
+    <div class="container">
+        {% block navProfil %}{% endblock %}
+        {% block infoProfil %}{% endblock %}   
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-      
-      <ul class="nav navbar-nav">        
-        <li><a href="{{ path('Home') }}"> Accueil </a></li>
-        <li><a href="{{ path('roomtarif') }}"> Les Chambres & Tarif</a></li>        
-        <li><a href="{{ path('introduction') }}"> Présentation </a></li>
-        <li><a href="{{ path('gallery') }}"> Galerie</a></li>
-        <li><a href="{{ path('contacts') }}"> Contacts</a></li>
-        <li><a href="{{ path('connexion') }}"> Se connecter </a></li>
-      </ul>
-    </div><!-- Wnavbar-collapse -->
-  </div><!-- container-fluid -->
-</nav>
-<!-- header -->
 
-
-        {% block content %}{% endblock %}
-
-
-
-<footer class="spacer">
+    <footer class="spacer">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
                     <h4>Holiday Crown</h4>
-                    <p>Holiday Crown was these three and songs arose whose. Of in vicinity contempt together in possible branched. Assured company hastily looking garrets in oh. Most have love my gone to this so. Discovered interested prosperous the our affronting insipidity day. Missed lovers way one vanity wishes nay but. Use shy seemed within twenty wished old few regret passed. Absolute one hastened mrs any sensible. </p>
-                </div>              
-                 
-                 <div class="col-sm-3">
+                    <p>Holiday Crown was these three and songs arose whose. Of in vicinity contempt together in possible branched. Assured company hastily looking garrets in oh. Most have love my gone to this so. Discovered interested prosperous the our
+                        affronting insipidity day. Missed lovers way one vanity wishes nay but. Use shy seemed within twenty wished old few regret passed. Absolute one hastened mrs any sensible. </p>
+                </div>
+
+                <div class="col-sm-3">
                     <h4>Quick Links</h4>
                     <ul class="list-unstyled">
-                      <li><a href="{{ path('roomtarif') }}"> Chambres & Tarif</a></li>        
-                      <li><a href="{{ path('introduction') }}"> Présentation</a></li>
-                      <li><a href="{{ path('gallery') }}"> Galerie</a></li>
-                      <li><a href="{{ path('contacts') }}"> Contacts</a></li>
-                      <li><a href="{{ path('mentions_legales') }}"> Mentions Legales et CGV </a></li>
+                        <li><a href="{{ path ('roomtarif') }}"> Chambres & Tarif</a></li>
+                        <li><a href="{{ path ('introduction') }}"> Présentation</a></li>
+                        <li><a href="{{ path ('gallery') }}"> Galerie</a></li>
+                        <li><a href="{{ path ('contacts') }}"> Contacts</a></li>
+                        <li><a href="{{ path ('mentions_legales') }}"> Mentions Legales et CGV </a></li>
                     </ul>
                 </div>
-                 <div class="col-sm-4 subscribe">
+                <div class="col-sm-4 subscribe">
                     <h4>Inscription</h4>
                     <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Enter email id here">
-                    <span class="input-group-btn">
+                        <input type="text" class="form-control" placeholder="Enter email id here">
+                        <span class="input-group-btn">
                     <button class="btn btn-default" type="button">S'inscrire</button>
                     </span>
                     </div>
                     <div class="social">
-                    <a href="#"><i class="fa fa-facebook-square" data-toggle="tooltip" data-placement="top" data-original-title="facebook"></i></a>
-                    <a href="#"><i class="fa fa-instagram"  data-toggle="tooltip" data-placement="top" data-original-title="instragram"></i></a>
-                    <a href="#"><i class="fa fa-twitter-square" data-toggle="tooltip" data-placement="top" data-original-title="twitter"></i></a>
-                    <a href="#"><i class="fa fa-pinterest-square" data-toggle="tooltip" data-placement="top" data-original-title="pinterest"></i></a>
-                    <a href="#"><i class="fa fa-tumblr-square" data-toggle="tooltip" data-placement="top" data-original-title="tumblr"></i></a>
-                    <a href="#"><i class="fa fa-youtube-square" data-toggle="tooltip" data-placement="top" data-original-title="youtube"></i></a>
+                        <a href="#"><i class="fa fa-facebook-square" data-toggle="tooltip" data-placement="top" data-original-title="facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"  data-toggle="tooltip" data-placement="top" data-original-title="instragram"></i></a>
+                        <a href="#"><i class="fa fa-twitter-square" data-toggle="tooltip" data-placement="top" data-original-title="twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest-square" data-toggle="tooltip" data-placement="top" data-original-title="pinterest"></i></a>
+                        <a href="#"><i class="fa fa-tumblr-square" data-toggle="tooltip" data-placement="top" data-original-title="tumblr"></i></a>
+                        <a href="#"><i class="fa fa-youtube-square" data-toggle="tooltip" data-placement="top" data-original-title="youtube"></i></a>
                     </div>
                 </div>
             </div>
-            <!--/.row--> 
+            <!--/.row-->
         </div>
-        <!--/.container-->    
-    
-    <!--/.footer-bottom--> 
-</footer>
+        <!--/.container-->
 
-<div class="text-center copyright">Powered by <a href="http://thebootstrapthemes.com">thebootstrapthemes.com</a></div>
+        <!--/.footer-bottom-->
+    </footer>
 
-<a href="#home" class="toTop scroll"><i class="fa fa-angle-up"></i></a>
+    <div class="text-center copyright">Powered by <a href="http://thebootstrapthemes.com">thebootstrapthemes.com</a></div>
 
-
-
-
-<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
-<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-    <!-- The container for the modal slides -->
-    <div class="slides"></div>
-    <!-- Controls for the borderless lightbox -->
-    <h3 class="title">title</h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <!-- The modal dialog, which will be used to wrap the lightbox content -->    
-</div>
+    <a href="#home" class="toTop scroll"><i class="fa fa-angle-up"></i></a>
 
 
 
 
+    <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title">title</h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    </div>
 
-<script src="assets/jquery.js"></script>
+
+
+
+
+<script src="{{ asset('assets_front/jquery.js') }}"></script>
 
 <!-- wow script -->
 <script src="{{ asset('assets_front/wow/wow.min.js') }}"></script>
@@ -153,9 +157,8 @@
 <!-- uniform -->
 <script src="{{ asset('assets_front/uniform/js/jquery.uniform.js') }}"></script>
 
-
 <!-- boostrap -->
-<script src="{{ asset('assets_front/bootstrap/js/bootstrap.js" type="text/javascript') }}" ></script>
+<script src="{{ asset('assets_front/bootstrap/js/bootstrap.js') }}" type="text/javascript" ></script>
 
 <!-- jquery mobile -->
 <script src="{{ asset('assets_front/mobile/touchSwipe.min.js') }}"></script>
@@ -180,9 +183,5 @@
 
 
 </body>
+
 </html>
-
-
-
-
-

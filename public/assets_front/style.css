@@ -172,3 +172,63 @@ body::-webkit-scrollbar {
 
     .room-features .size-price{margin-bottom: 2em;}
 }
+/***********************************************************************
+/***********************************************************************
+*********************  FIN PARTIE PRE-GENERER **************************
+ ***********************************************************************
+ ***********************************************************************/
+  
+/************************************************************************
+*********************  DEBUT PARTIE RAJOUT ******************************
+ ************************************************************************
+ ***********************************************************************/
+
+
+
+/* **************css page inscription*********************** */
+
+.inscription .alert .alert-danger .col-md-8 .col-md-offset-2 .text-center {
+    z-index: 10;
+}
+
+
+.inscription input .col-md-12 {
+    background: #bfa145;
+    color: white;
+}
+
+
+ /* PAGE DE CONNEXION*/
+
+ #blockConnexion {
+   margin: 180px 0 174px 0;
+ }
+ 
+ /* side bar dans profil et element du contenu */
+ .navbar_profil .navbar a
+ {
+     color : #bfa145 ;
+ }
+
+ .navbar_profil li
+ {
+    list-style : none ;
+    padding : 10px;
+ }
+
+ .infoProfil
+ {
+     padding : 20px ;
+     border-bottom : 30px;
+ }
+
+ .infoProfil .form-control , .infoProfil .btn
+ {
+    border-radius : 5px ;
+ }
+ 
+.navbar_profil
+{
+    padding-top : 75px ;
+    line-height: 20px ;
+}

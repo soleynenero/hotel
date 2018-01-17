@@ -5,6 +5,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Hotel\Controller\InfoUserController;
+use Twig\Extension\AbstractExtension;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
@@ -13,12 +15,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 // route Home
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html.twig', array());
+    return $app['twig']->render('index.html.twig');
 })->bind('Home');
 
+$app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
+
 // route roomtarif
-$app->get('/les-chambres-et-tarifs.html', function () use ($app) {
-    return $app['twig']->render('basic/room_tarif.html.twig', array());
+$app->get('/les-chambres-et-tarifs', function () use ($app) {
+    return $app['twig']->render('basic/room_tarif.html.twig');
 })->bind('roomtarif');
 
 // route introduction
@@ -42,31 +46,44 @@ $app->get('/mentions_legales', function () use ($app) {
 })->bind('mentions_legales');
 
 
+
+
+
 /*** CONNEXION ET INSCRIPTION ***/
 
-// page d'inscription
+/************************************************* */
+/************* ROUTE PAGE INSCRIPTION *************/
+/************************************************* */
 $app->get('/inscription', function() use($app)
 {
     return $app['twig']->render('basic/inscription.html.twig', array());
 // peut etre mettre un lien vers la page login si l'utilisateur a deja un compte
 })->bind('inscription');
  
-$app->post('/inscription', function() use($app)
-{
-// Post à compléter avec les conditions de contrôle : mdp , nom , prenom ,  adresse , ville , code postal , tel , email , statut en hidden
-});
+$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')//->before($verifParamInscription)
+;
 
 
-// page de connexion
+
+/************************************************* */
+/*************** ROUTE PAGE CONNEXIONS *************/
+/************************************************* */
+
 $app->get('/connexion', function() use($app)
 {
     return $app['twig']->render('basic/connexion.html.twig', array());
 })->bind('connexion');
 
-$app->post('/connexion', function() use($app)
-{
-// Post à compléter : mdp , token en hidden ( a générer a l'ouverture de la session)
-});
+
+$app->post('/connexion', "Hotel\Controller\ConnexionController::login")
+//->before($verifParamLogin)
+;
+
+
+
+/************************************************* */
+/******************* ROUTE PAGE PROFIL *************/
+/************************************************* */
 
 // page mot de passe oublié
 $app->post('/oubli_mdp', function() use($app)
@@ -74,21 +91,73 @@ $app->post('/oubli_mdp', function() use($app)
     return $app['twig']->render('basic/oubli_mdp.html.twig', array());
 })->bind('oubli_mdp');
 
+
+
+
+
+
 /*** LES ROUTES DES PAGES SECONDAIRES ***/
 
-// page profil
-$app->get('/profil_membre', function() use($app)
-{
-    return $app['twig']->render('basic/profil_membre.html.twig', array());
-})->bind('profil_membre');
-
-$app->post('/profil_membre', function() use($app)
-{
-// Post à compléter : nom , prenom ,  adresse , ville , code postal , tel , email , modif mdp
-});
+/************************************************* */
+/******************* ROUTE PAGE PROFIL *************/
+/************************************************* */
 
 
-// page de chambre standard
+
+// affichage info
+
+$app->get('/profil_membre', "Hotel\Controller\InfoUserController::affichageUserAction")->bind('profil_membre')
+// ->before($verifParamLogin)
+;
+
+// modification info
+$app->get('/profil_membre/modificationInfos', "Hotel\Controller\InfoUserController::affichageFormAction")
+->bind('modificationInfos')
+// ->before($verifParamLogin)
+;
+$app->post('/profil_membre/modificationInfos', "Hotel\Controller\InfoUserController::modificationProfilAction");
+    // Post à compléter : nom , prenom ,  adresse , ville , code postal , tel , email , modif mdp
+
+//     // Post à compléter : nom , prenom ,  adresse , ville , code postal , tel , email , modif mdp
+// ->bind('profil_membre1')
+// // ->before($verifParamLogin)
+// ;
+
+// modification reservation
+$app->get('/profil_membre/reservation', "Hotel\Controller\InfoUserController::affichageReservationAction")->bind('reservation')
+// ->before($verifParamLogin)
+;
+
+
+
+
+// modification mdp 
+$app->get('/profil_membre/modificationMdp', function() use($app){
+    return $app['twig']->render('basic/modification_mdp.html.twig');
+})->bind('modificationMdp')
+// ->before($verifParamLogin)
+;
+$app->post('/profil_membre/modificationMdp', "Hotel\Controller\InfoUserController::modifMdpAction")//->bind('modificationMdp1')
+// ->before($verifParamLogin)
+;
+
+
+// deconnexion
+$app->get('/deconnexion', function() use($app){
+    
+    session_destroy() ;
+    return $app->redirect("/hotel/public/");
+
+})->bind('deconnexion');
+
+
+
+/************************************************* */
+/************** ROUTE CHAMBRE STANDART *************/
+/************************************************* */
+
+
+
 $app->get('/chambre_standard', function() use($app)
 {
     return $app['twig']->render('basic/chambre_standard.html.twig', array());
@@ -101,7 +170,13 @@ $app->post('/chambre_standard', function() use($app)
 });
 
 
-// page de chambre supérieur
+
+
+/************************************************* */
+/************ ROUTE CHAMBRE SUPERIEUR *************/
+/************************************************* */
+
+
 $app->get('/chambre_superieure', function() use($app)
 {
     return $app['twig']->render('basic/chambre_superieure.html.twig', array());
@@ -114,7 +189,14 @@ $app->post('/chambre_superieure', function() use($app)
 });
 
 
-// page de chambre luxe
+
+
+
+/************************************************* */
+/************** ROUTE CHAMBRE LUXE *****************/
+/************************************************* */
+
+
 $app->get('/chambre_luxe', function() use($app)
 {
     return $app['twig']->render('basic/chambre_luxe.html.twig', array());
@@ -127,7 +209,14 @@ $app->post('/chambre_luxe', function() use($app)
 });
 
 
-// page de validation du paiement
+
+
+/************************************************* */
+/********* ROUTE VALIDATION DU PAIEMENT ***********/
+/************************************************* */
+
+
+
 $app->get('/validation', function() use($app)
 {
 // numéro facture, prix total ,  moyen de paiement , la date  
@@ -135,7 +224,15 @@ $app->get('/validation', function() use($app)
 })->bind('validation');
 
 
-// page services
+
+
+
+/************************************************* */
+/************** ROUTE SERVICES DU SITE *************/
+/************************************************* */
+
+
+
 $app->get('/services', function() use($app)
 {
     return $app['twig']->render('basic/services.html.twig', array());
@@ -143,62 +240,92 @@ $app->get('/services', function() use($app)
 
 
 
-/*** ROUTES VERS LES PAGES DE GESTION ***/
 
-// page gestion membres
-$app->get('admin/', function() use($app)
+/*************************************** */
+/******* ROUTES  SECTION GESTION *********/
+/************************************** */
+$app->get('/admin', function() use($app)
 {
     return $app['twig']->render('index_admin.html.twig', array());
 })->bind('admin');
 
-// page gestion membres
+
+/************************************************* */
+/************** ROUTE GESTION MEMBRES *************/
+/************************************************* */
+
+
+
 $app->get('admin/gestion_membres', function() use($app)
 {
     return $app['twig']->render('basic/gestion_membres.html.twig', array());
 })->bind('gestion_membres');
 
-$app->post('admin/gestion_membres', function() use($app)
+$app->post('/admin/gestion_membres', function() use($app)
 {
 // Post à compléter : nom , prenom adresse , ville , code postal , telephone , email, statut
 });
 
 
-// page gestion reservations
+/************************************************* */
+/********** ROUTE GESTION RESERVATIONS ************/
+/************************************************* */
+
+
 $app->get('admin/gestion_reservations', function() use($app)
 {
     return $app['twig']->render('basic/gestion_reservations.html.twig', array());
 })->bind('gestion_reservations');
 
-$app->post('admin/gestion_reservations', function() use($app)
+$app->post('/admin/gestion_reservations', function() use($app)
 {
 // Post à compléter : date deb , date fin , nb personne , id service , id chambre , statut chambre , nom service , id facture 
 });
 
 
-// page gestion chambres
+
+/************************************************* */
+/********** ROUTE GESTION CHAMBRES ************/
+/************************************************* */
+
+
 $app->get('admin/gestion_chambres', function() use($app)
 {
     return $app['twig']->render('basic/gestion_chambres.html.twig', array());
 })->bind('gestion_chambres');
 
-$app->post('admin/gestion_chambres', function() use($app)
+$app->post('/admin/gestion_chambres', function() use($app)
 {
 // Post à compléter : num chambre, statut , telephone , prix , categorie chambre , capacité
 });
 
-// page gestion services
+
+/************************************************* */
+/********** ROUTE GESTION SERVICES *****************/
+/************************************************* */
+
+
+
 $app->get('admin/gestion_services', function() use($app)
 {
     return $app['twig']->render('basic/gestion_services.html.twig', array());
 })->bind('gestion_services');
 
-$app->post('admin/gestion_services', function() use($app)
+$app->post('/admin/gestion_services', function() use($app)
 {
 // Post à compléter selon la base de données.
 });
 
 
-// pages ERREURS
+
+
+
+/************************************************* */
+/***************** PAGE ERREUR *********************/
+/************************************************* */
+
+
+
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;

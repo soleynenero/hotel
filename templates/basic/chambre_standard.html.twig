@@ -1,9 +1,74 @@
 {% extends "layout.html.twig" %}
 
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.carousel').carousel();
+    });
+</script>
+{% endblock %}
+
 {% block content %}
-    
-<div class="banner">    	   
-    <p>Ceci est la page Chambre Standard.</p>                
+
+<div class="container">
+    <h1 class="title">Chambre Standard <button type="submit" class="btn btn-default" style="font-weight:bold;" href="">Réserver!</button></h1> <!--penser à rajouter le lien vers la réservation-->
+
+    <div class="col-sm-12 col-md-12">
+        <div id="carousel" class="carousel slide col-md-8" data-ride="carousel" style="padding=1em;">
+            <div class="carousel-inner role="listbox" ">
+                <div class="item active">
+                    <img src="{{ asset('assets_front/images/photos/STD1.jpg') }}" class="img-responsive" alt="First slide">
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets_front/images/photos/STD2.jpg') }}" class="img-responsive" alt="Second slide">
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets_front/images/photos/STD3.jpg') }}" class="img-responsive" alt="Third slide">
+                </div>
+                <div class="item"> 
+                    <img src="{{ asset('assets_front/images/photos/STD4.jpg') }}" class="img-responsive" alt="Fourth slide">
+                </div>
+                <div class="item">
+                    <img src="{{ asset('assets_front/images/photos/STD5.jpg') }}" class="img-responsive" alt="Fifth slide">
+                </div>
+            </div>
+            <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                <i class="sr-only">Previous</i>
+            </a> 
+            <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <i class="sr-only">Next</i>
+            </a>
+        </div>
+        <div class="room-features">
+            <div class="col-sm-3 col-md-2">
+                <div class="size-price" style="padding: 0.5em 0; height: 6em; line-height: 2em;">Superficie<span>12 m²</span></div>
+            </div>
+            <div class="col-sm-3 col-md-2">
+                <div class="size-price" style="padding: 0.5em 0; height: 6em; line-height: 2em;">
+                    Prix (à partir de)<span>120 €</span>
+                </div>
+            </div>        
+            <div class="col-sm-12 col-md-4 amenitites">
+                <br>
+                <br>
+                <h3>Prestations</h3>
+                <ul>
+                    <li><strong>Équipements en chambre : </strong>Coffre-fort, Climatisation, Bureau, Chauffage, Armoire / penderie, Lits enfant/berceaux.</li>
+                    <li><strong>Salle de bains : </strong>Douche, Sèche-cheveux, Articles de toilette gratuits, Toilettes, Papier toilette.</li>
+                    <li><strong>High-tech : </strong>Télévision, Téléphone, Chaînes satellite, Télévision à écran plat, Routeur Wi-Fi portable.</li>
+                    <li><strong>Services/Extras : </strong>Service de réveil, Serviettes, Réservation de taxis et de restaurants.</li>
+                    <li><strong>Wifi gratuit! </strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12" style="margin: 1em 0;">
+        <p>Décorées dans des tons pastel, ces chambres contemporaines disposent d'une télévision à écran plat, d'un téléphone et de la climatisation. 
+        <br>Leur salle de bains privative est pourvue d'articles de toilette gratuits.</p>
+    </div>
 </div>
 
 {% endblock %}
