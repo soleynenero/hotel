@@ -60,7 +60,7 @@ $app->get('/inscription', function() use($app)
 // peut etre mettre un lien vers la page login si l'utilisateur a deja un compte
 })->bind('inscription');
  
-$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')//->before($verifParamInscription)
+$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')->before($verifParamInscription)
 ;
 
 
@@ -72,7 +72,7 @@ $app->post('/inscription','Hotel\Controller\AuthentificationController::Inscript
 $app->get('/connexion', function() use($app)
 {
     return $app['twig']->render('basic/connexion.html.twig', array());
-})->bind('connexion');
+})->bind('connexion')->before($isConnectYes);
 
 
 $app->post('/connexion', "Hotel\Controller\ConnexionController::login")
@@ -144,8 +144,9 @@ $app->post('/profil_membre/modificationMdp', "Hotel\Controller\InfoUserControlle
 
 // deconnexion
 $app->get('/deconnexion', function() use($app){
-    
-    session_destroy() ;
+
+    setcookie("hotel");
+    session_destroy();
     return $app->redirect("/hotel/public/");
 
 })->bind('deconnexion');
@@ -153,7 +154,7 @@ $app->get('/deconnexion', function() use($app){
 
 
 /************************************************* */
-/************** ROUTE CHAMBRE STANDART *************/
+/************** ROUTE CHAMBRE STANDARD *************/
 /************************************************* */
 
 
