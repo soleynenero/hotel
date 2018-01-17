@@ -1,0 +1,41 @@
+{% extends "layout.html.twig" %}
+
+{% block navProfil %}
+{% if connect != false %}
+    <div class="navbar_profil col-md-4 infoProfil">
+        <ul class="navbar">
+            <li><a href="{{ path ('profil_membre') }}">Mes Informations</a></li>
+            <li><a href="{{ path ('reservation') }}">Mes Réservations</a></li>
+            <li><a href="{{ path ('modificationInfos') }}">Modification du profil</a></li>
+            <li><a href="{{ path ('modificationMdp') }}">Modification du mot de passe</a></li>
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}
+{% block infoProfil %}
+    <div class="col-md-offset-1 col-md-6 text-center infoProfil">
+
+    <h3 class="text-left">Mes réservations</h3>
+        <table class="table">
+            <tr>
+                {% for reservation in reservations %}
+                    {% for cle , reserv in reservation %}
+                        <th>{{cle}}</th>
+                    {% endfor %}
+            </tr>
+                    {% for reserv in reservation %}
+                        <td>{{ reserv }}</td>
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+
+            {# <tr>
+                {% for reservation in reservations %}
+                    {% for reserv in reservation %}
+                        <td>{{ reserv }}</td>
+                    {% endfor %}
+                {% endfor %}
+            </tr> #}
+        </table>
+    </div>
+{% endblock %}
