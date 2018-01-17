@@ -187,7 +187,17 @@ body::-webkit-scrollbar {
 
 /* **************css page inscription*********************** */
 
+.forminscription{
+    border: 10px groove #bfa145;
+    padding: 20px;
+    margin-bottom: 10px;
+    background: rgba(156, 170, 49, 0.5); 
+}
 .erreurinscription {
+    z-index: 10;
+}
+
+.reussiteinscription {
     z-index: 10;
 }
 
@@ -197,14 +207,15 @@ body::-webkit-scrollbar {
     font-size: 20px;
 }
 
-a.inscritionsignup {
+.inscriptionsignup {
     background: #bfa145;
     color: white;
     padding: 5px;
 }
-a.inscritionsignup:hover {
+.inscriptionsignup:hover {
     background: #b08506;
     color: white;
+    text-decoration: none;
     padding: 5px;
 }
 
