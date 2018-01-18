@@ -53,8 +53,11 @@ namespace Hotel\Controller;
                 // echo '<p style="color: black">Validation OK<p>';
                 $insert->insertReserv($idUser, $nbPerson1, $debut1, $fin1, $cat1, $idserv);
                 $insert->factureReserv();
-                $idFacture = $insert->getIdFacture();
-                return $app['twig']->render('basic/validation_reservation.html.twig', array("reservation"=>$idFacture));
+                // $insert->validReserv();
+                $reserv = $insert->recapReserv();
+                return $app['twig']->render('basic/validation_reservation.html.twig', array('reserv' => $reserv));
+
+                // echo '<pre>'; echo var_dump($reserv); echo '</pre>';
             }
 
             return $app['twig']->render('index.html.twig');

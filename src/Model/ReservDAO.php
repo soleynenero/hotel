@@ -144,26 +144,61 @@
             $ht = $totalSejour - ($totalSejour/(1+(20.6/100)));
             $tva = round($ht, 2, PHP_ROUND_HALF_UP); // on calcule la tva
 
-            // on complète la table factures, le client n'a plus qu'à payer
+            // on complète la table factures, le client n'a plus qu'à payer !
             $bdd->executeQuery("UPDATE factures SET prix_total = ".$totalSejour.", tva = ". $tva ." WHERE id_factures = ". $this->idFacture .""); 
 
             return true;
 
         } // fin de facturReserv()
 
-        public function getIdFacture() {
-            return $this->idFacture;
+        public function recapReserv() {
+           
+            $bdd = $this->getDb();
 
-            // return array(
-            //     "idReserv" => $this->$idReserv,
-            //     "idFacture" => $this->idFacture,
-            //     "idChbre1" => $this->idChbre1,
-            //     "idChbre2" => $this->idChbre2,
-            //     "NbreNuits1" => $this->nuits1,
-            //     "NbreNuits2" => $this->nuits2,
-            // ));
+            $prestaChbre = $bdd->fetchAll("SELECT dp.*, df.prix_total, df.quantite, df.prix_unitaire, r.date_debut, r.date_fin FROM detail_prestation_chambre dp, detail_factures df, reservation r WHERE dp.id_prestation = df.id_prestation AND dp.id_reservation = r.id_reservation AND dp.id_reservation =". $this->idReserv ."");
 
+            $prestaService = $bdd->fetchAll("SELECT * FROM detail_prestation_services WHERE id_reservation =". $this->idReserv ."");
+
+            $prestaCout = $bdd->fetchAll("SELECT tva, prix_total FROM factures WHERE id_factures = ". $this->idFacture ."");
+
+            
+            $reserv = array('chambres' => array(), 'services' => array(), 'cout' => array());
+
+            for($i=0; $i < count($prestaChbre); $i++){
+                $datedebut = new DateTime($prestaChbre[$i]['date_debut']);
+                $datefin = new DateTime($prestaChbre[$i]['date_fin']);
+                $reserv['chambres'][$i] = array(
+                "idReserv" => $prestaChbre[$i]['id_reservation'],
+                "catChambre" => $prestaChbre[$i]['type_categorie'],
+                "capChambre" => $prestaChbre[$i]['capacite'],
+                "debut" => $datedebut->format('d/m/Y'),
+                "fin" => $datefin->format('d/m/Y'),
+                "nuits" => $prestaChbre[$i]['quantite'],
+                "prixUnit" => $prestaChbre[$i]['prix_unitaire'],
+                "prixChbre" => $prestaChbre[$i]['prix_total']
+                );
+            }
+
+            for($i=0; $i< count($prestaService); $i++){
+                $reserv['services'][$i] = array(
+                "service" => $prestaService[$i]['nom_service'],
+                "prixService" => $prestaService[$i]['prix_service'],
+                );
+            }
+
+            for($i=0; $i< count($prestaCout); $i++){
+                $reserv['cout'] = array(
+                "tva" => $prestaCout[$i]['tva'],
+                "prixTTC" => $prestaCout[$i]['prix_total'],
+                "prixHT" => $prestaCout[$i]['prix_total']-$prestaCout[$i]['tva']
+                );
+            }
+
+
+            return $reserv;
         }
 
-
+        
+        
+        
     } // fin de la classe

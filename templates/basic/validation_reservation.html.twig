@@ -10,12 +10,25 @@
 
 <div id="valid_reserv" class="container-fluid">
     <div class="row">
-        <div class="col-sm-6 col-md-2 col-sm-offset-3 col-md-offset-5">
-            <p>Voici le récapitulatif de votre commande :</p>
+        <div class="col-sm-6 col-md-8 col-sm-offset-3 col-md-offset-2">
+            <p>Voici le récapitulatif de votre réservation n° {{reserv['chambres'][0]['idReserv']}} :</p>
 
-            {{reservation}}
+            <p>1 chambre {{reserv['chambres'][0]['catChambre']}} {{reserv['chambres'][0]['capChambre']}} : {{reserv['chambres'][0]['prixUnit']}} € / nuit, </p>
+            <p>du {{reserv['chambres'][0]['debut']}} au {{reserv['chambres'][0]['fin']}} soit {{reserv['chambres'][0]['nuits']}} nuit(s).</p>
+            <p>Pour cette réservation, vous avez demandé :</p>
+            <ul>
+                {% for key, value in reserv['services'] %}
+                <li>{{ key }} : {{ value }} € (forfait)</li>
+                {% endfor%}
+            </ul>
+            <p>Prix total hors taxe : {{reserv['cout']['prixHT']}} €</p>
+            <p>TVA : {{reserv['cout']['tva']}} €</p>
+            <p>Prix total TTC : {{reserv['cout']['prixTTC']}} €</p>
+            
 
-            <p>Sélectionnez un moyen de paiement</p>
+
+
+            <p>Sélectionnez un moyen de paiement :</p>
 
             <a href='#'><button class="btn btn-default">Réglez votre commande</button></a>
         </div>
