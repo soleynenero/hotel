@@ -1,15 +1,13 @@
 <?php
-
     namespace Hotel\Controller;
-
     use Silex\Application;
     use Symfony\Component\HttpFoundation\Request;
     use Hotel\Model\TokensDAO;
-
     class AuthentificationController extends Controller{ // par convention, on va nommer les classes xxxxController
        
        
-        public function InscriptionAction(Application $app, Request $request){
+        public function InscriptionAction(Application $app, Request $request)
+        {
            
             
             $prenom = strip_tags(trim($request->request->get("prenom")));
@@ -20,56 +18,81 @@
             $telephone = strip_tags(trim($request->request->get("telephone")));
             $email = htmlspecialchars(trim($request->request->get("email"))); 
             $password = strip_tags(trim($request->request->get("mdp")));
+
+                $errors = "";
+
                 if(iconv_strlen($prenom) < 2 || iconv_strlen( $prenom )> 15){
-                echo '<div class="erreurinscription alert alert-warning col-xs-12 text-center">Erreur de taille prenom</div>';
+                 $errors .= ' Erreur de la taille de votre prenom  ;'   ;
                 
-                return $app['twig']->render('basic/inscription.html.twig');
+                
                 
                  }
                 if(iconv_strlen($nom) < 2 || iconv_strlen($nom) > 15){
-                echo '<div class="erreurinscription alert alert-warning col-xs-12  text-center">Erreur de taille nom</div>';
+                 $errors .= ' Erreur de la taille de votre nom   ;';
                 
-                return $app['twig']->render('basic/inscription.html.twig');
+               
                 }
     
                 if(!is_numeric($codepostal) || iconv_strlen($codepostal) != 5){
-               echo '<div class="erreurinscription alert alert-warning col-xs-12  text-center">Erreur de format code postal</div>';
+                $errors .= ' Erreur de format  du code postal  ;';
                 
-                return $app['twig']->render('basic/inscription.html.twig');
+                
                  }
     
                  if(!is_numeric( $telephone) || iconv_strlen( $telephone) != 10){
-                   echo '<div class="erreurinscription alert alert-warning col-xs-12  text-center">Erreur de format du telephone</div>';
+                    $errors .= ' Erreur du  format du telephone    ;';
                    
-                    return $app['twig']->render('basic/inscription.html.twig');
+                    
                  }          
             
-                if(!filter_var($email, FILTER_VALIDATE_EMAIL)) { // si l'email n'est pas au bon format (verif de la syntaxe avec la fonction de la classe)
-                    return $app['twig']->render('basic/inscription.html.twig'); // on redirige vers register
+                if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    
+                    $errors .= ' Erreur du format du champs email   ; ';
+                   
+                }
+               
+                if(!empty($errors))
+                {
+                    return $app['twig']->render('basic/inscription.html.twig', array(
+                    "error" => $errors ,
+                    "prenom" => $prenom , 
+                    "nom" => $nom , 
+                    "email" => $email , 
+                    "telephone" => $telephone , 
+                    "ville" => $ville , 
+                    "code_postal" => $codepostal , 
+                    "adresse" => $adresse));
+                } ;
+               
+
+               
+                
+
+                $app['db']->insert('user', array(
+                    'prenom' => $prenom,
+                    'nom' => $nom,
+                    'adresse' => $adresse,
+                    'ville' => $ville,
+                    'code_postal' => $codepostal,
+                    'telephone' => $telephone,
+                    'email' =>  $email,
+                    'mdp' => $password // on peut crypter avec la fonction crypt() en php et qui est indechiffrable
+                ));
+                
+                $token = $this->generateToken();
+                $id = $app['db']->lastInsertId();
+                $dateExpire = $this->expireToken();
+                // $dateCreated = $this->createToken();
+                $tokens = new TokensDAO ($app['db'] );
+                $token = $tokens->createToken($id, $dateExpire, "email");
+                
+                if($id)
+                {
+                    echo '<div class="reussiteinscription alert alert-success col-xs-12  text-center">Votre inscription à bien été prise en compte veuillez cliquez sur le lien qui vous à été envoyé sur votre messagerie afin de vous connecter</div>';
                 }
                 
-                
-            $app['db']->insert('user', array(
-                'prenom' => $prenom,
-                'nom' => $nom,
-                'adresse' => $adresse,
-                'ville' => $ville,
-                'code_postal' => $codepostal,
-                'telephone' => $telephone,
-                'email' =>  $email,
-                'mdp' => $password // on peut crypter avec la fonction crypt() en php et qui est indechiffrable
-            ));
             
-            $token = $this->generateToken();
-            $id = $app['db']->lastInsertId();
-            $dateExpire = $this->expireToken();
-            // $dateCreated = $this->createToken();
-            $tokens = new TokensDAO ($app['db'] );
-            $token = $tokens->createToken($id, $dateExpire, "email");
-            
-            if($id){
-                echo '<div class="reussiteinscription alert alert-success col-xs-12  text-center">Votre inscription à bien été prise en compte veuillez cliquez sur le lien qui vous à été envoyé sur votre messagerie afin de vous connecter</div>';
-            }
+             
            
             
              $this->sendMail(
@@ -82,7 +105,11 @@
                 // /* END */
             return $app['twig']->render('basic/inscription.html.twig');
             
+
+
         }
+
+
          public function verifEmailAction(Application $app, Request $request) {
              $token = strip_tags(trim($request->get("token")));
              $sql = "SELECT user_id FROM tokens WHERE token = ? AND type LIKE 'email'"; // LIKE est équivalent au = quand on chercher des strings
@@ -96,9 +123,3 @@
              return $app->redirect('/hotel/public/connexion');
          }
 }
-
-
-    
-
-
-

@@ -309,10 +309,11 @@ $app->post('/admin/gestion_chambres', function() use($app)
 
 
 
-$app->get('admin/gestion_services', function($id) use($app)
+$app->get('admin/gestion_services', function() use($app)
 {
-    
-    return $app['twig']->render('basic/gestion_services.html.twig', array());
+    $sql = $app['db']->fetchAll('SELECT * FROM services'); 
+    var_dump( $sql);
+ return $app['twig']->render('basic/gestion_services.html.twig', array());
 })->bind('gestion_services');
 
 $app->post('/admin/gestion_services', function() use($app)

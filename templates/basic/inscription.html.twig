@@ -10,23 +10,28 @@
 
   </div>
 
-
+            
 <form method="post" action="" class=" forminscription col-xs-6 col-xs-offset-3" >
 	<input type="hidden" name="standard">
 
-  
+  {% if error is defined %}
+               <span style ="color: red">{{error}}</span>
+  {% endif %}
   
   <div class="form-group">
     <label for="nom">Nom</label>
     <input type="text" class="form-control" id="nom" name="nom" placeholder="nom de 2 à 15 caractères" required>
+     
   </div>
   <div class="form-group">
     <label for="prenom">Prénom</label>
-    <input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom de 2 à 15 caractère" required>
+    <input type="text" class="form-control"  id="prenom" name="prenom" placeholder="prenom de 2 à 15 caractère" required>
+    
   </div>
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" class="form-control" id="email"  name="email" placeholder="Veuillez écrire une adresse email valide " required>
+    
   </div>
  
  
@@ -34,24 +39,29 @@
   <div class="form-group"><br>
     <label for="ville">Ville</label>
     <input type="text" class="form-control" id="ville" name="ville" placeholder="Veuillez écrire le nom de votre ville" required>
+    
   </div>
   
   <div class="form-group">
     <label for="code_postal">Code Postal</label>
     <input type="text" class="form-control" id="code_postal" name="code_postal" placeholder="Code Postal 5 chiffres alphanumérique" required>
+    
   </div>
   
   <div class="form-group">
     <label for="telephone">Telephone</label>
     <input type="text" class="form-control" id="telephone" name="telephone" placeholder="telephone 10 chiffres alphanumérique" required>
+   
   </div>
 
   <label for="adresse">Adresse</label>
+  
   <textarea class="form-control" rows="3" id="adresse" name="adresse" placeholder="Veuillez ecrire votre adresse" required></textarea><br>
   
   <div class="form-group">
     <label for="mdp">Mot de passe</label>
     <input type="text" class="form-control" id="mdp" name="mdp" placeholder="Veuillez écrire votre mot de passe" required>
+   
   </div>
 
     
@@ -60,7 +70,7 @@
   <input type="submit" class="col-xs-12 " id="buttoninscription" value="inscription"><br><br><br>
 </form><br>
 
-
+           
 
 
 </div>  

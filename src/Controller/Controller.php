@@ -15,13 +15,13 @@
                 $mail->isSMTP();                                      // Set mailer to use SMTP
                 $mail->Host = 'smtp-mail.outlook.com';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'hotelgrandsvoisins@outlook.com';                 // SMTP username
-                $mail->Password = 'webforce2018';                           // SMTP password
+                $mail->Username = 'hotelwebforce@outlook.com';                 // SMTP username
+                $mail->Password = 'webforce18';                           // SMTP password
                 $mail->SMTPSecure = 'tls';                            // mode de sécurité
                 $mail->Port = 587;                                    // TCP port to connect to
             
                 //Recipients (qui est l'expéditeur)
-                $mail->setFrom('hotelgrandsvoisins@outlook.com', 'alo'); // l'adresse de l'expéditeur (nous). Le 2ème argument est un alias qui s'affichera dans le mail
+                $mail->setFrom('hotelwebforce@outlook.com', 'alo'); // l'adresse de l'expéditeur (nous). Le 2ème argument est un alias qui s'affichera dans le mail
                 $mail->addAddress($user["address"], $user['name']);  // l'adresse du destinataire. + alias en 2ème arg (en général le nom)
                 
                 //Content
