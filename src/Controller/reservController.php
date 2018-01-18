@@ -25,14 +25,14 @@ namespace Hotel\Controller;
             
             if($request->get('idserv')){ // si des services ont été sélectionnés
                 foreach($request->get('idserv') as $key => $val){
-                    $key = htmlspecialchars(trim($val));
+                    $key = htmlspecialchars(trim($val)); // on sécurise les valeurs de l'array généré par les checkboxes dans le formulaire
                 }
 
-                $idserv =  $request->get('idserv');
+                $idserv =  $request->get('idserv'); // on stocke l'array dans une variable
             }
             
             else{
-                $idserv = [];
+                $idserv = []; // si aucun service n'est demandé on créé un array vide
             }
        
             // echo '<pre>'; var_dump($idserv); echo '</pre>';
@@ -52,7 +52,9 @@ namespace Hotel\Controller;
 
                 // echo '<p style="color: black">Validation OK<p>';
                 $insert->insertReserv($idUser, $nbPerson1, $debut1, $fin1, $cat1, $idserv);
-                // $insert->factureReserv();
+                $insert->factureReserv();
+                $idFacture = $insert->getIdFacture();
+                return $app['twig']->render('basic/validation_reservation.html.twig', array("reservation"=>$idFacture));
             }
 
             return $app['twig']->render('index.html.twig');

@@ -1,0 +1,28 @@
+{% extends "layout.html.twig" %}
+
+{% block menuNav %}
+    {% include 'include/menu_nav.html.twig' ignore missing %}
+{% endblock %}
+
+{% block content %}
+
+
+
+<div id="valid_reserv" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-md-2 col-sm-offset-3 col-md-offset-5">
+            <p>Voici le récapitulatif de votre commande :</p>
+
+            {{reservation}}
+
+            <p>Sélectionnez un moyen de paiement</p>
+
+            <a href='#'><button class="btn btn-default">Réglez votre commande</button></a>
+        </div>
+    </div>
+</div>
+
+
+
+ 
+{% endblock %}

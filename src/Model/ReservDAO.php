@@ -3,6 +3,7 @@
     namespace Hotel\Model; 
 
     use Doctrine\DBAL\Connection;
+    use \DateTime;
 
     class ReservDAO {
 
@@ -10,23 +11,30 @@
         private $idFacture;
         private $idReserv;
         private $idChbre1;
+        private $idChbre2;
+        private $nuits1 = 1;
+        private $nuits2 = 1;
 
         function __construct($connect) {
             $this->db = $connect;
         }
 
-        protected function getDb() {
+
+        protected function getDb() { // connexion à la bdd
             return $this->db;
         }
+
 
         public function recupEmail(int $idUser, string $email) {
 
             $bdd = $this->getDb(); 
+
             // on récupère le mail de l'user avec son id dans la table user
             $sql = "SELECT * FROM user WHERE user_id = ? AND email = ?";
             $result = $bdd->fetchAssoc($sql, array(0 => $idUser, 1 => $email));
             return $result;
         }
+
 
         public function insertReserv(int $idUser, int $nbPerson1, string $debut1, string $fin1, int $cat1, array $idserv) {
 
@@ -39,7 +47,7 @@
             
                 if(!empty($result)) { // si une chambre est dispo
 
-                    // on créé l'id de la future facture
+                    // on créé l'id de la future facture pour faire la liaison entre les tables
                     $bdd->insert('factures', array(
                         'user_id' => $idUser
                     ));
@@ -56,6 +64,11 @@
                     );
                     $this->idReserv = $bdd->lastInsertId();
 
+                    // on calcule le nombre de nuits réservées
+                    $debut1 = new DateTime($debut1);
+                    $fin1 = new DateTime($fin1);
+                    $this->nuits1 = intval($debut1->diff($fin1)->format('%d')) -1; // différence de jours entre le jour d'arrivée et le jour de départ -1 pour compter les nuits
+
                     // on complète la prestation avec les services demandé
                     if(!empty($idserv)){
                         foreach($idserv as $key => $val){
@@ -68,14 +81,15 @@
                     }
 
                     // on insère la chambre dans la prestation
-                    $this->idChbre1 = $result['id_chambres']; // on récupère l'id de la chambre
+                    $this->idChbre1 = $result['id_chambres']; // en récupèrant l'id de la chambre
                     $bdd->insert('prestation', array(
                         'id_reservation' => $this->idReserv,
                         'id_chambres' => $result['id_chambres']
                     ));
 
-                    // on change le statut de la chambre
-                    $bdd->executeUpdate("UPDATE chambres SET statut = 'occupee' WHERE id_chambres = ". $this->idChbre1 ."");
+                    //*****************  A RETABLIR ! ********************************************
+                    // et en changeant le statut de la chambre
+                    // $bdd->executeUpdate("UPDATE chambres SET statut = 'occupee' WHERE id_chambres = ". $this->idChbre1 ."");
 
                 }
                  
@@ -84,41 +98,72 @@
               
                 return "";
             } // fin insertReserv()
-         
+        
 
-        // public function factureReserv(){
+        public function factureReserv(){
 
-        //     $bdd = $this->getDb();
+            $bdd = $this->getDb();
 
-        //     $sql = "SELECT * FROM prestation_prix_chambres WHERE id_reservation = ". $this->idReserv."";
-        //     $chambre = $bdd->fetchAssoc($sql, array());
+            // on fait le détail de la facture à partir des prestations réservées par l'utilisateur (via le n° de facture) :
 
-            
+            // 1) en commençant par la chambre
+            $sql = "SELECT * FROM detail_prestation_chambre WHERE id_factures = ? AND id_chambres = ?";
+            $result = $bdd->fetchAssoc($sql, array($this->idFacture, $this->idChbre1));
 
-        //     // // on récupère la prestation de services
-        //     // $sql = "SELECT * FROM prestation_prix_services WHERE id_reservation = ". $this->idReserv ."";
-        //     // $services = $bdd->fetchAssoc($sql, array()); 
-            
-        //     // foreach($services as $key => $val){
+            $nbNuits = $this->nuits1;
+            $prixTotal = $nbNuits * $result['prix']; // calcul du prix du séjour
 
-        //     //     $bdd->insert('detail_factures', array(
-        //     //                 'id_factures'=> $this->idFacture,
-        //     //                 'prestation_id' => $val
-        //     //             ));
-        //     //     }
+            $bdd->insert('detail_factures', array( // remplissage de la table
+                'id_factures' => $result['id_factures'],
+                'id_prestation' => $result['id_prestation'],
+                'prix_unitaire' => $result['prix'],
+                'quantite' => $nbNuits,
+                'prix_total' => $prixTotal)
+            ); 
 
-        //         //     $bdd->insert('detail_factures', array(
-        //         //         'id_factures'=> $this->idFacture,
-        //         //         'prestation_id' => $val
-        //         //     ));
-                
-        //         // if($key == 'prix_service')
-        //         //     $bdd->executeUpdate("UPDATE detail_factures SET prix_unitaire = ". $val ." WHERE prestation_id = ". $this->idChbre1 ."");
-            
+            // 2) puis en ajoutant les services
+            $sql = "SELECT * FROM detail_prestation_services WHERE id_factures = ?";
+            $result = $bdd->fetchAll($sql, array($this->idFacture)); // on récupère les services commandés dans un array multidimensionnel...
 
-        // } // fin de facturReserv()
+            for($i=0; $i< count($result); $i++){ //... qu'on explore pour en extraire les lignes une par une et les insérer dans la table
+
+                $bdd->insert('detail_factures', array(
+                    'id_factures' => $result[$i]['id_factures'],
+                    'id_prestation' => $result[$i]['id_prestation'],
+                    'prix_unitaire' => $result[$i]['prix_service'],
+                    'quantite' => 1, // les services sont des forfaits uniques
+                    'prix_total' => $result[$i]['prix_service'])
+                ); 
+            }
+
+            // on calcule enfin le total chambre + service et la TVA du séjour
+
+            $sql = $bdd->fetchAssoc("SELECT SUM(prix_total) AS 'totalSejour' FROM detail_factures WHERE id_factures =". $this->idFacture ."");
+
+            $totalSejour = intval($sql['totalSejour']); // on récupère le prix total
+            $ht = $totalSejour - ($totalSejour/(1+(20.6/100)));
+            $tva = round($ht, 2, PHP_ROUND_HALF_UP); // on calcule la tva
+
+            // on complète la table factures, le client n'a plus qu'à payer
+            $bdd->executeQuery("UPDATE factures SET prix_total = ".$totalSejour.", tva = ". $tva ." WHERE id_factures = ". $this->idFacture .""); 
+
+            return true;
+
+        } // fin de facturReserv()
+
+        public function getIdFacture() {
+            return $this->idFacture;
+
+            // return array(
+            //     "idReserv" => $this->$idReserv,
+            //     "idFacture" => $this->idFacture,
+            //     "idChbre1" => $this->idChbre1,
+            //     "idChbre2" => $this->idChbre2,
+            //     "NbreNuits1" => $this->nuits1,
+            //     "NbreNuits2" => $this->nuits2,
+            // ));
+
+        }
 
 
-
-} // fin de la classe
-?>
+    } // fin de la classe

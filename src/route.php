@@ -18,8 +18,6 @@ $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html.twig');
 })->bind('Home');
 
-$app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
-
 // route roomtarif
 $app->get('/les-chambres-et-tarifs', function () use ($app) {
     return $app['twig']->render('basic/room_tarif.html.twig');
@@ -45,8 +43,13 @@ $app->get('/mentions_legales', function () use ($app) {
     return $app['twig']->render('basic/mentions_legales.html.twig', array());
 })->bind('mentions_legales');
 
+/** BLOC RESERVATION **/
+$app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
 
-
+/** VALIDATION DE RESERVATION **/
+$app->get('/reservation', function () use ($app) {
+    return $app['twig']->render('basic/validation_reservation.html.twig');
+});
 
 
 /*** CONNEXION ET INSCRIPTION ***/
