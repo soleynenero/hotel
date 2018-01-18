@@ -28,7 +28,7 @@
                 
                  }
                 if(iconv_strlen($nom) < 2 || iconv_strlen($nom) > 15){
-                 $errors .= ' Erreur de la taille de votre nom   ;';
+                 $errors .= ' Erreur de la taille de votre nom  ;';
                 
                
                 }
