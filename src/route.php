@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hotel\Controller\InfoUserController;
+use Hotel\Controller\Controller;
+use Hotel\Model\InfosAdminDAO;
 use Twig\Extension\AbstractExtension;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
@@ -241,19 +243,58 @@ $app->get('/services', function() use($app)
 
 
 
+/******************************************/
+/***********PARTIE BACK DU SITE************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/***********ROUTE ADMIN INDEX**************/
+/******************************************/
+/******************************************/
 
-/*************************************** */
-/**** ROUTES  SECTION GESTION ADMIN *****/
-/************************************** */
 
-$app->get('admin', "Hotel\Model\InfosAdminDAO::selectAllUser")
-->bind('admin');
+// $app->get('/admin', "Hotel\Controller\AdminIndexController::affichageInfosIndexAdmin" )->bind('admin');
 
 
-// $app->get('/admin', function() use($app)
-// {
-//     return $app['twig']->render('InfosAdminDAO.php', array());
-// })->bind('admin');
+$app->get('/admin', function() use($app)
+{
+
+    $isconnectedAnIsAdmin = Controller::isAdmin();
+    if ($isconnectedAnIsAdmin) { // Si l'utilisateur est admin
+        $IndexAdmin = new InfosAdminDAO($app['db']);
+        $affichageIndexAdmin = $IndexAdmin->selectAllUser();
+        $affichageRoomVac = $IndexAdmin->selectAllRoomVacancy();
+        $affichageRoomNoVac = $IndexAdmin->selectAllRoomNoVacancy();
+        // var_dump($_SESSION);
+        return $app['twig']->render('index_admin.html.twig', array( //on vehicule les données dont on a besoin
+
+            "IndexAdmin" => $affichageIndexAdmin,
+            "AffichageRoomVac" => $affichageRoomVac,
+            "AffichageRoomNoVac" => $affichageRoomNoVac,
+        ));
+    } else {// Si l'utilisateur n'est pas admin
+        // var_dump($_SESSION);
+        return $app->redirect('/hotel/public/');
+    }
+})->bind('admin');
+
+// $isconnectedAndAdmin = Controller::isAdmin();
+// if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
+//     $infosUser = new UserModelDAO($app['db']);
+//     return $app['twig']->render('dashboard/user-dashboard.html.twig', array(
+//         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
+//         "usersInfo" => $infosUser->allUsersSelected(),
+//     ));
+// } else {// Si l'utilisateur n'est pas admin
+//     return $app->redirect('/Coolloc/public');
+// }
+
+
+
+
 
 
 /************************************************* */
