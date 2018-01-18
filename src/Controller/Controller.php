@@ -22,7 +22,7 @@
             
                 //Recipients (qui est l'expéditeur)
                 $mail->setFrom('hotelgrandsvoisins@outlook.com', 'alo'); // l'adresse de l'expéditeur (nous). Le 2ème argument est un alias qui s'affichera dans le mail
-                $mail->addAddress("kergoals@gmail.com", 'alex'); // l'adresse du destinataire. + alias en 2ème arg (en général le nom)
+                $mail->addAddress($user["address"], $user['name']);  // l'adresse du destinataire. + alias en 2ème arg (en général le nom)
                 
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
