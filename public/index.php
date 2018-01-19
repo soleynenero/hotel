@@ -31,7 +31,11 @@
     require __DIR__.'/../src/Model/ReservDAO.php';
     require __DIR__.'/../src/model/TokensDAO.php';
     require __DIR__.'/../src/Model/ConnexionDAO.php';
+
+    require __DIR__.'/../src/Model/GestionMembreDAO.php';
+    require __DIR__.'/../src/Model/GestionChambreDAO.php';
     require __DIR__.'/../src/Model/InfosAdminDAO.php';
+
 
     require __DIR__.'/../src/controller/Controller.php';
     require __DIR__.'/../src/controller/AuthentificationController.php';
@@ -39,6 +43,8 @@
     require __DIR__.'/../src/Controller/ConnexionController.php';
     require __DIR__.'/../src/Controller/AdminIndexController.php';
     require __DIR__.'/../src/Controller/InfoUserController.php';
+    require __DIR__.'/../src/Controller/GestionMembreController.php';
+    require __DIR__.'/../src/Controller/GestionChambreController.php';
 
     require __DIR__.'/../src/route.php';
 

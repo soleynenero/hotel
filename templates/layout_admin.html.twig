@@ -33,6 +33,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('assets_admin/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -65,12 +66,14 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+
                   <li><a><i class="fa fa-home"></i>Acces site Front <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ path ('Home') }}">Accéder à l'accueil </a></li>
                       <li><a href="{{ path ('gallery') }}">Accéder à la galerie </a></li>
                       <li><a href="{{ path ('introduction') }}">Accéder à la présentation </a></li>
                     </ul>
+
                   </li>
                   <li><a><i class="fa fa-edit"></i> Gestion Administrative <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -85,7 +88,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
+            <div class="sidebar-footer hidden-small deconnexion">
               {# <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
@@ -95,7 +98,9 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a> #}
+
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{connect != false ? path ('deconnexion')}}">
+
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -112,8 +117,11 @@
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
 
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
+              {# <ul class="nav navbar-nav navbar-right text-right">
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ path ('deconnexion') }}">
+                  <span class="glyphicon glyphicon-off col-md-11" aria-hidden="true"></span>
+                </a> #}
+                {# <li class="">
                   <a href="" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="images/img.jpg" alt="">Admin
                     <span class=" fa fa-angle-down"></span>
@@ -122,8 +130,8 @@
                     <li><a href=""> Profile</a></li>
                     <li><a href=""><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
-                </li>
-              </ul>
+                </li> #}
+              {# </ul> #}
             </nav>
           </div>
         </div>
@@ -132,8 +140,7 @@
         <!-- page content -->
         <div class="right_col" role="main">
 
-
-        {% block content %}{% endblock %}
+          {% block content %}{% endblock %}
 
 
         </div>

@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
     $error = false;
     $messageError = "";
 
+
     foreach($verifRequest as $key => $val) {
         if( !$request->has($val) || trim($request->get($val)) == ""){ // si la $val n'existe pas et qu'elle est vide
             $error = true;

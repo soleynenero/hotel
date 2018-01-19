@@ -91,7 +91,8 @@ $app->post('/connexion', "Hotel\Controller\ConnexionController::login")
 $app->post('/oubli_mdp', function() use($app)
 {
     return $app['twig']->render('basic/oubli_mdp.html.twig', array());
-})->bind('oubli_mdp');
+})
+->bind('oubli_mdp');
 
 
 
@@ -289,10 +290,8 @@ $app->get('/admin', function() use($app)
 
 
 
-$app->get('admin/gestion_membres', function() use($app)
-{
-    return $app['twig']->render('basic/gestion_membres.html.twig', array());
-})->bind('gestion_membres');
+$app->get('/admin/gestion_membres', "Hotel\Controller\GestionMembreController::affichageMembreAction")
+->bind('gestion_membres');
 
 $app->post('/admin/gestion_membres', function() use($app)
 {
@@ -305,7 +304,7 @@ $app->post('/admin/gestion_membres', function() use($app)
 /************************************************* */
 
 
-$app->get('admin/gestion_reservations', function() use($app)
+$app->get('/admin/gestion_reservations', function() use($app)
 {
     return $app['twig']->render('basic/gestion_reservations.html.twig', array());
 })->bind('gestion_reservations');
@@ -321,16 +320,23 @@ $app->post('/admin/gestion_reservations', function() use($app)
 /********** ROUTE GESTION CHAMBRES ************/
 /************************************************* */
 
+// permet de voir les chambres
+$app->get('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::affichageChambreAction")
+->bind('gestion_chambres');
 
-$app->get('admin/gestion_chambres', function() use($app)
-{
-    return $app['twig']->render('basic/gestion_chambres.html.twig', array());
-})->bind('gestion_chambres');
+// permet d'ajouter une nlle chambre
+$app->post('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::ajoutChambreAction");
 
-$app->post('/admin/gestion_chambres', function() use($app)
-{
-// Post à compléter : num chambre, statut , telephone , prix , categorie chambre , capacité
-});
+// d'aller sur la page de modification des chambres
+$app->get('/admin/gestion_chambres/modification?id={id_chambres}', "Hotel\Controller\GestionChambreController::selectModifChambreAction")
+->bind('modif_chambre');
+
+// permet de modifier les chambres
+$app->post('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::updateModifChambreAction");
+
+// permet de supprimer une chambre
+$app->get('/admin/gestion_chambres/suppression?id={id_chambres}', "Hotel\Controller\GestionChambreController::deleteChambreAction")
+->bind('suppression');
 
 
 /************************************************* */
@@ -339,7 +345,7 @@ $app->post('/admin/gestion_chambres', function() use($app)
 
 
 
-$app->get('admin/gestion_services', function() use($app)
+$app->get('/admin/gestion_services', function() use($app)
 {
     return $app['twig']->render('basic/gestion_services.html.twig', array());
 })->bind('gestion_services');

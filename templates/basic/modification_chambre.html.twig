@@ -1,0 +1,73 @@
+{% extends "layout_admin.html.twig" %}
+
+{% block content %}
+
+<pre><p>{{ dump(chambres)}}</p></pre>
+
+<pre><p>{{ dump(chambres.statut)}}</p></pre>
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label for="numchambre" class="control-label">Numéro de la chambre</label>
+            <div>
+                <input type="text" class="form-control" id="numchambre" name="numero_chambre" value ="{{chambres.numero_chambre}}">
+            </div>
+        </div>
+        {# test #}
+        {# <p>{{ dump (categories)}}</p>
+        {% for categorie in categories %} #}
+            {# <pre>
+            <p>{{ dump (categorie)}}</p>
+            </pre> #}
+            {# {% for cat in categorie %}
+            <pre>
+            <p>{{ dump (cat)}}</p>
+            </pre> #}
+
+            {# {% endfor %}
+        {% endfor %} #}
+
+        {# endtest #}
+        <div class="form-group">
+            <label for="categorie" class="control-label">Categorie</label>
+            <select id="categorie" class="form-control" name="id_categorie">
+                                
+                {% for categorie in categories %}
+
+                    <option value="{{categorie.id_categorie}}" {% if categorie.type_categorie == chambres.Categorie %} selected {% endif %}>{{categorie.type_categorie}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="capacite" class="control-label">Capacite</label>
+            <select id="capacite" class="form-control" name="id_capacite">
+                
+                {% for capacite in capacites %}
+
+                    <option value="{{capacite.id_capacite}}" {% if capacite.capacite == chambres.capacite %} selected {% endif %}>{{capacite.capacite}}</option>
+                {% endfor %}
+                       
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="telephone" class="control-label">Telephone</label>
+            <div>
+                <input type="text" class="form-control" id="telephone" name="telephone" value ="{{chambres.telephone}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="prix" class="control-label">Prix</label>
+            <div>
+                <input type="text" class="form-control" id="prix" name="prix" value ="{{chambres.prix}}">
+            </div>
+        </div>
+
+        <div>
+        <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Ajouter une chambre</button>
+        </div>
+    </form>
+
+{% endblock %}
