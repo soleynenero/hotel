@@ -257,7 +257,7 @@ $app->get('/admin', function() use($app)
 
 
 
-$app->get('admin/gestion_membres', "Hotel\Controller\GestionMembreController::affichageMembreAction")
+$app->get('/admin/gestion_membres', "Hotel\Controller\GestionMembreController::affichageMembreAction")
 ->bind('gestion_membres');
 
 $app->post('/admin/gestion_membres', function() use($app)
@@ -271,7 +271,7 @@ $app->post('/admin/gestion_membres', function() use($app)
 /************************************************* */
 
 
-$app->get('admin/gestion_reservations', function() use($app)
+$app->get('/admin/gestion_reservations', function() use($app)
 {
     return $app['twig']->render('basic/gestion_reservations.html.twig', array());
 })->bind('gestion_reservations');
@@ -287,14 +287,23 @@ $app->post('/admin/gestion_reservations', function() use($app)
 /********** ROUTE GESTION CHAMBRES ************/
 /************************************************* */
 
-
-$app->get('admin/gestion_chambres', "Hotel\Controller\GestionChambreController::affichageChambreAction")
+// permet de voir les chambres
+$app->get('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::affichageChambreAction")
 ->bind('gestion_chambres');
 
-$app->post('/admin/gestion_chambres', function() use($app)
-{
-// Post à compléter : num chambre, statut , telephone , prix , categorie chambre , capacité
-});
+// permet d'ajouter une nlle chambre
+$app->post('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::ajoutChambreAction");
+
+// d'aller sur la page de modification des chambres
+$app->get('/admin/gestion_chambres/modification?id={id_chambres}', "Hotel\Controller\GestionChambreController::selectModifChambreAction")
+->bind('modif_chambre');
+
+// permet de modifier les chambres
+$app->post('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::updateModifChambreAction");
+
+// permet de supprimer une chambre
+$app->get('/admin/gestion_chambres/suppression?id={id_chambres}', "Hotel\Controller\GestionChambreController::deleteChambreAction")
+->bind('suppression');
 
 
 /************************************************* */
@@ -303,7 +312,7 @@ $app->post('/admin/gestion_chambres', function() use($app)
 
 
 
-$app->get('admin/gestion_services', function() use($app)
+$app->get('/admin/gestion_services', function() use($app)
 {
     return $app['twig']->render('basic/gestion_services.html.twig', array());
 })->bind('gestion_services');
