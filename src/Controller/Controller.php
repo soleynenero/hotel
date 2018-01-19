@@ -3,6 +3,8 @@
     namespace Hotel\Controller;
 
     use Silex\Application;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
     use \DateTime; // pour utiliser la classe Date de PHP dans notre classe expireToken
 
     class Controller {
@@ -45,11 +47,26 @@
         }
 
         
+
+
+        
         public function expireToken(){
             $dateNow = new DateTime();
             $dateNow->modify("+ 1 day");
             return $dateNow->format("Y-m-d H:i:s");
         }
         
+
+
+
+        public static function isAdmin()
+        {
+            if ($_SESSION['user']["statut"] == "admin") {
+                return true;
+            } else {
+                return false;
+            }
+            
+        }
         
     }

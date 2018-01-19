@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hotel\Controller\InfoUserController;
+use Hotel\Controller\Controller;
+use Hotel\Model\InfosAdminDAO;
 use Twig\Extension\AbstractExtension;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
@@ -60,7 +62,7 @@ $app->get('/inscription', function() use($app)
 // peut etre mettre un lien vers la page login si l'utilisateur a deja un compte
 })->bind('inscription');
  
-$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')//->before($verifParamInscription)
+$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')->before($verifParamInscription)
 ;
 
 
@@ -72,7 +74,7 @@ $app->post('/inscription','Hotel\Controller\AuthentificationController::Inscript
 $app->get('/connexion', function() use($app)
 {
     return $app['twig']->render('basic/connexion.html.twig', array());
-})->bind('connexion');
+})->bind('connexion')->before($isConnectYes);
 
 
 $app->post('/connexion', "Hotel\Controller\ConnexionController::login")
@@ -145,8 +147,9 @@ $app->post('/profil_membre/modificationMdp', "Hotel\Controller\InfoUserControlle
 
 // deconnexion
 $app->get('/deconnexion', function() use($app){
-    
-    session_destroy() ;
+
+    setcookie("hotel");
+    session_destroy();
     return $app->redirect("/hotel/public/");
 
 })->bind('deconnexion');
@@ -154,7 +157,7 @@ $app->get('/deconnexion', function() use($app){
 
 
 /************************************************* */
-/************** ROUTE CHAMBRE STANDART *************/
+/************** ROUTE CHAMBRE STANDARD *************/
 /************************************************* */
 
 
@@ -241,14 +244,44 @@ $app->get('/services', function() use($app)
 
 
 
+/******************************************/
+/***********PARTIE BACK DU SITE************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/***********ROUTE ADMIN INDEX**************/
+/******************************************/
+/******************************************/
 
-/*************************************** */
-/******* ROUTES  SECTION GESTION *********/
-/************************************** */
+
+// $app->get('/admin', "Hotel\Controller\AdminIndexController::affichageInfosIndexAdmin" )->bind('admin');
+
+
 $app->get('/admin', function() use($app)
 {
-    return $app['twig']->render('index_admin.html.twig', array());
+
+    $isconnectedAnIsAdmin = Controller::isAdmin();
+    if ($isconnectedAnIsAdmin) { // Si l'utilisateur est admin
+        $IndexAdmin = new InfosAdminDAO($app['db']);
+        $affichageIndexAdmin = $IndexAdmin->selectAllUser();
+        $affichageRoomVac = $IndexAdmin->selectAllRoomVacancy();
+        $affichageRoomNoVac = $IndexAdmin->selectAllRoomNoVacancy();
+        // var_dump($_SESSION);
+        return $app['twig']->render('index_admin.html.twig', array( //on vehicule les données dont on a besoin
+
+            "IndexAdmin" => $affichageIndexAdmin,
+            "AffichageRoomVac" => $affichageRoomVac,
+            "AffichageRoomNoVac" => $affichageRoomNoVac,
+        ));
+    } else {// Si l'utilisateur n'est pas admin
+        // var_dump($_SESSION);
+        return $app->redirect('/hotel/public/');
+    }
 })->bind('admin');
+
 
 
 /************************************************* */
