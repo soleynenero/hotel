@@ -34,6 +34,7 @@
 
     require __DIR__.'/../src/Model/GestionMembreDAO.php';
     require __DIR__.'/../src/Model/GestionChambreDAO.php';
+    require __DIR__.'/../src/Model/GestionServiceDAO.php';
     require __DIR__.'/../src/Model/InfosAdminDAO.php';
 
 
@@ -45,6 +46,7 @@
     require __DIR__.'/../src/Controller/InfoUserController.php';
     require __DIR__.'/../src/Controller/GestionMembreController.php';
     require __DIR__.'/../src/Controller/GestionChambreController.php';
+    require __DIR__.'/../src/Controller/GestionServiceController.php';
 
     require __DIR__.'/../src/route.php';
 

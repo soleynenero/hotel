@@ -11,19 +11,6 @@
         {% if errornb is defined %}
             <p>{{ errornb|nl2br }}</p>
         {% endif %}
-        
-{# 
-        {% if msgValidation is defined %}
-            <hr>
-                {{ msgValidation }}
-            <hr>
-        {% endif %}
-
-        {% if msgValidationSup is defined %}
-            <hr>
-                {{ msgValidationSup }}
-            <hr>
-        {% endif %} #}
 
 
     {# sachant que c'est un tableau multidimentionnel il faut que je fasse 2 boucles for pour afficher mes informations #}
@@ -38,10 +25,6 @@
             <th>Modification</th>
             <th>Suppression</th>
         </tr>
-{#         
-        {% for chambre in chambres %}
-            <tr>
-            <pre><p>{{dump (chambre )}}</p></pre> #}
 
         {% for chambre in chambres %}
             <tr>
@@ -55,26 +38,7 @@
                 <td><a href="{{  path('suppression', {id_chambres: chambre.id_chambres}) }}"><span class="glyphicon glyphicon-trash alignement"</span></a></td>
             </tr>
 
-            {# <pre><p>{{dump (chambre)}}</p></pre> #}
-        {# {% for c in chambre %} #}
-        {# <pre><p>{{dump (c)}}</p></pre> #}
-            {# {% for c in chambre %}
-                <td>{{ c }}</td>
-            {% endfor %} #}
-
-        {# {% endfor %} #}
-
         {% endfor %}
-
-
-            {# {% for c in chambre | keys if not %} #}
-            {# <pre><p>{{dump (c)}}</p></pre> #}
-                {# <td>{{ c }}</td>
-            {% endfor %}
-                <td><a href=""><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
-                <td><a href=""><span class="glyphicon glyphicon-trash alignement"</span></a></td>
-            </tr>
-        {% endfor %} #}
         
     </table>
 
@@ -89,21 +53,7 @@
                 <input type="text" class="form-control" id="numchambre" name="numero_chambre" placeholder ="12">
             </div>
         </div>
-        {# test #}
-        {# <p>{{ dump (categories)}}</p>
-        {% for categorie in categories %} #}
-            {# <pre>
-            <p>{{ dump (categorie)}}</p>
-            </pre> #}
-            {# {% for cat in categorie %}
-            <pre>
-            <p>{{ dump (cat)}}</p>
-            </pre> #}
 
-            {# {% endfor %}
-        {% endfor %} #}
-
-        {# endtest #}
         <div class="form-group">
             <label for="categorie" class="control-label">Categorie</label>
             <select id="categorie" class="form-control" name="id_categorie">

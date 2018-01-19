@@ -1,9 +1,52 @@
 {% extends "layout_admin.html.twig" %}
 
 {% block content %}
-    
-<div class="banner">    	   
-    <p>Ceci est la page Gestion des services.</p>                
-</div>
 
+<h3 class="text-center">Gestion Services</h3>
+<table class="table">
+
+    <tr>
+        <th>Nom du service</th>
+        <th>Prix du service</th>
+        <th>Modification</th>
+        <th>Suppression</th>
+    </tr>
+
+    {% for service in services %}
+    {# <pre><p>{{dump (service)}}</p></pre> #}
+        <tr>
+            <td>{{service.nom_service}}</td>
+            <td>{{service.prix_service}}</td>
+
+            <td><a href=""><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
+            {# a mettre dans le href de a : bien sur il faut remplacer les elements {{  path('modif_chambre', {id_service: chambre.id_chambres}) }} #}
+            {# a mettre dans le href de a : bien sur il faut remplacer les elements {{  path('suppression', {id_chambres: chambre.id_chambres}) }} #}
+            <td><a href=""><span class="glyphicon glyphicon-trash alignement"</span></a></td>
+        </tr>
+
+    {% endfor %}
+
+</table>
+
+    <h4 class="text-center">Ajouter d'un service</h4>
+
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label for="nom_service" class="control-label">Nom du service</label>
+            <div>
+                <input type="text" class="form-control" id="nom_service" name="nom_service" placeholder ="coursier">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="prix_service" class="control-label">Prix du service</label>
+            <div>
+                <input type="text" class="form-control" id="prix_service" name="prix_service" placeholder ="50">
+            </div>
+        </div>
+
+        <div>
+        <button type="submit" class="btn btn-primary col-sm-12 btn_service">Ajouter un service</button>
+        </div>
+    </form>
 {% endblock %}
