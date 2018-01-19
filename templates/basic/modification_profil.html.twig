@@ -46,19 +46,21 @@
                 <input type="text" class="form-control" id="code_postal" name="code_postal" value="{{ code_postal }}"class="taille_form">
             </div>            
             <button type="submit" class="btn btn-default col-md-12">Modifier</button>
-            {% if error is defined %}
-                <hr>
-                    {{ error }}
-                <hr>
-            {% endif %}
-
-            {% if msgmodif is defined %}
-                <hr>
-                    {{ msgmodif }}
-                <hr>
-            {% endif %}
-
         </form>
+
+        {% if error is defined %}
+            
+                <p>{{ error|nl2br }}</p>
+            <hr>
+        {% endif %}
+        
+
+        {% if msgmodif is defined %}
+            <hr>
+                {{ msgmodif }}
+            <hr>
+        {% endif %}
+
     </div>
 
 

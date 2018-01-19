@@ -25,9 +25,6 @@
             $sql = "SELECT prenom , nom , email , telephone , ville , code_postal , adresse FROM user WHERE user_id = ?";
             $user = $this->db->fetchAssoc($sql, array((int) $user_id));
             return $user;
-            // foreach ($post as $cle => $valeur){
-            //     // var_dump($valeur);
-            // }
         }
 
         // fonction permettant l'affichage des informations de l'utilisateur

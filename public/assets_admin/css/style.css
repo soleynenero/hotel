@@ -1,0 +1,16 @@
+.deconnexion a
+{
+    display : inline-block ;
+    width : 100% ;
+}
+
+.btn_chambre
+{
+    background: #5A738E ;
+    color : white ;
+}
+
+.alignement
+{
+    padding-left : 35px ;
+}

@@ -18,16 +18,37 @@
     <h3 class="text-left">Mes réservations</h3>
         <table class="table">
             <tr>
+                <th>Date commande</th>
+                <th>Date debut</th>
+                <th>Date fin</th>
+                <th>Nombre personne</th>
+                <th>Nom service</th>
+                <th>Prix service</th>
+                <th>Prix chambre</th>
+                <th>Capacite</th>
+                <th>Categorie</th>
+            </tr>
+            {% if reservations is defined %}
+                {% for reservation in reservations %}
+                    <tr>
+                    {% for reserv in reservation %}
+                        <td>{{ reserv }}</td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {# <tr>
                 {% for reservation in reservations %}
                     {% for cle , reserv in reservation %}
                         <th>{{cle}}</th>
                     {% endfor %}
             </tr>
+            <tr>
                     {% for reserv in reservation %}
                         <td>{{ reserv }}</td>
                     {% endfor %}
                 {% endfor %}
-            </tr>
+            </tr> #}
 
             {# <tr>
                 {% for reservation in reservations %}
@@ -37,5 +58,9 @@
                 {% endfor %}
             </tr> #}
         </table>
+
+        {% if noReserv is defined %}
+            <p>{{ noReserv }}</p>
+        {% endif %}
     </div>
 {% endblock %}

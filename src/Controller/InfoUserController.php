@@ -37,7 +37,8 @@
             // print_r($reservations);
             // echo "</pre>";
             // die();
-            return $app['twig']->render('basic/reservation.html.twig', array("reservations" => $reservations));
+            return $app['twig']->render('basic/reservation.html.twig', array("reservations" => $reservations,
+                                                                                "noReserv" => "Vous n'avez pas encore réservé"));
         }
 
         public function modificationProfilAction(Application $app, Request $request)
@@ -55,24 +56,26 @@
 
             $errors ="";
             if(iconv_strlen($prenom) < 2 || iconv_strlen( $prenom )> 15){
-                $errors .= "Votre nom doit être compris entre 2 et 15 caractères";
+                $errors .= "Votre prenom doit être compris entre 2 et 15 caractères\n";
                 }
             if(iconv_strlen($nom) < 2 || iconv_strlen($nom) > 15){
-                $errors .= "Votre nom doit être compris entre 2 et 15 caractères";
+                $errors .= "Votre nom doit être compris entre 2 et 15 caractères\n";
             }
 
             if(!is_numeric($code_postal) || iconv_strlen($code_postal) != 5){
-                $errors .= "Votre code postal n'est pas au bon format : 0102030405";
+                $errors .= "Votre code postal n'est pas au bon format : 01020\n";
                 }
 
             if(!is_numeric($telephone) || iconv_strlen($telephone) != 10){
-                $errors .= "Votre telephone n'est pas au bon format : 0102030405";
+                $errors .= "Votre telephone n'est pas au bon format : 0102030405\n";
             }          
 
         
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors .= "Votre adresse mail n'est pas au bon format : hotel@hotel.com";
+                $errors .= "Votre adresse mail n'est pas au bon format : hotel@hotel.com\n";
             }
+            // print_r($errors);
+            // die();
         
             if(!empty($errors))
             {

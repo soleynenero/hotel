@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hotel\Controller\InfoUserController;
+use Hotel\Controller\Controller;
+use Hotel\Model\InfosAdminDAO;
 use Twig\Extension\AbstractExtension;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
@@ -65,8 +67,9 @@ $app->get('/inscription', function() use($app)
 // peut etre mettre un lien vers la page login si l'utilisateur a deja un compte
 })->bind('inscription');
  
-$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')
-//->before($verifParamInscription)
+
+$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')->before($verifParamInscription)
+
 ;
 
 /**************************** Validate token email *********** */
@@ -79,7 +82,7 @@ $app->get("/verif/{token}/", 'Hotel\Controller\AuthentificationController::verif
 $app->get('/connexion', function() use($app)
 {
     return $app['twig']->render('basic/connexion.html.twig', array());
-})->bind('connexion');
+})->bind('connexion')->before($isConnectYes);
 
 
 $app->post('/connexion', "Hotel\Controller\ConnexionController::login")
@@ -96,7 +99,8 @@ $app->post('/connexion', "Hotel\Controller\ConnexionController::login")
 $app->get('/oubli_mdp', function() use($app)
 {
     return $app['twig']->render('basic/oubli_mdp.html.twig', array());
-})->bind('oubli_mdp');
+})
+->bind('oubli_mdp');
 
 
 // Vérification que l'adresse mail est bien valide
@@ -153,8 +157,9 @@ $app->post('/profil_membre/modificationMdp', "Hotel\Controller\InfoUserControlle
 
 // deconnexion
 $app->get('/deconnexion', function() use($app){
-    
-    session_destroy() ;
+
+    setcookie("hotel");
+    session_destroy();
     return $app->redirect("/hotel/public/");
 
 })->bind('deconnexion');
@@ -241,14 +246,44 @@ $app->get('/services', function() use($app)
 
 
 
+/******************************************/
+/***********PARTIE BACK DU SITE************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/******************************************/
+/***********ROUTE ADMIN INDEX**************/
+/******************************************/
+/******************************************/
 
-/*************************************** */
-/******* ROUTES  SECTION GESTION *********/
-/************************************** */
+
+// $app->get('/admin', "Hotel\Controller\AdminIndexController::affichageInfosIndexAdmin" )->bind('admin');
+
+
 $app->get('/admin', function() use($app)
 {
-    return $app['twig']->render('index_admin.html.twig', array());
+
+    $isconnectedAnIsAdmin = Controller::isAdmin();
+    if ($isconnectedAnIsAdmin) { // Si l'utilisateur est admin
+        $IndexAdmin = new InfosAdminDAO($app['db']);
+        $affichageIndexAdmin = $IndexAdmin->selectAllUser();
+        $affichageRoomVac = $IndexAdmin->selectAllRoomVacancy();
+        $affichageRoomNoVac = $IndexAdmin->selectAllRoomNoVacancy();
+        // var_dump($_SESSION);
+        return $app['twig']->render('index_admin.html.twig', array( //on vehicule les données dont on a besoin
+
+            "IndexAdmin" => $affichageIndexAdmin,
+            "AffichageRoomVac" => $affichageRoomVac,
+            "AffichageRoomNoVac" => $affichageRoomNoVac,
+        ));
+    } else {// Si l'utilisateur n'est pas admin
+        // var_dump($_SESSION);
+        return $app->redirect('/hotel/public/');
+    }
 })->bind('admin');
+
 
 
 /************************************************* */
@@ -257,10 +292,8 @@ $app->get('/admin', function() use($app)
 
 
 
-$app->get('admin/gestion_membres', function() use($app)
-{
-    return $app['twig']->render('basic/gestion_membres.html.twig', array());
-})->bind('gestion_membres');
+$app->get('/admin/gestion_membres', "Hotel\Controller\GestionMembreController::affichageMembreAction")
+->bind('gestion_membres');
 
 $app->post('/admin/gestion_membres', function() use($app)
 {
@@ -273,7 +306,7 @@ $app->post('/admin/gestion_membres', function() use($app)
 /************************************************* */
 
 
-$app->get('admin/gestion_reservations', function() use($app)
+$app->get('/admin/gestion_reservations', function() use($app)
 {
     return $app['twig']->render('basic/gestion_reservations.html.twig', array());
 })->bind('gestion_reservations');
@@ -289,16 +322,23 @@ $app->post('/admin/gestion_reservations', function() use($app)
 /********** ROUTE GESTION CHAMBRES ************/
 /************************************************* */
 
+// permet de voir les chambres
+$app->get('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::affichageChambreAction")
+->bind('gestion_chambres');
 
-$app->get('admin/gestion_chambres', function() use($app)
-{
-    return $app['twig']->render('basic/gestion_chambres.html.twig', array());
-})->bind('gestion_chambres');
+// permet d'ajouter une nlle chambre
+$app->post('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::ajoutChambreAction");
 
-$app->post('/admin/gestion_chambres', function() use($app)
-{
-// Post à compléter : num chambre, statut , telephone , prix , categorie chambre , capacité
-});
+// d'aller sur la page de modification des chambres
+$app->get('/admin/gestion_chambres/modification?id={id_chambres}', "Hotel\Controller\GestionChambreController::selectModifChambreAction")
+->bind('modif_chambre');
+
+// permet de modifier les chambres
+$app->post('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::updateModifChambreAction");
+
+// permet de supprimer une chambre
+$app->get('/admin/gestion_chambres/suppression?id={id_chambres}', "Hotel\Controller\GestionChambreController::deleteChambreAction")
+->bind('suppression');
 
 
 /************************************************* */
@@ -307,7 +347,7 @@ $app->post('/admin/gestion_chambres', function() use($app)
 
 
 
-$app->get('admin/gestion_services', function() use($app)
+$app->get('/admin/gestion_services', function() use($app)
 {
     return $app['twig']->render('basic/gestion_services.html.twig', array());
 })->bind('gestion_services');
