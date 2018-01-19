@@ -4,9 +4,10 @@
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // middleware verif utilisateur est connecté
+
 // $verifConnexion = function(Request $request)
 // {
 //     global $app;

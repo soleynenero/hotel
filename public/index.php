@@ -29,14 +29,15 @@
     require __DIR__.'/../src/Model/UserDAO.php';
     require __DIR__.'/../src/Model/InfoReservationDAO.php';
     require __DIR__.'/../src/Model/ReservDAO.php';
-    require __DIR__.'/../src/model/TokensDAO.php';
+    require __DIR__.'/../src/Model/TokensDAO.php';
     require __DIR__.'/../src/Model/ConnexionDAO.php';
 
-    require __DIR__.'/../src/controller/Controller.php';
-    require __DIR__.'/../src/controller/AuthentificationController.php';
+    require __DIR__.'/../src/Controller/Controller.php';
+    require __DIR__.'/../src/Controller/AuthentificationController.php';
     require __DIR__.'/../src/Controller/reservController.php';
     require __DIR__.'/../src/Controller/ConnexionController.php';
     require __DIR__.'/../src/Controller/InfoUserController.php';
+    require __DIR__.'/../src/Controller/ForgottenController.php';
 
     require __DIR__.'/../src/route.php';
 

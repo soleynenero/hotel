@@ -67,7 +67,11 @@
                     // on calcule le nombre de nuits réservées
                     $debut1 = new DateTime($debut1);
                     $fin1 = new DateTime($fin1);
-                    $this->nuits1 = intval($debut1->diff($fin1)->format('%d')) -1; // différence de jours entre le jour d'arrivée et le jour de départ -1 pour compter les nuits
+
+                    if(intval($debut1->diff($fin1)->format('%d')) == 1)
+                        $this->nuits1 = intval($debut1->diff($fin1)->format('%d')); // différence de jours entre le jour d'arrivée et le jour de départ
+                    else
+                        $this->nuits1 = intval($debut1->diff($fin1)->format('%d')) -1; // différence de jours entre le jour d'arrivée et le jour de départ -1 pour compter les nuits
 
                     // on complète la prestation avec les services demandé
                     if(!empty($idserv)){
