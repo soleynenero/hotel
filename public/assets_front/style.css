@@ -232,3 +232,19 @@ body::-webkit-scrollbar {
     padding-top : 75px ;
     line-height: 20px ;
 }
+
+/*FRONT INDEX*/
+
+/*LIEN POUR L'ADMIN FRONT -> BACK*/
+#toFrontBack{
+    position: fixed;
+    left: 1em;
+    bottom: 1em;
+    background: rgba(0,0,0,0.5);
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    color: #fff;
+    font-size: 2em;
+}
+
