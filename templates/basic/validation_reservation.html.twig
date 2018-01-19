@@ -1,0 +1,112 @@
+{% extends "layout.html.twig" %}
+
+{% block menuNav %}
+    {% include 'include/menu_nav.html.twig' ignore missing %}
+{% endblock %}
+
+{% block content %}
+
+
+
+<div id="valid_reserv" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-md-8 col-sm-offset-3 col-md-offset-2">
+            <p>Voici le récapitulatif de votre réservation n° {{reserv['chambres'][0]['idReserv']}} :</p>
+
+            <p>1 chambre {{reserv['chambres'][0]['catChambre']}} {{reserv['chambres'][0]['capChambre']}} : {{reserv['chambres'][0]['prixUnit']}} € / nuit, </p>
+            <p>du {{reserv['chambres'][0]['debut']}} au {{reserv['chambres'][0]['fin']}} soit {{reserv['chambres'][0]['nuits']}} nuit(s).</p>
+            <p>Pour cette réservation, vous avez demandé :</p>
+            <ul>
+                {% for service in reserv.services %}
+                    {# {% for index in service %} #}
+                        {#{% for cle, valeur in index %} #}
+                    <li>{{ service.service }} : {{ service.prixService }} € TTC</li>
+                            {# <pre>{{ dump(service) }}</pre> #}
+                            {# {{ cle }} {{ valeur }} #}
+
+                            {# {{ cle }} {{valeur }} #}
+
+                        {# {% endfor %} #}
+                    {# {% endfor %} #}
+                {% endfor %}
+            </ul>
+            <p>Prix total hors taxe : {{reserv['cout']['prixHT']}} €</p>
+            <p>TVA : {{reserv['cout']['tva']}} €</p>
+            <p>Prix total TTC : {{reserv['cout']['prixTTC']}} €</p>
+            
+
+{# array(3) {
+  ["chambres"]=>
+  array(1) {
+    [0]=>
+    array(8) {
+      ["idReserv"]=>
+      string(2) "30"
+      ["catChambre"]=>
+      string(10) "superieure"
+      ["capChambre"]=>
+      string(6) "double"
+      ["debut"]=>
+      string(10) "08/01/2018"
+      ["fin"]=>
+      string(10) "24/01/2018"
+      ["nuits"]=>
+      string(2) "15"
+      ["prixUnit"]=>
+      string(4) "1300"
+      ["prixChbre"]=>
+      string(5) "19500"
+    }
+  }
+  ["services"]=>
+  array(4) {
+    [0]=>
+    array(2) {
+      ["service"]=>
+      string(13) "TV ecran plat"
+      ["prixService"]=>
+      string(2) "30"
+    }
+    [1]=>
+    array(2) {
+      ["service"]=>
+      string(8) "pressing"
+      ["prixService"]=>
+      string(2) "20"
+    }
+    [2]=>
+    array(2) {
+      ["service"]=>
+      string(7) "parking"
+      ["prixService"]=>
+      string(1) "0"
+    }
+    [3]=>
+    array(2) {
+      ["service"]=>
+      string(14) "blanchisserie "
+      ["prixService"]=>
+      string(2) "15"
+    }
+  }
+  ["cout"]=>
+  array(3) {
+    ["tva"]=>
+    string(4) "3342"
+    ["prixTTC"]=>
+    string(5) "19565"
+    ["prixHT"]=>
+    int(16223)
+  }
+} #}
+            <p>Sélectionnez un moyen de paiement :</p>
+
+            <a href='#'><button class="btn btn-default">Réglez votre commande</button></a>
+        </div>
+    </div>
+</div>
+
+
+
+ 
+{% endblock %}

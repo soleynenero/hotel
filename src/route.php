@@ -47,8 +47,13 @@ $app->get('/mentions_legales', function () use ($app) {
     return $app['twig']->render('basic/mentions_legales.html.twig', array());
 })->bind('mentions_legales');
 
+/** BLOC RESERVATION **/
+$app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
 
-
+/** VALIDATION DE RESERVATION **/
+$app->get('/reservation', function () use ($app) {
+    return $app['twig']->render('basic/validation_reservation.html.twig');
+});
 
 
 /*** CONNEXION ET INSCRIPTION ***/
@@ -62,10 +67,13 @@ $app->get('/inscription', function() use($app)
 // peut etre mettre un lien vers la page login si l'utilisateur a deja un compte
 })->bind('inscription');
  
+
 $app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')->before($verifParamInscription)
+
 ;
 
-
+/**************************** Validate token email *********** */
+$app->get("/verif/{token}/", 'Hotel\Controller\AuthentificationController::verifEmailAction');
 
 /************************************************* */
 /*************** ROUTE PAGE CONNEXIONS *************/
@@ -87,25 +95,27 @@ $app->post('/connexion', "Hotel\Controller\ConnexionController::login")
 /******************* ROUTE PAGE PROFIL *************/
 /************************************************* */
 
-// page mot de passe oublié
-$app->post('/oubli_mdp', function() use($app)
+// page mot de passe oublié  /!\ Modifié (Sathia)
+$app->get('/oubli_mdp', function() use($app)
 {
     return $app['twig']->render('basic/oubli_mdp.html.twig', array());
 })
 ->bind('oubli_mdp');
 
 
+// Vérification que l'adresse mail est bien valide
+$app->post('/oubli_mdp','Hotel\Controller\ForgottenController::verifEmailAction')
+;
 
-
-
+// // Envoi du mot de passe : ne fonctionne pas
+// $app->post('/oubli_mdp', 'Hotel\Controller\ForgottenController::sendPasswordAction')
+// ;
 
 /*** LES ROUTES DES PAGES SECONDAIRES ***/
 
 /************************************************* */
 /******************* ROUTE PAGE PROFIL *************/
 /************************************************* */
-
-
 
 // affichage info
 
@@ -167,11 +177,7 @@ $app->get('/chambre_standard', function() use($app)
     return $app['twig']->render('basic/chambre_standard.html.twig', array());
 })->bind('chambre_standard');
 
-$app->post('/chambre_standard', function() use($app)
-{
-// Post à compléter : date deb, date fin, nb personnes ,prix , categorie en hidden , capacité , nom service
-// lien vers le module de paiement ( API)
-});
+// Uniquement page de description
 
 
 
@@ -186,11 +192,7 @@ $app->get('/chambre_superieure', function() use($app)
     return $app['twig']->render('basic/chambre_superieure.html.twig', array());
 })->bind('chambre_superieure');
 
-$app->post('/chambre_superieure', function() use($app)
-{
-// Post à compléter : date deb, date fin, nb personnes ,prix , categorie en hidden , capacité , nom service
-// lien vers le module de paiement ( API)
-});
+// Uniquement page de description
 
 
 

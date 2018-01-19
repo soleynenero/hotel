@@ -7,9 +7,9 @@
     <img src="{{ asset('assets_front/images/photos/banner4.jpg ') }}"  class="img-responsive" alt="slide">
     <div class="welcome-message">
         <div class="wrap-info">
-            <div class="information">
+            <div class="information" style="padding-top: 10em;">
                 <h1  class="animated fadeInDown">Hôtel Grands Voisins</h1>
-                <p class="animated fadeInUp">Le luxe en trois mois et demi</p>                
+                <p class="animated fadeInUp">Paris Rive Gauche. Le luxe en trois mois et demi</p>                
             </div>
             <a href="#information" class="arrow-nav scroll wowload fadeInDownBig"><i class="fa fa-angle-down"></i></a>
         </div>
@@ -27,7 +27,7 @@
             <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3" id="reservation">
                 <h3>Réservez ici</h3>
                 <form role="form" class="wowload fadeInRight" method="post">
-                    <input type="hidden" name="user_id" value="22">
+                    <input type="hidden" name="user_id" value="4"> {#Modifier la value#}
                     <div class="form-group">
                         <input type="text" class="form-control" name="nom" placeholder="Nom">
                     </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <hr></hr>
-                    <div class="form-group">
+                    {# <div class="form-group">
                         <h4 class="text-center">Autre réservation</h4>
                         <div class="row">
                             <div class="col-xs-12">
@@ -116,10 +116,10 @@
                                 <input type="date" class="form-control" name="date_fin2">
                             </div>
                         </div>
-                    </div>
+                    </div> #}
 
                     <hr></hr>
-                    <div class="form-group">
+                    <div class="form-group" id="resaServices">
                         <h4 class="text-center">Services souhaités</h4>
                         <input type="checkbox" name="idserv[]" value="1">TV
                         <input type="checkbox" name="idserv[]" value="2">Pressing
@@ -141,68 +141,187 @@
 </div>
 <!-- reservation-information -->
 
+<!-- Modifié par Sathia -->
 
-
-<!-- services -->
-<div class="spacer services wowload fadeInUp">
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <!-- RoomCarousel -->
-            <div id="RoomCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                <div class="item active"><img src="{{ asset('assets_front/images/photos/8.jpg') }}" class="img-responsive" alt="slide"></div>                
-                <div class="item  height-full"><img src="{{ asset('assets_front/images/photos/9.jpg') }}"  class="img-responsive" alt="slide"></div>
-                <div class="item  height-full"><img src="{{ asset('assets_front/images/photos/10.jpg') }}"  class="img-responsive" alt="slide"></div>
+<!-- Les Chambres -->
+<div class="services wowload fadeInUp" id="Chambres">
+    <div class="container">
+        <h2 style="text-align:center;">#Les Chambres</h2>
+        <div class="row">
+            <div class="col-sm-4" id="STD" style="margin-bottom: 1.5em">
+                <!-- RoomCarousel -->
+                <div id="Standard" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="{{ asset('assets_front/images/photos/STD1.jpg') }}" class="img-responsive"" alt="slide">
+                    </div>               
+                    <div class="item">
+                        <img src="{{ asset('assets_front/images/photos/STD3.jpg') }}"  class="img-responsive"; alt="slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset  ('assets_front/images/photos/STD4.jpg') }}"  class="img-responsive"; alt="slide"></div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#Standard" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                    <a class="right carousel-control" href="#Standard" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
                 </div>
-                <!-- Controls -->
-                <a class="left carousel-control" href="#RoomCarousel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                <a class="right carousel-control" href="#RoomCarousel" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
-            </div>
-            <!-- RoomCarousel-->
-            <div class="caption">Rooms<a href="rooms-tariff.php" class="pull-right"><i class="fa fa-edit"></i></a></div>
-        </div>
-
-
-        <div class="col-sm-4">
-            <!-- RoomCarousel -->
-            <div id="TourCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                <div class="item active"><img src="{{ asset('assets_front/images/photos/6.jpg') }}" class="img-responsive" alt="slide"></div>
-                <div class="item  height-full"><img src="{{ asset('assets_front/images/photos/3.jpg') }}"  class="img-responsive" alt="slide"></div>
-                <div class="item  height-full"><img src="{{ asset('assets_front/images/photos/4.jpg') }}"  class="img-responsive" alt="slide"></div>
+                <!-- Description Chambre-->
+                <div class="caption" style="padding: 1.5em 1.5em 3em 1.5em;">
+                    <h4> Chambre Standard </h4>
+                    <p  class="col-md-6" style="padding: 0;">A partir de 120 €</p> 
+                    <button class="pull-right btn btn-default">
+                        <a style="font-family: 'Raleway';font-size:15px;color:#ffff" href="{{ path('chambre_standard') }}" >
+                            Voir Détails
+                        </a>
+                    </button>
                 </div>
-                <!-- Controls -->
-                <a class="left carousel-control" href="#TourCarousel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                <a class="right carousel-control" href="#TourCarousel" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
             </div>
-            <!-- RoomCarousel-->
-            <div class="caption">Tour Packages<a href="gallery.php" class="pull-right"><i class="fa fa-edit"></i></a></div>
-        </div>
 
-
-        <div class="col-sm-4">
-            <!-- RoomCarousel -->
-            <div id="FoodCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                <div class="item active"><img src="{{ asset('assets_front/images/photos/1.jpg') }}" class="img-responsive" alt="slide"></div>
-                <div class="item  height-full"><img src="{{ asset('assets_front/images/photos/2.jpg') }}"  class="img-responsive" alt="slide"></div>
-                <div class="item  height-full"><img src="{{ asset('assets_front/images/photos/5.jpg') }}"  class="img-responsive" alt="slide"></div>
+            <div class="col-sm-4" id="SUP" style="margin-bottom: 1.5em">
+                <!-- RoomCarousel -->
+                <div id="Superieure" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="{{ asset('assets_front/images/photos/SUP1.jpg') }}" class="img-responsive"" alt="slide">
+                    </div>               
+                    <div class="item">
+                        <img src="{{ asset('assets_front/images/photos/SUP2.jpg') }}"  class="img-responsive"; alt="slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset  ('assets_front/images/photos/SUP3.jpg') }}"  class="img-responsive"; alt="slide"></div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#Superieure" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                    <a class="right carousel-control" href="#Superieure" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
                 </div>
-                <!-- Controls -->
-                <a class="left carousel-control" href="#FoodCarousel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                <a class="right carousel-control" href="#FoodCarousel" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                <!-- Description Chambre-->
+                <div class="caption" style="padding: 1.5em 1.5em 3em 1.5em;">
+                    <h4> Chambre Supérieure </h4>
+                    <p  class="col-md-6" style="padding: 0;">A partir de 150 €</p> 
+                    <button class="pull-right btn btn-default">
+                        <a style="font-family: 'Raleway';font-size:15px;color:#ffff" href="{{ path('chambre_superieure') }}" >
+                            Voir Détails
+                        </a>
+                    </button>
+                </div>
             </div>
-            <!-- RoomCarousel-->
-            <div class="caption">Food and Drinks<a href="gallery.php" class="pull-right"><i class="fa fa-edit"></i></a></div>
+
+            <div class="col-sm-4" id="SUITE" style="margin-bottom: 1.5em">
+                <!-- RoomCarousel -->
+                <div id="Deluxe" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="{{ asset('assets_front/images/photos/SUITE1.jpg') }}" class="img-responsive"" alt="slide">
+                    </div>               
+                    <div class="item">
+                        <img src="{{ asset('assets_front/images/photos/SUITE2.jpg') }}"  class="img-responsive"; alt="slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset  ('assets_front/images/photos/SUITE3.jpg') }}"  class="img-responsive"; alt="slide"></div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#Deluxe" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                    <a class="right carousel-control" href="#Deluxe" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                </div>
+                <!-- Description Chambre-->
+                <div class="caption" style="padding: 1.5em 1.5em 3em 1.5em;">
+                    <h4> Suite Deluxe </h4>
+                    <p  class="col-md-6" style="padding: 0;">A partir de 180 €</p> 
+                    <button class="pull-right btn btn-default">
+                        <a style="font-family: 'Raleway';font-size:15px;color:#ffff" href="{{ path('chambre_luxe') }}" >
+                            Voir Détails
+                        </a>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
+<!-- Les services -->
+<div id="Services" class="services wowload fadeInUp" style="background-color:#ffff;">
+    <div class="container">
+        <h2 style="text-align:center;">#Les Services</h2>
+        <div class="row">
+            <div class="col-sm-3"  id="service1">
+                <div class="item height-full">
+                    <img src="{{ asset('assets_front/images/photos/SERV1.jpg') }}" class="img-responsive" alt="service">
+                </div>
+                <div class="caption" style="padding: 1em 1em 3em 1em;">
+                    <h4> Petit-déjeuner en buffet</h4>
+                    <p  class="col-md-7" style="padding: 0;">Des produits frais : 15 €/pers</p> 
+                    <button class="pull-right btn btn-default col-md-5" style="padding: 0.5em 1em 0.5em 1em;">
+                        <a style="font-family: 'Raleway'; font-size:15px;color:#ffff" href="#resaServices" >
+                            Réserver!
+                        </a>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-sm-3"  id="service2">
+                <div class="item height-full">
+                    <img src="{{ asset('assets_front/images/photos/SERV2.png') }}" class="img-responsive" alt="service">
+                </div>
+                <div class="caption" style="padding: 1em 1em 3em 1em;">
+                    <h4> Blanchisserie </h4>
+                    <p  class="col-md-7" style="padding: 0;">A partir de 15 €</p> 
+                    <button class="pull-right btn btn-default col-md-5" style="padding: 0.5em 1em 0.5em 1em;">
+                        <a style="font-family: 'Raleway'; font-size:15px;color:#ffff" href="#resaServices" >
+                            Réserver!
+                        </a>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-sm-3"  id="service3">
+                <div class="item height-full">
+                    <img src="{{ asset('assets_front/images/photos/SERV3.jpg') }}" class="img-responsive" alt="service">
+                </div>
+                <div class="caption" style="padding: 1em 1em 3em 1em;">
+                    <h4> Bagagerie </h4>
+                    <p  class="col-md-7" style="padding: 0;">Jour de départ ou d'arrivée : 10 €</p> 
+                    <button class="pull-right btn btn-default col-md-5" style="padding: 0.5em 1em 0.5em 1em;">
+                        <a style="font-family: 'Raleway'; font-size:15px;color:#ffff" href="#resaServices" >
+                            Réserver!
+                        </a>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-sm-3"  id="service4">
+                <div class="item height-full">
+                    <img src="{{ asset('assets_front/images/photos/SERV4.png') }}" class="img-responsive" alt="service">
+                </div>
+                <div class="caption" style="padding: 1em 1em 3em 1em;">
+                    <h4> Parking </h4>
+                    <p  class="col-md-7" style="padding: 0;">Places limitées : 15 €</p> 
+                    <button class="pull-right btn btn-default col-md-5" style="padding: 0.5em 1em 0.5em 1em;">
+                        <a style="font-family: 'Raleway'; font-size:15px;color:#ffff" href="#resaServices" >
+                            Réserver!
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3"  id="service5">
+                <div class="item height-full">
+                    <img src="{{ asset('assets_front/images/photos/SERV5.jpg') }}" class="img-responsive" alt="service">
+                </div>
+                <div class="caption" style="padding: 1em 1em 3em 1em;">
+                    <h4> Conciergerie </h4>
+                    <p  class="col-md-7" style="padding: 0;">Une demande particulière?</p> 
+                    <button class="pull-right btn btn-default col-md-5" style="padding: 0.5em 1em 0.5em 1em;">
+                        <a style="font-family: 'Raleway'; font-size:15px;color:#ffff" href="#resaServices" >
+                            Réserver!
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- services -->
-
-
-
-
 
 {% endblock %}
