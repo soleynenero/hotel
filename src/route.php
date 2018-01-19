@@ -319,15 +319,20 @@ $app->post('/admin/gestion_membres', function() use($app)
 /************************************************* */
 
 
-$app->get('/admin/gestion_reservations', function() use($app)
-{
-    return $app['twig']->render('basic/gestion_reservations.html.twig', array());
-})->bind('gestion_reservations');
+$app->get('/admin/gestion_reservations', "Hotel\Controller\GestionReservationController::affichageReservationAction")
+->bind('gestion_reservations');
+
+
+$app->get('/admin/gestion_reservation', "Hotel\Controller\GestionReservationController::affichageReservationAction")
+->bind('gestion_reservation');
 
 $app->post('/admin/gestion_reservations', function() use($app)
 {
 // Post à compléter : date deb , date fin , nb personne , id service , id chambre , statut chambre , nom service , id facture 
 });
+
+
+
 
 
 

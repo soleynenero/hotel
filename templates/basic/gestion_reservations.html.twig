@@ -2,8 +2,35 @@
 
 {% block content %}
     
-<div class="banner">    	   
-    <p>Ceci est la page Gestion des réservations.</p>                
-</div>
+<table class="table">
+        <tr>
+            <th>N° commande</th>
+            <th>Nom complet</th>
+            <th>N° facture</th>
+            <th>Date commande</th>
+            <th>Date d'arrivée</th>
+            <th>Date départ</th>
+            <th>Modification</th>
+            <th>Suppression</th>
+        </tr>
+{#         
+        {% for chambre in chambres %}
+            <tr>
+            <pre><p>{{dump (chambre )}}</p></pre> #}
+
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{reservation.numero_chambre}}</td>
+                <td>{{reservation.Categorie}}</td>
+                <td>{{reservation.capacite}}</td>
+                <td>{{reservation.telephone}}</td>
+                <td>{{reservation.prix}}</td>
+                <td>{{reservation.statut}}</td>
+                <td><a href="{{  path('modif_chambre', {id_chambres: chambre.id_chambres}) }}"><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
+                <td><a href="{{  path('suppression', {id_chambres: chambre.id_chambres}) }}"><span class="glyphicon glyphicon-trash alignement"</span></a></td>
+            </tr>
+        {% endfor %}
+        
+    </table>
 
 {% endblock %}
