@@ -82,12 +82,12 @@
             foreach($chambre AS $cle => $tab):
                 if($numero_chambre == $tab["numero_chambre"]):
                     $errorsnb = "Le numero de chambre ". $numero_chambre." est deja pris \n";
-                    endif ;
-                    endforeach ;
+                endif ;
+            endforeach ;
                     
-                    var_dump($chambre);
-                    die();
-            if(!empty($errors))
+                    // var_dump($chambre);
+                    // die();
+            if(!empty($errors) || !empty($errorsnb))
             {
                 
                 return $app['twig']->render('basic/gestion_chambres.html.twig', array(
@@ -99,13 +99,17 @@
             }
 
             // on appelle la classe GestionChambreDAO pour se connecter a la bdd et recupérer les informations des membres
-            $Chambre = new GestionChambreDAO($app['db']);
-            $nlleChambre = $Chambre->insertChambre($numero_chambre, $id_categorie, $id_capacite, $telephone, $prix);
-            // return $app['twig']->render('basic/gestion_chambres.html.twig', array(
-            //     "msgValidation" => "Merci d'avoir inséré une nouvelle chambre",
-            //     "chambres" =>  $chambre,
-            //     "capacites" => $capacite,
-            //     "categories" => $categorie));
+            if(empty($errors) || empty($errorsnb))
+            {
+                $Chambre = new GestionChambreDAO($app['db']);
+                $nlleChambre = $Chambre->insertChambre($numero_chambre, $id_categorie, $id_capacite, $telephone, $prix);
+                return $app['twig']->render('basic/gestion_chambres.html.twig', array(
+                    "msgValidation" => "Merci d'avoir inséré une nouvelle chambre",
+                    "chambres" =>  $chambre,
+                    "capacites" => $capacite,
+                    "categories" => $categorie));
+            }
+
         }
 
         public function selectModifChambreAction(Application $app, Request $request , $id_chambres)
@@ -201,12 +205,19 @@
         }
         public function deleteChambreAction(Application $app, Request $request, $id_chambres)
         {
+            $chambresupp = new GestionChambreDAO($app['db']);
+            $suppression = $chambresupp->selectmodifChambre($id_chambres);
+            echo "<pre>";
+            print_r($capacite);
+            echo "</pre>";
+            die();
             $affichageCategorie = new GestionChambreDAO($app['db']);
             $categorie = $affichageCategorie->deleteChambre($id_chambres);
             // echo "<pre>";
             // print_r($capacite);
             // echo "</pre>";
             // die();
+            
             $msgValidationSup = "La chambre $numero_chambre a bien été supprimé";
 
             return $app->redirect('/hotel/public/admin/gestion_chambres');
