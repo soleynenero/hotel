@@ -65,11 +65,11 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home / Site <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i>Acces site Front <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="">Accéder au site </a></li>
-                      <li><a href="">Accéder à la page X </a></li>
-                      <li><a href="">Accéder à la page X </a></li>
+                      <li><a href="{{ path ('Home') }}">Accéder à l'accueil </a></li>
+                      <li><a href="{{ path ('gallery') }}">Accéder à la galerie </a></li>
+                      <li><a href="{{ path ('introduction') }}">Accéder à la présentation </a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Gestion Administrative <span class="fa fa-chevron-down"></span></a>
@@ -95,7 +95,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a> #}
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{connect != false ? path ('deconnexion')}}">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -131,7 +131,10 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-                
+
+
+        {% block content %}{% endblock %}
+
 
         </div>
         <!-- /page content -->
