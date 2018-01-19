@@ -1,63 +1,53 @@
 {% extends "layout.html.twig" %}
 
-{% block menuNav %}
-    {% include 'include/menu_nav.html.twig' ignore missing %}
-{% endblock %}
-
 {% block content %}
-
 
 <div class="container">
 
-<h1 class="title">Contact</h1>
-
-
 <!-- form -->
 <div class="contact">
-
-
-
-       <div class="row">
-       	
-       	<div class="col-sm-12">
-       	<div class="map">
-       	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9933.460884430251!2d-0.13301252240929382!3d51.50651527467666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2snp!4v1414314152341" width="100%" height="300" frameborder="0"></iframe>	
-       	</div>
-
-
-		<div class="col-sm-6 col-sm-offset-3">
-			<div class="spacer">   		
-
-       		<h4>Write to us</h4>
-			<form role="form">
-			<div class="form-group">	
-			<input type="text" class="form-control" id="name" placeholder="Name">
+    <div class="row"  style="padding:2em 0 4em 0;">
+        <div class="col-sm-6">
+			<h1 class="title">Nous contacter</h1>
+			<div class="col-sm-12" style="background:url('{{ asset('assets_front/images/photos/banner8.jpg ') }}'); ">
+				<div style="padding:4em 0 4em 0;"> 
+					<div class="col-sm-6 col-sm-offset-0.5" style="background-color:#fff; border:1px solid #bbb; height:250px;padding:1em 1em;"> 
+						<h4 style="color:#bfa145; font-weight:bold;">Nous écrire</h4>
+						<h4>Hôtel Grands Voisins</h4>
+						<span>Boulevard Denfert-Rochereau</span>
+						<br>
+						<span>75014 Paris</span>
+						<br>
+						<span>01 45 00 00</span>
+						<br>
+						<span>contact@hotel-grandsvoisins.fr</span>
+					</div>	
+					<form role="form" class="col-sm-6 col-sm-offset-0.5" style="padding:0 1em 4em 1em;">
+						<div class="form-group">	
+							<input type="text" class="form-control" id="name" name="nom" placeholder="Entrez votre nom">
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email">
+						</div>
+						<div class="form-group">
+							<textarea type="email" class="form-control" name="message"  placeholder="Entrez votre message" rows="8"></textarea>
+						</div>
+						<button type="submit" class="btn btn-default"> Envoyer</button>
+					</form>
+				</div>	
 			</div>
-			<div class="form-group">
-			<input type="email" class="form-control" id="email" placeholder="Enter email">
+		</div>
+		<div class="col-sm-5 col-sm-offset-1"> 
+			<h1 class="title">Nous localiser</h1>
+			<div class="map">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.126449962962!2d2.332395315673628!3d48.83672667928533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671c778fcc639%3A0x8ba45a16f7e5e28d!2s84+Avenue+Denfert-Rochereau%2C+75014+Paris-14E-Arrondissement!5e0!3m2!1sfr!2sfr!4v1516126605345" width="100%" height="400" frameborder="0"></iframe>	
 			</div>
-			<div class="form-group">
-			<input type="phone" class="form-control" id="phone" placeholder="Phone">
-			</div>
-			<div class="form-group">
-			<textarea type="email" class="form-control"  placeholder="Message" rows="4"></textarea>
-			</div>
-					
-			<button type="submit" class="btn btn-default">Send</button>
-			</form>
-			</div>
-
-
-       	</div>
-
-
-
-
-
-       </div>
-</div>
+		</div>   
+	</div>
 </div>
 <!-- form -->
+
+
 
 </div>
 
