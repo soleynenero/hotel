@@ -82,9 +82,11 @@
             foreach($chambre AS $cle => $tab):
                 if($numero_chambre == $tab["numero_chambre"]):
                     $errorsnb = "Le numero de chambre ". $numero_chambre." est deja pris \n";
-                endif ;
-            endforeach ;
-        
+                    endif ;
+                    endforeach ;
+                    
+                    var_dump($chambre);
+                    die();
             if(!empty($errors))
             {
                 
@@ -99,11 +101,11 @@
             // on appelle la classe GestionChambreDAO pour se connecter a la bdd et recupérer les informations des membres
             $Chambre = new GestionChambreDAO($app['db']);
             $nlleChambre = $Chambre->insertChambre($numero_chambre, $id_categorie, $id_capacite, $telephone, $prix);
-            return $app['twig']->render('basic/gestion_chambres.html.twig', array(
-                "msgValidation" => "Merci d'avoir inséré une nouvelle chambre",
-                "chambres" =>  $chambre,
-                "capacites" => $capacite,
-                "categories" => $categorie));
+            // return $app['twig']->render('basic/gestion_chambres.html.twig', array(
+            //     "msgValidation" => "Merci d'avoir inséré une nouvelle chambre",
+            //     "chambres" =>  $chambre,
+            //     "capacites" => $capacite,
+            //     "categories" => $categorie));
         }
 
         public function selectModifChambreAction(Application $app, Request $request , $id_chambres)
@@ -119,29 +121,28 @@
             $affichageCategorie = new GestionChambreDAO($app['db']);
             $categorie = $affichageCategorie->selectCategorie();
 
+            $affichageStatut = new GestionChambreDAO($app['db']);
+            $statut = $affichageStatut->selectStatut();
+
             
             // je renvoie sur la page du gestion_chambres les informations de ma chambre et des informations dans mon select qui est un array
             return $app['twig']->render('basic/modification_chambre.html.twig', array("chambres" => $chambre,
                                                                                     "capacites" => $capacite,
-                                                                                    "categories" => $categorie));
+                                                                                    "categories" => $categorie,
+                                                                                    "statuts" => $statut,));
         }
 
-        public function updateModifChambreAction(Application $app, Request $request)
+        public function updateModifChambreAction(Application $app, Request $request , int $id_chambres)
         {
-
             // recuperation de l'insertion de l'utilisateur        
             $id_categorie = $request->get("id_categorie");
             $id_capacite = $request->get("id_capacite"); 
             $statut = $request->get("statut"); 
-            $numero_chambre = strip_tags($request->get("numero_chambre"));
             $telephone = strip_tags($request->get("telephone"));
             $prix = htmlspecialchars($request->get("prix"));
 
             $errors ="";
 
-            if(!is_numeric($numero_chambre)){
-                $errors .= "Le numéro de chambre doit etre numérique\n";
-                }
 
             if(!is_numeric($prix)){
                 $errors .= "Le prix doit etre numérique\n";
@@ -152,9 +153,14 @@
             }     
 
             // on appelle la classe GestionChambreDAO pour se connecter a la bdd et recupérer les informations des membres
-            $affichageChambreModifiable = new GestionChambreDAO($app['db']);
+            $voirChambre = new GestionChambreDAO($app['db']);
             // ici je stock les informations de mes utilisateur dans un tableau appelé membre
-            $chambre = $affichageChambreModifiable->selectModifChambre($numero_chambre , $id_categorie , $id_capacite , $telephone , $prix , $statut, $id_chambres);
+            // pour voir les lignes affecter
+            if(empty($errors))
+                $rowAffect = $voirChambre->modifChambre($id_categorie , $id_capacite , $telephone , $prix , $statut, $id_chambres);
+
+            $affichageChambreModifiable = new GestionChambreDAO($app['db']);
+            $chambre = $affichageChambreModifiable->selectmodifChambre($id_chambres);
 
             $affichageCapacite = new GestionChambreDAO($app['db']);
             $capacite = $affichageCapacite->selectCapacite();
@@ -162,12 +168,8 @@
             $affichageCategorie = new GestionChambreDAO($app['db']);
             $categorie = $affichageCategorie->selectCategorie();
 
-            // verification si le num de chambre est le meme
-            foreach($chambre AS $cle => $tab):
-                if($numero_chambre == $tab["numero_chambre"]):
-                    $errorsnb = "Le numero de chambre ". $numero_chambre." est deja pris \n";
-                endif ;
-            endforeach ;
+            $affichageStatut = new GestionChambreDAO($app['db']);
+            $statut = $affichageStatut->selectStatut();
 
             // s'il y a des erreurs mettre le msg d'erreur
             if(!empty($errors))
@@ -177,21 +179,25 @@
                 "error" => $errors,
                 "chambres" =>  $chambre,
                 "capacites" => $capacite,
-                "categories" => $categorie));
+                "categories" => $categorie,
+                "statuts" => $statut));
             }
+
+
             // echo "<pre>";
             // print_r($capacite);
             // echo "</pre>";
             // die();
             
-            // j'ai un message de modification de ma chambre
-            $msgValidation = "La chambre $numero_chambre a bien été modifié";
+            // j'ai un message de modification de ma chambr
+            
 
             
             return $app['twig']->render('basic/modification_chambre.html.twig', array("chambres" => $chambre,
                                                                                     "capacites" => $capacite,
+                                                                                    "msgValidation" => "Votre chambre a bien été modifié",
                                                                                     "categories" => $categorie,
-                                                                                    "msgValidation" => $msgValidation));
+                                                                                    "statuts" => $statut));
         }
         public function deleteChambreAction(Application $app, Request $request, $id_chambres)
         {

@@ -1,75 +1,72 @@
 {% extends "layout_admin.html.twig" %}
 
 {% block content %}
-<h3 class="text-center">Modification de la chambre numéro {{chambres.numero_chambre}}</h3>
-<pre><p>{{ dump(chambres)}}</p></pre>
+<div class="container">
+    <h3 class="text-center">Modification de la chambre</h3>
+    <hr>
+    {% if error is defined %}
+        {{ error }}
+    {% endif %}
 
-<pre><p>{{ dump(chambres.statut)}}</p></pre>
-    <form class="form-horizontal" method="post">
-        {# test #}
-        {# <p>{{ dump (categories)}}</p>
-        {% for categorie in categories %} #}
-            {# <pre>
-            <p>{{ dump (categorie)}}</p>
-            </pre> #}
-            {# {% for cat in categorie %}
-            <pre>
-            <p>{{ dump (cat)}}</p>
-            </pre> #}
+    {% if msgValidation is defined %}
+        {{ msgValidation }}
+    {% endif %}
+    {# <pre><p>{{ dump(chambres)}}</p></pre> #}
 
-            {# {% endfor %}
-        {% endfor %} #}
+    {# <pre><p>{{ dump(chambres.statut)}}</p></pre> #}
+        <form class="form-horizontal" method="post">
 
-        {# endtest #}
-        <div class="form-group">
-            <label for="categorie" class="control-label">Categorie</label>
-            <select id="categorie" class="form-control" name="id_categorie">
-                                
-                {% for categorie in categories %}
-
-                    <option value="{{categorie.id_categorie}}" {% if categorie.type_categorie == chambres.Categorie %} selected {% endif %}>{{categorie.type_categorie}}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="capacite" class="control-label">Capacite</label>
-            <select id="capacite" class="form-control" name="id_capacite">             
-                {% for capacite in capacites %}
-
-                    <option value="{{capacite.id_capacite}}" {% if capacite.capacite == chambres.capacite %} selected {% endif %}>{{capacite.capacite}}</option>
-                {% endfor %}            
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="statut" class="control-label">Statut</label>
-            <select id="statut" class="form-control" name="statut">             
-                {% for capacite in capacites %}
-
-                    <option value="{{capacite.id_capacite}}" {% if capacite.capacite == chambres.statut %} selected {% endif %}>{{capacite.capacite}}</option>
-                {% endfor %}            
-            </select>
-        </div>
-
-
-        <div class="form-group">
-            <label for="telephone" class="control-label">Telephone</label>
-            <div>
-                <input type="text" class="form-control" id="telephone" name="telephone" value ="{{chambres.telephone}}">
+            <div class="form-group">
+                <label for="categorie" class="control-label">Categorie</label>
+                <select id="categorie" class="form-control" name="id_categorie">
+                                    
+                    {% for categorie in categories %}
+                        <pre><p>{{ dump(categorie)}}</p></pre>
+                        <option value="{{categorie.id_categorie}}"{% if categorie.type_categorie == chambres.Categorie %} selected {% endif %}>{{categorie.type_categorie}}</option>
+                    {% endfor %}
+                </select>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="prix" class="control-label">Prix</label>
-            <div>
-                <input type="text" class="form-control" id="prix" name="prix" value ="{{chambres.prix}}">
+            <div class="form-group">
+                <label for="capacite" class="control-label">Capacite</label>
+                <select id="capacite" class="form-control" name="id_capacite">             
+                    {% for capacite in capacites %}
+
+                        <option value="{{capacite.id_capacite}}" {% if capacite.capacite == chambres.capacite %} selected {% endif %}>{{capacite.capacite}}</option>
+                    {% endfor %}            
+                </select>
             </div>
-        </div>
 
-        <div>
-        <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Ajouter une chambre</button>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="statut" class="control-label">Statut</label>
+                <select id="statut" class="form-control" name="statut">             
+                    {% for statut in statuts %}
+                        <option value="{{statut.id_statut}}" {% if statut.statut == chambres.statut %} selected {% endif %}>{{statut.statut}}</option>
+                    {% endfor %}            
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="telephone" class="control-label">Telephone</label>
+                <div>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value ="{{chambres.telephone}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prix" class="control-label">Prix</label>
+                <div>
+                    <input type="text" class="form-control" id="prix" name="prix" value ="{{chambres.prix}}">
+                </div>
+            </div>
+
+            <div>
+            <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Ajouter une chambre</button>
+            </div>
+        </form>
+
+        <a href="{{ path ('gestion_chambres') }}">cliquer ici pour retourner vers la page gestion chambre</a>
+</div>
 
 {% endblock %}
