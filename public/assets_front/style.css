@@ -191,7 +191,7 @@ body::-webkit-scrollbar {
     border: 10px groove #bfa145;
     padding: 20px;
     margin-bottom: 10px;
-    background: rgba(156, 170, 49, 0.5); 
+    background: rgba(220, 220, 220, 0.5); 
 }
 .erreurinscription {
     z-index: 10;
