@@ -15,21 +15,24 @@
 
             <p>1 chambre {{reserv['chambres'][0]['catChambre']}} {{reserv['chambres'][0]['capChambre']}} : {{reserv['chambres'][0]['prixUnit']}} € / nuit, </p>
             <p>du {{reserv['chambres'][0]['debut']}} au {{reserv['chambres'][0]['fin']}} soit {{reserv['chambres'][0]['nuits']}} nuit(s).</p>
-            <p>Pour cette réservation, vous avez demandé :</p>
-            <ul>
-                {% for service in reserv.services %}
-                    {# {% for index in service %} #}
-                        {#{% for cle, valeur in index %} #}
-                    <li>{{ service.service }} : {{ service.prixService }} € TTC</li>
-                            {# <pre>{{ dump(service) }}</pre> #}
-                            {# {{ cle }} {{ valeur }} #}
 
-                            {# {{ cle }} {{valeur }} #}
+            {% if  reserv.services is not empty %}
+              <p>Pour cette réservation, vous avez demandé :</p>
+              <ul>
+                  {% for service in reserv.services %}
+                      {# {% for index in service %} #}
+                          {#{% for cle, valeur in index %} #}
+                      <li>{{ service.service }} : {{ service.prixService }} € TTC</li>
+                              {# <pre>{{ dump(service) }}</pre> #}
+                              {# {{ cle }} {{ valeur }} #}
 
-                        {# {% endfor %} #}
-                    {# {% endfor %} #}
-                {% endfor %}
-            </ul>
+                              {# {{ cle }} {{valeur }} #}
+
+                          {# {% endfor %} #}
+                      {# {% endfor %} #}
+                  {% endfor %}
+              </ul>
+            {% endif %}
             <p>Prix total hors taxe : {{reserv['cout']['prixHT']}} €</p>
             <p>TVA : {{reserv['cout']['tva']}} €</p>
             <p>Prix total TTC : {{reserv['cout']['prixTTC']}} €</p>

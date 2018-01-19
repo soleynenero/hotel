@@ -56,12 +56,15 @@
 
         public static function isAdmin()
         {
-            if ($_SESSION['user']["statut"] == "admin") {
-                return true;
-            } else {
-                return false;
+            if(!empty($_SESSION)){
+                if ($_SESSION['user']["statut"] == "admin") {
+                    return true;
+                } else {
+                    return false;
+                }
             }
             
         }
-        
+
+       
     }

@@ -25,17 +25,21 @@
     <div class="embed-responsive embed-responsive-16by9 wowload fadeInLeft"><iframe  class="embed-responsive-item" src="//player.vimeo.com/video/55057393?title=0" width="100%" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 </div> #}
             <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3" id="reservation">
-                <h3>Réservez ici</h3>
+                <h2 style="text-align:center;">#Réservation</h2>
+                {% if reserv_error is defined and reserv_error is not empty %}
+                    <div class='alert alert-danger col-md-8 col-md-offset-2' > {{ reserv_error }} </div>
+                {% endif %}
+
                 <form role="form" class="wowload fadeInRight" method="post">
-                    <input type="hidden" name="user_id" value="4"> {#Modifier la value#}
+                    <input type="hidden" name="user_id" value="{% if id_user is defined %}{{ id_user }} {% endif %}">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nom" placeholder="Nom">
+                        <input type="text" class="form-control" name="nom" placeholder="Nom" value="{% if nom is defined %}{{ nom }}{% endif %}">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="prenom" placeholder="Prénom">
+                        <input type="text" class="form-control" name="prenom" placeholder="Prénom" value="{% if prenom is defined %}{{ prenom }}{% endif %}">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="E-mail" value="test@bidonc.com">
+                        <input type="email" class="form-control" name="email" placeholder="E-mail" value="{% if email is defined %}{{ email }}{% endif %}">
                     </div>        
                     <hr></hr>
                     <div class="form-group">
@@ -77,8 +81,8 @@
                             </div>
                         </div>
                     </div>
-                    <hr></hr>
-                    {# <div class="form-group">
+                   {# <hr></hr>
+                     <div class="form-group">
                         <h4 class="text-center">Autre réservation</h4>
                         <div class="row">
                             <div class="col-xs-12">
