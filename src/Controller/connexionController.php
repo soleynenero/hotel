@@ -52,9 +52,9 @@
                 $user['token'] = $token;
                 $user['dateEnd'] = $dateExpire;
                 $_SESSION["user"] = $user; //creation de la session
-                echo '<pre>';
-                var_dump($_SESSION);
-                echo '</pre>';
+                // echo '<pre>';
+                // var_dump($_SESSION);
+                // echo '</pre>';
                 // die();
 
                 setcookie("hotel", $token, time()+3600 * 24); //Creation du Cookie

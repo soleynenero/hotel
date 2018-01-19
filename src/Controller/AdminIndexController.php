@@ -1,4 +1,9 @@
 <?php
+// Fichier non utilisé a supprimer apres test poussé
+// Fichier non utilisé a supprimer apres test poussé
+// Fichier non utilisé a supprimer apres test poussé
+// Fichier non utilisé a supprimer apres test poussé
+// Fichier non utilisé a supprimer apres test poussé
 
     namespace Hotel\Controller;
 

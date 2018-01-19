@@ -42,7 +42,7 @@
 
         public function selectAllRoomNoVacancy()
         {
-            $sql ="SELECT COUNT(*) AS totalRoomNoVac FROM chambres WHERE statut = 'occupe'";
+            $sql ="SELECT COUNT(*) AS totalRoomNoVac FROM chambres WHERE statut = 'occupee'";
             $totalRoomNoVac = $this->db->fetchAssoc($sql);
             return $totalRoomNoVac;
         }

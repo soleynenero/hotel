@@ -281,20 +281,6 @@ $app->get('/admin', function() use($app)
     }
 })->bind('admin');
 
-// $isconnectedAndAdmin = Controller::isAdmin();
-// if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
-//     $infosUser = new UserModelDAO($app['db']);
-//     return $app['twig']->render('dashboard/user-dashboard.html.twig', array(
-//         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
-//         "usersInfo" => $infosUser->allUsersSelected(),
-//     ));
-// } else {// Si l'utilisateur n'est pas admin
-//     return $app->redirect('/Coolloc/public');
-// }
-
-
-
-
 
 
 /************************************************* */
