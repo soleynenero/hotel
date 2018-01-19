@@ -17,7 +17,20 @@ use Twig\Extension\AbstractExtension;
 
 // route Home
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html.twig');
+
+    $isconnectedAnIsAdmin = Controller::isAdmin();
+    if (isset($_SESSION)) {
+        if ($isconnectedAnIsAdmin) {
+            return $app['twig']->render('index.html.twig', array(
+                "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
+               ));
+        }else {
+            return $app['twig']->render('index.html.twig');
+        }
+    }else{
+        return $app['twig']->render('index.html.twig');
+    }
+    
 })->bind('Home');
 
 $app->post('/', 'Hotel\Controller\ReservationControl::verifAction');

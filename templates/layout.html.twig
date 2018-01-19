@@ -130,6 +130,11 @@
 
     <a href="#home" class="toTop scroll"><i class="fa fa-angle-up"></i></a>
 
+    {% if isconnectedAnIsAdmin is defined %}
+
+        <a  id="toFrontBack" href="{{ path ('admin') }}"><i class="fa fa-cog fa-6" aria-hidden="true"></i></a>
+    {% endif %}
+
 
 
 
