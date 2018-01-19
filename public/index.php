@@ -32,11 +32,22 @@
     require __DIR__.'/../src/Model/TokensDAO.php';
     require __DIR__.'/../src/Model/ConnexionDAO.php';
 
+    require __DIR__.'/../src/Model/GestionServiceDAO.php';
+
+
+
+
     require __DIR__.'/../src/Controller/Controller.php';
     require __DIR__.'/../src/Controller/AuthentificationController.php';
     require __DIR__.'/../src/Controller/reservController.php';
     require __DIR__.'/../src/Controller/ConnexionController.php';
     require __DIR__.'/../src/Controller/InfoUserController.php';
+
+    require __DIR__.'/../src/Controller/GestionServiceController.php';
+
+
+
+
 
     require __DIR__.'/../src/route.php';
 

@@ -20,7 +20,7 @@
         }
 
         // fonction permettant de récupérer les informations de la table service
-        public function affichageServices( $services)
+        public function affichageServices($services)
         {
             $sql = $db->fetchAll('SELECT * FROM services');
            
