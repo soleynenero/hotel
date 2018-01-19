@@ -8,6 +8,8 @@ namespace Hotel\Controller;
 
     class ReservationControl { 
 
+        private $reserv_error;
+
         public function verifAction(Application $app, Request $request){
 
             $idUser = htmlspecialchars(trim($request->get("user_id")));
@@ -15,14 +17,30 @@ namespace Hotel\Controller;
             $prenom = htmlspecialchars(trim($request->get("prenom"))); 
             $email = htmlspecialchars(trim($request->get("email"))); 
             $cat1 = htmlspecialchars(trim($request->get("id_categorie1"))); 
-            $cat2 = htmlspecialchars(trim($request->get("id_categorie2"))); 
+            // $cat2 = htmlspecialchars(trim($request->get("id_categorie2"))); 
             $nbPerson1 = htmlspecialchars(trim($request->get("nb_personne1"))); 
-            $nbPerson2 = htmlspecialchars(trim($request->get("nb_personne2"))); 
+            // $nbPerson2 = htmlspecialchars(trim($request->get("nb_personne2"))); 
             $debut1 = htmlspecialchars(trim($request->get("date_debut1"))); 
-            $debut2 = htmlspecialchars(trim($request->get("date_debut2"))); 
+            // $debut2 = htmlspecialchars(trim($request->get("date_debut2"))); 
             $fin1 = htmlspecialchars(trim($request->get("date_fin1"))); 
-            $fin2 = htmlspecialchars(trim($request->get("date_fin2")));
+            // $fin2 = htmlspecialchars(trim($request->get("date_fin2")));
             
+            /* contrôle des dates */
+            $today = date("Y-m-d");
+
+            if($debut1 < $today){
+                $this->reserv_error = "Erreur : Le début du séjour est antérieur à la date actuelle";
+                return $app['twig']->render('index.html.twig', array(
+                'reserv_error' => $this->reserv_error));
+            }
+
+            if($fin1 < $debut1){
+                $this->reserv_error = "Erreur : La fin du séjour est antérieure à la date de début !";
+                return $app['twig']->render('index.html.twig', array(
+                'reserv_error' => $this->reserv_error));
+            }
+            /* fin contrôle des dates*/
+
             if($request->get('idserv')){ // si des services ont été sélectionnés
                 foreach($request->get('idserv') as $key => $val){
                     $key = htmlspecialchars(trim($val)); // on sécurise les valeurs de l'array généré par les checkboxes dans le formulaire
@@ -38,11 +56,16 @@ namespace Hotel\Controller;
             // echo '<pre>'; var_dump($idserv); echo '</pre>';
 
             if(empty($idUser)){ // si l'utilisateur n'est pas identifié
-                return $app['twig']->render('basic/connexion.html.twig'); // demande de connexion
+                $this->reserv_error = "Merci de vous connecter avant de réserver une chambre.";
+                return $app['twig']->render('index.html.twig', array(
+                'reserv_error' => $this->reserv_error));
             }
 
             if(empty($nom) || empty($prenom) || empty($email) || empty($cat1) || empty($nbPerson1) || empty($debut1) || empty($fin1)) {// si la 1ère chambre réservée est vide
-                return $app['twig']->render('index.html.twig'); // retour à la réservation 
+                $this->reserv_error = "Vous devez remplir tous les champs, svp !";
+                return $app['twig']->render('index.html.twig', array(
+                    'reserv_error' => $this->reserv_error
+                )); // retour à la réservation 
             }
 
             $insert = new ReservDAO($app['db']);
@@ -50,18 +73,30 @@ namespace Hotel\Controller;
 
             if($resultat['email'] == $email) { // si l'id correspond au mail renseigné
 
+                $truc = $insert->insertReserv($idUser, $nbPerson1, $debut1, $fin1, $cat1, $idserv);
                 // echo '<p style="color: black">Validation OK<p>';
-                $insert->insertReserv($idUser, $nbPerson1, $debut1, $fin1, $cat1, $idserv);
-                $insert->factureReserv();
-                // $insert->validReserv();
-                $reserv = $insert->recapReserv();
-                return $app['twig']->render('basic/validation_reservation.html.twig', array('reserv' => $reserv));
+                if($truc != "erreur"){
+
+                    $insert->factureReserv();
+                    $reserv = $insert->recapReserv();
+                    return $app['twig']->render('basic/validation_reservation.html.twig', array('reserv' => $reserv));
+                }
+
+                else {
+                    $this->reserv_error = "Il n'y a plus de chambre disponible. Changez de catégorie de chambre, de date de séjour ou le nombre de personne.";
+                    return $app['twig']->render('index.html.twig', array(
+                    'reserv_error' => $this->reserv_error
+                )); // retour à la réservation 
+                }
 
                 // echo '<pre>'; echo var_dump($reserv); echo '</pre>';
             }
-
-            return $app['twig']->render('index.html.twig');
-
+            else{
+                $this->reserv_error = "Vos identifiants sont incorrects, veuillez renseigner votre mail de connexion. Si le problème persiste, déconnectez-vous et reconnectez-vous.";
+                return $app['twig']->render('index.html.twig', array(
+                    'reserv_error' => $this->reserv_error
+                )); // retour à la réservation 
+            }
         }
 
     }

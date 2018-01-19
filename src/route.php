@@ -17,9 +17,15 @@ use Twig\Extension\AbstractExtension;
 
 // route Home
 $app->get('/', function () use ($app) {
-
     $isconnectedAnIsAdmin = Controller::isAdmin();
     if (isset($_SESSION)) {
+        if(isset($_SESSION['user']) && $_SESSION['user']['statut'] == 'standard')
+            return $app['twig']->render('index.html.twig', array(
+                "id_user" => $_SESSION['user']['user_id'],
+                "prenom" => $_SESSION['user']['prenom'],
+                "nom" => $_SESSION['user']['nom'],
+                "email" => $_SESSION['user']['email']
+                ));
         if ($isconnectedAnIsAdmin) {
             return $app['twig']->render('index.html.twig', array(
                 "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
@@ -30,8 +36,29 @@ $app->get('/', function () use ($app) {
     }else{
         return $app['twig']->render('index.html.twig');
     }
-    
+ 
 })->bind('Home');
+
+
+
+// $app->get('/', function () use ($app) {
+//     $isconnectedAnIsAdmin = Controller::isAdmin();
+//     if (isset($_SESSION)) {
+//         if ($isconnectedAnIsAdmin) {
+//             return $app['twig']->render('index.html.twig', array(
+//                 "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
+//                ));
+//         }else {
+//             return $app['twig']->render('index.html.twig');
+//         }
+//     }else{
+//         return $app['twig']->render('index.html.twig');
+//     }
+
+// })->bind('Home');
+
+
+
 
 $app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
 

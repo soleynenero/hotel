@@ -42,7 +42,7 @@
 
             // on vérifie la disponibilité d'une chambre en fonction de la catégorie, du nombre de personne et du statut des chambres
 
-            $sql1 = "SELECT * FROM chambres WHERE id_categorie = ? AND id_capacite = ? AND statut = 'libre' LIMIT 0,1";
+            $sql1 = "SELECT * FROM chambres WHERE id_categorie = ? AND id_capacite = ? AND id_statut = 1 LIMIT 0,1";
             $result = $bdd->fetchAssoc($sql1, array(0 => $cat1 , 1 => $nbPerson1));
             
                 if(!empty($result)) { // si une chambre est dispo
@@ -68,10 +68,7 @@
                     $debut1 = new DateTime($debut1);
                     $fin1 = new DateTime($fin1);
 
-                    if(intval($debut1->diff($fin1)->format('%d')) == 1)
-                        $this->nuits1 = intval($debut1->diff($fin1)->format('%d')); // différence de jours entre le jour d'arrivée et le jour de départ
-                    else
-                        $this->nuits1 = intval($debut1->diff($fin1)->format('%d')) -1; // différence de jours entre le jour d'arrivée et le jour de départ -1 pour compter les nuits
+                    $this->nuits1 = intval($debut1->diff($fin1)->format('%d')); // différence de jours entre le jour d'arrivée et le jour de départ
 
                     // on complète la prestation avec les services demandé
                     if(!empty($idserv)){
@@ -91,16 +88,16 @@
                         'id_chambres' => $result['id_chambres']
                     ));
 
-                    //*****************  A RETABLIR ! ********************************************
-                    // et en changeant le statut de la chambre
-                    // $bdd->executeUpdate("UPDATE chambres SET statut = 'occupee' WHERE id_chambres = ". $this->idChbre1 ."");
+                   
+                   // et on change le statut de la chambre en occupée
+                    $bdd->executeUpdate("UPDATE chambres SET id_statut = '2' WHERE id_chambres = ". $this->idChbre1 ."");
 
                 }
                  
                 else // si pas de chambre dispo
-                    echo 'y\'a pas de place !';
+                    return "erreur";
               
-                return "";
+                
             } // fin insertReserv()
         
 
