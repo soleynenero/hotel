@@ -343,14 +343,14 @@ $app->get('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController:
 $app->post('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::ajoutChambreAction");
 
 // d'aller sur la page de modification des chambres
-$app->get('/admin/gestion_chambres/modification?id={id_chambres}', "Hotel\Controller\GestionChambreController::selectModifChambreAction")
+$app->get('/admin/gestion_chambres/modification/{id_chambres}', "Hotel\Controller\GestionChambreController::selectModifChambreAction")
 ->bind('modif_chambre');
 
 // permet de modifier les chambres
-$app->post('/admin/gestion_chambres', "Hotel\Controller\GestionChambreController::updateModifChambreAction");
+$app->post('/admin/gestion_chambres/modification/{id_chambres}', "Hotel\Controller\GestionChambreController::updateModifChambreAction");
 
 // permet de supprimer une chambre
-$app->get('/admin/gestion_chambres/suppression?id={id_chambres}', "Hotel\Controller\GestionChambreController::deleteChambreAction")
+$app->get('/admin/gestion_chambres/suppression/{id_chambres}', "Hotel\Controller\GestionChambreController::deleteChambreAction")
 ->bind('suppression');
 
 
