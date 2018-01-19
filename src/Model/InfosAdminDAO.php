@@ -28,7 +28,7 @@
 
         public function selectAllUser()
         {
-            $sql = "SELECT COUNT(*) AS totalUser FROM user WHERE statut != 'admin'";
+            $sql = "SELECT COUNT(*) AS totalUser ";
             $totalUser  = $this->db->fetchAssoc($sql);
             return $totalUser;
         }
