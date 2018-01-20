@@ -88,10 +88,8 @@
                         'id_chambres' => $result['id_chambres']
                     ));
 
-                   // A RETABLIR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                    // et on change le statut de la chambre en occupée
-                    // $bdd->executeUpdate("UPDATE chambres SET id_statut = '2' WHERE id_chambres = ". $this->idChbre1 ."");
-                    // A RETABLIR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    $bdd->executeUpdate("UPDATE chambres SET id_statut = '2' WHERE id_chambres = ". $this->idChbre1 ."");
                 
                 }
                  
