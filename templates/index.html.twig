@@ -24,12 +24,13 @@
 {# <div class="col-sm-7 col-md-8">
     <div class="embed-responsive embed-responsive-16by9 wowload fadeInLeft"><iframe  class="embed-responsive-item" src="//player.vimeo.com/video/55057393?title=0" width="100%" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 </div> #}
-            <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3" id="reservation">
-                <h2 style="text-align:center;">#Réservation</h2>
-                {% if reserv_error is defined and reserv_error is not empty %}
-                    <div class='alert alert-danger col-md-8 col-md-offset-2' > {{ reserv_error }} </div>
-                {% endif %}
+            <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3" id="reservation">         <h2 style="text-align:center;">#Réservation</h2>
+                   
 
+                {% if reserv_error is defined and reserv_error is not empty %}
+                    <div class='alert alert-danger' > {{ reserv_error }} </div>
+                {% endif %}
+                 <h4 class="text-center clearfix">Vos identifiants</h4>
                 <form role="form" class="wowload fadeInRight" method="post">
                     <input type="hidden" name="user_id" value="{% if id_user is defined %}{{ id_user }} {% endif %}">
                     <div class="form-group">
@@ -47,10 +48,10 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <select class="form-control" name="id_categorie1">
-                                    <option value="0">Catégorie de chambre</option>
-                                    <option value="1">Standard</option>
-                                    <option value="2">Supérieure</option>
-                                    <option value="3">Luxe</option>
+                                    <option value="0" {% if categorie is not defined %}selected="selected"{% endif %}>Catégorie de chambre</option>
+                                    <option value="1" {% if categorie is defined and categorie == '1' %}selected="selected"{% endif %}>Standard</option>
+                                    <option value="2" {% if categorie is defined and categorie == '2' %} selected="selected"{% endif %}>Supérieure</option>
+                                    <option value="3" {% if categorie is defined and categorie == '3' %}selected="selected"{% endif %}>Luxe</option>
                                 </select>
                             </div>
                         </div>
@@ -59,11 +60,21 @@
                         <div class="row">        
                             <div class="col-xs-12">
                                 <select class="form-control" name="nb_personne1">
-                                    <option value="0">Nombre de personne(s)</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                    <option value="0" {% if nbPersonne is not defined %}selected="selected"{% endif %}>
+                                        Nombre de personne(s)
+                                    </option>
+                                    <option {% if nbPersonne is defined and nbPersonne == '1' %}selected="selected"{% endif %}>
+                                        1
+                                    </option>
+                                    <option {% if nbPersonne is defined and nbPersonne == '2' %}selected="selected"{% endif %}>
+                                        2
+                                    </option>
+                                    <option {% if nbPersonne is defined and nbPersonne == '3' %}selected="selected"{% endif %}>
+                                        3
+                                    </option>
+                                    <option {% if nbPersonne is defined and nbPersonne == '4' %}selected="selected"{% endif %}>
+                                        4
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -72,12 +83,12 @@
                         <div class="row">
                             <div class="col-xs-4">
                                 <p>Date d'arrivée :</p>
-                                <input type="date" class="form-control" name="date_debut1">
+                                <input type="date" class="form-control" name="date_debut1" {% if date_debut is defined%}value="{{ date_debut }}"{% endif %} >
                             </div>
                             <div class="col-xs-4"></div>
                             <div class="col-xs-4">
                                 <p>Date de départ :</p>
-                                <input type="date" class="form-control" name="date_fin1">
+                                <input type="date" class="form-control" name="date_fin1" {% if date_fin is defined%}value="{{ date_fin }}"{% endif %}>
                             </div>
                         </div>
                     </div>

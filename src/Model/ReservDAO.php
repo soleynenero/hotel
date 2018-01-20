@@ -163,7 +163,7 @@
             $prestaCout = $bdd->fetchAll("SELECT tva, prix_total FROM factures WHERE id_factures = ". $this->idFacture ."");
 
             
-            $reserv = array('chambres' => array(), 'services' => array(), 'cout' => array());
+            $reserv = array('chambres' => array(), 'services' => array(), 'cout' => array(), 'identifiants' => array('nom' => $_SESSION['user']['nom'], 'prenom' => $_SESSION['user']['prenom']));
 
             for($i=0; $i < count($prestaChbre); $i++){
                 $datedebut = new DateTime($prestaChbre[$i]['date_debut']);

@@ -11,6 +11,8 @@
 <div id="valid_reserv" class="container-fluid">
     <div class="row">
         <div class="col-sm-6 col-md-8 col-sm-offset-3 col-md-offset-2">
+            <p>Merci de votre confiance {{ reserv.identifiants.prenom }} {{ reserv.identifiants.nom}} !</p>
+            
             <p>Voici le récapitulatif de votre réservation n° {{reserv['chambres'][0]['idReserv']}} :</p>
 
             <p>1 chambre {{reserv['chambres'][0]['catChambre']}} {{reserv['chambres'][0]['capChambre']}} : {{reserv['chambres'][0]['prixUnit']}} € / nuit, </p>
@@ -37,74 +39,28 @@
             <p>TVA : {{reserv['cout']['tva']}} €</p>
             <p>Prix total TTC : {{reserv['cout']['prixTTC']}} €</p>
             
-
-{# array(3) {
-  ["chambres"]=>
-  array(1) {
-    [0]=>
-    array(8) {
-      ["idReserv"]=>
-      string(2) "30"
-      ["catChambre"]=>
-      string(10) "superieure"
-      ["capChambre"]=>
-      string(6) "double"
-      ["debut"]=>
-      string(10) "08/01/2018"
-      ["fin"]=>
-      string(10) "24/01/2018"
-      ["nuits"]=>
-      string(2) "15"
-      ["prixUnit"]=>
-      string(4) "1300"
-      ["prixChbre"]=>
-      string(5) "19500"
-    }
-  }
-  ["services"]=>
-  array(4) {
-    [0]=>
-    array(2) {
-      ["service"]=>
-      string(13) "TV ecran plat"
-      ["prixService"]=>
-      string(2) "30"
-    }
-    [1]=>
-    array(2) {
-      ["service"]=>
-      string(8) "pressing"
-      ["prixService"]=>
-      string(2) "20"
-    }
-    [2]=>
-    array(2) {
-      ["service"]=>
-      string(7) "parking"
-      ["prixService"]=>
-      string(1) "0"
-    }
-    [3]=>
-    array(2) {
-      ["service"]=>
-      string(14) "blanchisserie "
-      ["prixService"]=>
-      string(2) "15"
-    }
-  }
-  ["cout"]=>
-  array(3) {
-    ["tva"]=>
-    string(4) "3342"
-    ["prixTTC"]=>
-    string(5) "19565"
-    ["prixHT"]=>
-    int(16223)
-  }
-} #}
             <p>Sélectionnez un moyen de paiement :</p>
 
+        <div class="row">
+        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+          <form role="form" method="">
+            <div class="radio">
+              <label>
+                <input type="radio" name="paiement" value="paypal">
+                <img src="{{ asset('assets_front/images/paypal.gif ') }}" alt="paypal">
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="paiement" value="visa_mastercard">
+                <img src="{{ asset('assets_front/images/visa-mastercard.gif ') }}" alt="paypal">
+              </label>
+            </div>          
+            
             <a href='#'><button class="btn btn-default">Réglez votre commande</button></a>
+          </form>
+          </div>
+        </div>
         </div>
     </div>
 </div>

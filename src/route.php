@@ -40,26 +40,6 @@ $app->get('/', function () use ($app) {
 })->bind('Home');
 
 
-
-// $app->get('/', function () use ($app) {
-//     $isconnectedAnIsAdmin = Controller::isAdmin();
-//     if (isset($_SESSION)) {
-//         if ($isconnectedAnIsAdmin) {
-//             return $app['twig']->render('index.html.twig', array(
-//                 "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
-//                ));
-//         }else {
-//             return $app['twig']->render('index.html.twig');
-//         }
-//     }else{
-//         return $app['twig']->render('index.html.twig');
-//     }
-
-// })->bind('Home');
-
-
-
-
 $app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
 
 // route roomtarif

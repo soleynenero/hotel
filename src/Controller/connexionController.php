@@ -63,9 +63,15 @@
                 if ($user['statut'] == 'admin') { // Redirection vers le back si l'utilisateur est un admin
                     return $app->redirect('admin');
                 }
-                return $app['twig']->render('index.html.twig', array()); // Si pas admn retirection vers la home
+                
+                return $app['twig']->render('index.html.twig', array(
+                    "id_user" => $_SESSION['user']['user_id'],
+                    "prenom" => $_SESSION['user']['prenom'],
+                    "nom" => $_SESSION['user']['nom'],
+                    "email" => $_SESSION['user']['email']
+                    )); // Si pas admn retirection vers la home
             }else {
-                $errors = "email ou mot de passe renseigné incorect"; // si mauvais mdp on remplit la var errors
+                $errors = "email ou mot de passe renseigné incorrect"; // si mauvais mdp on remplit la var errors
             }
 
 
