@@ -3,17 +3,22 @@
     namespace Hotel\Controller ;
         use Silex\Application;
         use Symfony\Component\HttpFoundation\Request;
-        use Hotel\Model\GestionChambreDAO ;
+        use Hotel\Model\GestionReservationDAO ;
 
     class GestionReservationController
     {
 
-        public function affichacheReservationAction(Application $app, Request $request)
+        public function affichageReservationAction(Application $app, Request $request)
         {
-            $affichageReservation = new GestionReservationDAP($app['db']);
+            $affichageReservation = new GestionReservationDAO($app['db']);
             $reservation = $affichageReservation->selectReservation();
-
-            return $app['twig']->render('basic/gestion_reservations.html.twig', array("reservation" => $reservation,));
+            // echo '<pre>';
+            // var_dump($reservation);
+            // echo '</pre>';
+            // die();
+            return $app['twig']->render('basic/gestion_reservations.html.twig', array(
+                "reservation" => $reservation,
+            ));
         }
 
 

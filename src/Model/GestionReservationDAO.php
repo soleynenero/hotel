@@ -28,6 +28,8 @@
             return $reservation;
         }
 
+        
+
         // public function selectChambre()
         // {
         //     $sql = "SELECT c.id_chambres ,c.numero_chambre , cat.type_categorie AS 'Categorie', cap.capacite , c.telephone ,c.prix , s.statut

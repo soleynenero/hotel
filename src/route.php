@@ -18,18 +18,11 @@ use Twig\Extension\AbstractExtension;
 // route Home
 $app->get('/', function () use ($app) {
 
-    $isconnectedAnIsAdmin = Controller::isAdmin();
-    if (isset($_SESSION)) {
-        if ($isconnectedAnIsAdmin) {
-            return $app['twig']->render('index.html.twig', array(
-                "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
-               ));
-        }else {
-            return $app['twig']->render('index.html.twig');
-        }
-    }else{
-        return $app['twig']->render('index.html.twig');
-    }
+    if (Controller::isAdmin())
+        return $app['twig']->render('index.html.twig', array(
+            "isconnectedAnIsAdmin" => true,
+        ));
+    return $app['twig']->render('index.html.twig');
     
 })->bind('Home');
 
@@ -323,8 +316,8 @@ $app->get('/admin/gestion_reservations', "Hotel\Controller\GestionReservationCon
 ->bind('gestion_reservations');
 
 
-$app->get('/admin/gestion_reservation', "Hotel\Controller\GestionReservationController::affichageReservationAction")
-->bind('gestion_reservation');
+// $app->get('/admin/gestion_reservation', "Hotel\Controller\GestionReservationController::affichageReservationAction")
+// ->bind('gestion_reservation');
 
 $app->post('/admin/gestion_reservations', function() use($app)
 {

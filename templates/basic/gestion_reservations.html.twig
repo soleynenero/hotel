@@ -1,8 +1,8 @@
 {% extends "layout_admin.html.twig" %}
 
 {% block content %}
-    
-<table class="table">
+<h3 class="text-center">Gestion des reservations</h3> 
+<table class="table table-striped table-hover">
         <tr>
             <th>N° commande</th>
             <th>Nom complet</th>
@@ -10,25 +10,31 @@
             <th>Date commande</th>
             <th>Date d'arrivée</th>
             <th>Date départ</th>
+            <th>Nbr de personne</th>
             <th>Modification</th>
             <th>Suppression</th>
         </tr>
-{#         
-        {% for chambre in chambres %}
+        
+        {# {% for reservation in reservation %}
             <tr>
-            <pre><p>{{dump (chambre )}}</p></pre> #}
+            <pre><p>{{dump (reservation )}}</p></pre>
+        {% endfor %} #}
 
-        {% for reservation in reservations %}
+        {% for reservation in reservation %}
+
             <tr>
-                <td>{{reservation.numero_chambre}}</td>
-                <td>{{reservation.Categorie}}</td>
-                <td>{{reservation.capacite}}</td>
-                <td>{{reservation.telephone}}</td>
-                <td>{{reservation.prix}}</td>
-                <td>{{reservation.statut}}</td>
-                <td><a href="{{  path('modif_chambre', {id_chambres: chambre.id_chambres}) }}"><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
-                <td><a href="{{  path('suppression', {id_chambres: chambre.id_chambres}) }}"><span class="glyphicon glyphicon-trash alignement"</span></a></td>
+            {% for data in reservation %}
+                {% if loop.index == 5 or loop.index == 6 %}
+                {# des que ma boucle pointe sur l'index 5 et 6 #}
+                    <td>{{data | date("d-m-Y") }}</td>
+                {% else %}
+                    <td>{{data}}</td>
+                {% endif %}
+            {% endfor %}
+                <td><a href=""><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
+                <td><a href=""><span class="glyphicon glyphicon-trash alignement"</span></a></td>
             </tr>
+
         {% endfor %}
         
     </table>
