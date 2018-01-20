@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hotel\Controller\InfoUserController;
 use Hotel\Controller\Controller;
 use Hotel\Model\InfosAdminDAO;
+use Hotel\Model\ReservDAO;
 use Twig\Extension\AbstractExtension;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
@@ -26,21 +27,21 @@ $app->get('/', function () use ($app) {
                 "prenom" => $_SESSION['user']['prenom'],
                 "nom" => $_SESSION['user']['nom'],
                 "email" => $_SESSION['user']['email'],
-                "listServ" => $listServices
+                "listService" => $listServices
                 ));
         if ($isconnectedAnIsAdmin) {
             return $app['twig']->render('index.html.twig', array(
                 "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
-                "listeServ" => $listServices
+                "listService" => $listServices
                ));
         }else {
             return $app['twig']->render('index.html.twig', array(
-                "listeServ" => $listServices
+                "listService" => $listServices
             ));
         }
     }else{
         return $app['twig']->render('index.html.twig', array(
-            "listeServ" => $listServices
+            "listService" => $listServices
         ));
     }
  
