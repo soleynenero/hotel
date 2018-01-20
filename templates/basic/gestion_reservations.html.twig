@@ -12,7 +12,6 @@
             <th>Date départ</th>
             <th>Nbr de personne</th>
             <th>Modification</th>
-            <th>Suppression</th>
         </tr>
         
         {# {% for reservation in reservation %}
@@ -20,20 +19,20 @@
             <pre><p>{{dump (reservation )}}</p></pre>
         {% endfor %} #}
 
-        {% for reservation in reservation %}
+        {% for reservation in reservations %}
 
             <tr>
-            {% for data in reservation %}
-                {% if loop.index == 5 or loop.index == 6 %}
-                {# des que ma boucle pointe sur l'index 5 et 6 #}
-                    <td>{{data | date("d-m-Y") }}</td>
-                {% else %}
-                    <td>{{data}}</td>
-                {% endif %}
-            {% endfor %}
-                <td><a href=""><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
-                <td><a href=""><span class="glyphicon glyphicon-trash alignement"</span></a></td>
+                <td>{{reservation.id}}</td>
+                <td>{{reservation.Nom}}</td>
+                <td>{{reservation.NbFacture}}</td>
+                <td>{{reservation.date_commande}}</td>
+                <td>{{reservation.date_debut | date("d-m-Y")}}</td>
+                <td>{{reservation.date_fin | date("d-m-Y")}}</td>
+                <td>{{reservation.nb_personne}}</td>
+                <td><a href=" {{ path('modif_reservation', { 'id_reservation': reservation.id }) }} "><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
+                {# {{  path('modif_reservation', {id_reservation: reservation.id_reservation}) }} #}
             </tr>
+            
 
         {% endfor %}
         

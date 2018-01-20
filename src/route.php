@@ -311,19 +311,17 @@ $app->post('/admin/gestion_membres', function() use($app)
 /********** ROUTE GESTION RESERVATIONS ************/
 /************************************************* */
 
-
+// permet de voir les reservation
 $app->get('/admin/gestion_reservations', "Hotel\Controller\GestionReservationController::affichageReservationAction")
 ->bind('gestion_reservations');
 
 
-// $app->get('/admin/gestion_reservation', "Hotel\Controller\GestionReservationController::affichageReservationAction")
-// ->bind('gestion_reservation');
+// permet d'aller sur la page de modification des reservation
+$app->get('/admin/gestion_reservation/{id_reservation}', "Hotel\Controller\GestionReservationController::selectModifReservationAction")
+->bind('modif_reservation');
 
-$app->post('/admin/gestion_reservations', function() use($app)
-{
-// Post à compléter : date deb , date fin , nb personne , id service , id chambre , statut chambre , nom service , id facture 
-});
-
+// permet de modifier les reservations
+$app->post('/admin/gestion_reservation/{id_reservation}', "Hotel\Controller\GestionReservationController::modifReservation");
 
 
 

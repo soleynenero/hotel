@@ -1,0 +1,68 @@
+{% extends "layout_admin.html.twig" %}
+
+{% block content %}
+
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label for="numcommande" class="control-label">Numéro commande</label>
+            <div>
+                <input type="text" class="form-control" id="numcommande" name="numcommande" value ="{{ reservation.id }}" disabled="disabled">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nomComplet" class="control-label">Nom Complet</label>
+            <div>
+                <input type="text" class="form-control" id="nomComplet" name="nomComplet" value ="{{reservation.Nom}}" disabled="disabled">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="numeroFacture" class="control-label">Numero facture</label>
+            <div>
+                <input type="text" class="form-control" id="numeroFacture" name="numeroFacture" value ="{{reservation.NbFacture}}" disabled="disabled">
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <label for="numeroFacture" class="control-label">Date commande</label>
+            <div>
+                <input type="text" class="form-control" id="datecommande" name="datecommande" value ="{{reservation.date_commande}}" disabled="disabled">
+            </div>
+        </div>
+
+   
+        <div class="form-group">
+            <label for="datearrivee" class="control-label">Date d'arrivée</label>
+            <div>
+                <input type="date" class="form-control" id="datearrivee" name="datearrivee" value ="{{reservation.date_debut | date("d-m-Y")}}">
+            </div>
+        </div>
+
+    
+        <div class="form-group">
+            <label for="datedepart" class="control-label">Date de départ</label>
+            <div>
+                <input type="date" class="form-control" id="datedepart" name="datedepart" value ="{{reservation.date_fin | date("d-m-Y")}}" >
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label for="capacite" class="control-label">Capacite</label>
+                <select id="capacite" class="form-control" name="id_capacite">             
+                    {% for capacite in 1..4 %}
+
+                        <option value="{{capacite}}" {% if capacite == reservation.nb_personne %} selected {% endif %}>{{capacite}}</option>
+                    {% endfor %}            
+                </select>
+        </div>
+
+        
+
+
+        <div>
+        <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Modifier la reservation</button>
+        </div>
+    </form>
+
+{% endblock %}
