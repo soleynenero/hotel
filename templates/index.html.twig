@@ -4,7 +4,7 @@
     
 <!-- banner -->
 <div class="banner">    	   
-    <img src="{{ asset('assets_front/images/photos/banner4.jpg ') }}"  class="img-responsive" alt="slide">
+    <img src="{{ asset('assets_front/images/photos/darkbanner4.jpg ') }}"  class="img-responsive" alt="slide">
     <div class="welcome-message">
         <div class="wrap-info">
             <div class="information" style="padding-top: 10em;">
@@ -81,74 +81,28 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-4">
+                            <div class="col-md-5">
                                 <p>Date d'arrivée :</p>
                                 <input type="date" class="form-control" name="date_debut1" {% if date_debut is defined%}value="{{ date_debut }}"{% endif %} >
                             </div>
-                            <div class="col-xs-4"></div>
-                            <div class="col-xs-4">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5">
                                 <p>Date de départ :</p>
                                 <input type="date" class="form-control" name="date_fin1" {% if date_fin is defined%}value="{{ date_fin }}"{% endif %}>
                             </div>
                         </div>
                     </div>
-                   {# <hr></hr>
-                     <div class="form-group">
-                        <h4 class="text-center">Autre réservation</h4>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <select class="form-control" name="id_categorie2">
-                                    <option value="0">Catégorie de chambre</option>
-                                    <option value="1">Standard</option>
-                                    <option value="2">Supérieure</option>
-                                    <option value="3">Luxe</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">        
-                            <div class="col-xs-12">
-                                <select class="form-control" name="nb_personne2">
-                                    <option value="0">Nombre de personne(s)</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <p>Date d'arrivée :</p>
-                                <input type="date" class="form-control" name="date_debut2">
-                            </div>
-                            <div class="col-xs-4"></div>
-                            <div class="col-xs-4">
-                                <p>Date de départ :</p>
-                                <input type="date" class="form-control" name="date_fin2">
-                            </div>
-                        </div>
-                    </div> #}
 
                     <hr></hr>
                     <div class="form-group" id="resaServices">
                         <h4 class="text-center">Services souhaités</h4>
-                        <input type="checkbox" name="idserv[]" value="1">TV
-                        <input type="checkbox" name="idserv[]" value="2">Pressing
-                        <input type="checkbox" name="idserv[]" value="3">Conciergerie
-                        <input type="checkbox" name="idserv[]" value="4">Bagagerie
-                        <input type="checkbox" name="idserv[]" value="5">Coffre
-                        <input type="checkbox" name="idserv[]" value="6">Wifi
-                        <input type="checkbox" name="idserv[]" value="7">Buffet</br>
-                        <input type="checkbox" name="idserv[]" value="8">Parking
-                        <input type="checkbox" name="idserv[]" value="9">Blanchisserie
-                        <input type="checkbox" name="idserv[]" value="10">Chauffeur
-                        <input type="checkbox" name="idserv[]" value="11">Coursier
+                        {% for index in listServ %}
+                        {# {{ dump(index) }} #}
+                        <input type="checkbox" name="idserv[]" value="{{index.id_services}}">{{ index.nom_service}} ({{ index.prix_service}} €)<br>
+                    
+                        {% endfor %}
                     </div>
-                    <button class="btn btn-default">Réserver</button>
+                    <button class="btn btn-default col-xs-12 col-md-6 col-md-offset-3">Réserver</button>
                 </form>    
             </div>
         </div>  

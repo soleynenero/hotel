@@ -6,63 +6,48 @@
 
 {% block content %}
 
+<div class="container">
+    <div class="col-md-6 col-md-offset-3" style="margin-top: 2em;">
+      <p>Merci de votre confiance, {{ reserv.identifiants.prenom }} {{ reserv.identifiants.nom}} !</p><hr></hr>
+      <p><h4>Voici le récapitulatif de votre réservation n° {{reserv['chambres'][0]['idReserv']}} </h4></p><hr></hr>
 
+      <p>1 chambre {{reserv['chambres'][0]['catChambre']}} {{reserv['chambres'][0]['capChambre']}} : {{reserv['chambres'][0]['prixUnit']}} € / nuit, </p>
+      <p>du {{reserv['chambres'][0]['debut']}} au {{reserv['chambres'][0]['fin']}} soit {{reserv['chambres'][0]['nuits']}} nuit(s).</p>
 
-<div id="valid_reserv" class="container-fluid">
-    <div class="row">
-        <div class="col-sm-6 col-md-8 col-sm-offset-3 col-md-offset-2">
-            <p>Merci de votre confiance {{ reserv.identifiants.prenom }} {{ reserv.identifiants.nom}} !</p>
-            
-            <p>Voici le récapitulatif de votre réservation n° {{reserv['chambres'][0]['idReserv']}} :</p>
+      {% if  reserv.services is not empty %}
+        <p>Pour cette réservation, vous avez demandé :</p>
+        <ul>
+            {% for service in reserv.services %}
+                
+                <li>{{ service.service }} ({{ service.prixService }} € TTC)</li>
+                        
+            {% endfor %}
+        </ul>
+        <hr><hr/>
+      {% endif %}
 
-            <p>1 chambre {{reserv['chambres'][0]['catChambre']}} {{reserv['chambres'][0]['capChambre']}} : {{reserv['chambres'][0]['prixUnit']}} € / nuit, </p>
-            <p>du {{reserv['chambres'][0]['debut']}} au {{reserv['chambres'][0]['fin']}} soit {{reserv['chambres'][0]['nuits']}} nuit(s).</p>
-
-            {% if  reserv.services is not empty %}
-              <p>Pour cette réservation, vous avez demandé :</p>
-              <ul>
-                  {% for service in reserv.services %}
-                      {# {% for index in service %} #}
-                          {#{% for cle, valeur in index %} #}
-                      <li>{{ service.service }} : {{ service.prixService }} € TTC</li>
-                              {# <pre>{{ dump(service) }}</pre> #}
-                              {# {{ cle }} {{ valeur }} #}
-
-                              {# {{ cle }} {{valeur }} #}
-
-                          {# {% endfor %} #}
-                      {# {% endfor %} #}
-                  {% endfor %}
-              </ul>
-            {% endif %}
-            <p>Prix total hors taxe : {{reserv['cout']['prixHT']}} €</p>
-            <p>TVA : {{reserv['cout']['tva']}} €</p>
-            <p>Prix total TTC : {{reserv['cout']['prixTTC']}} €</p>
-            
-            <p>Sélectionnez un moyen de paiement :</p>
-
-        <div class="row">
-        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
-          <form role="form" method="">
-            <div class="radio">
-              <label>
-                <input type="radio" name="paiement" value="paypal">
-                <img src="{{ asset('assets_front/images/paypal.gif ') }}" alt="paypal">
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="paiement" value="visa_mastercard">
-                <img src="{{ asset('assets_front/images/visa-mastercard.gif ') }}" alt="paypal">
-              </label>
-            </div>          
-            
-            <a href='#'><button class="btn btn-default">Réglez votre commande</button></a>
-          </form>
-          </div>
+      <p>Prix total hors taxe : {{reserv['cout']['prixHT']}} €</br>
+      TVA : {{reserv['cout']['tva']}} €</br>
+      Prix total TTC : {{reserv['cout']['prixTTC']}} €</p>
+      <hr></hr>
+      <p>Sélectionnez un moyen de paiement :</p>
+    
+      
+        <div class="radio" style="width: 10em;height: 3em;">
+          <label>
+            <input type="radio-inline" name="paiement" value="paypal">
+            <img src="{{ asset('assets_front/images/paypal.gif ') }}" alt="paypal">
+          </label>
         </div>
-        </div>
-    </div>
+        <div class="radio" style="width: 10em;height: 3em;">
+          <label>
+            <input type="radio-inline" name="paiement" value="visa_mastercard">
+            <img src="{{ asset('assets_front/images/visa-mastercard.gif ') }}" alt="visa_mastercard">
+          </label>
+        </div>          
+        <div class="col-md-12" style="margin-top: 2em;"><a><button class="btn btn-default" style="margin-bottom: 3em;">Réglez votre commande</button></a></div>
+      
+  </div>
 </div>
 
 
