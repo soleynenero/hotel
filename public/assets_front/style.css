@@ -26,6 +26,11 @@ p{margin-bottom: 1em;line-height: 1.5em;}
 .navbar-nav > li > a{font-size: 1em;line-height: 4.26em;padding: 10px 0 10px 30px;}
 .navbar-default{border:none;background: #eeeeee;}
 .navbar-brand{height: 83px;}
+nav.navbar.navbar-default {
+    position: fixed;
+    z-index: 110;
+    width: 100%;
+}
 /*nav*/
 
 
@@ -190,7 +195,9 @@ body::-webkit-scrollbar {
 .forminscription{
     border: 10px groove #bfa145;
     padding: 20px;
-    margin-bottom: 10px;
+    min-height: 200px;
+    margin-top: 50px;
+    margin-bottom: 25px;
     background: rgba(220, 220, 220, 0.5); 
 }
 .erreurinscription {
@@ -202,8 +209,8 @@ body::-webkit-scrollbar {
 }
 
 .inscriptionconnexion {
-    margin-top: 20PX;
-    margin-bottom: 20px;
+    margin-top: 120px;
+    margin-bottom: 10px;
     font-size: 20px;
 }
 
@@ -235,10 +242,14 @@ body::-webkit-scrollbar {
 
  /* PAGE DE CONNEXION*/
 
- #blockConnexion {
+ /* #blockConnexion {
    margin: 180px 0 174px 0;
- }
+ } */
  
+.connexionform {
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
  /* side bar dans profil et element du contenu */
  .navbar_profil .navbar a
  {
@@ -266,4 +277,50 @@ body::-webkit-scrollbar {
 {
     padding-top : 75px ;
     line-height: 20px ;
+}
+
+
+/* **********erreur page 404************ */
+.errormsg{
+    color:black;
+}
+.errorpage404{
+    background: red;
+    
+}
+
+
+.errorpage404 .h1error404 {
+    text-align: center;
+    color: black;
+    letter-spacing: 30px;
+    margin-left: 77px;
+    margin-bottom: 20px;
+    z-index: 50;
+    margin-top: 50px;
+}
+.errorpage404 .h2error404{
+    text-align: center;
+    color: black;
+}
+.errorpage404 img{
+    width: 350px;
+    height: 350px;
+  
+    
+}
+.errorpage404 img:hover{
+    width: 350px;
+    height: 350px;
+    transform: scale(1.5, 2);
+    z-index: 40;
+}
+.errorpage404 .btn{
+    margin-left: 90px;
+    background: black;
+    color:red !important;
+}
+.errorpage404 .btn a{
+   
+    color:red ;
 }

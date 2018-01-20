@@ -1,5 +1,47 @@
-{% extends "layout.html.twig" %}
 
-{% block content %}
-    An error occurred on the server.
-{% endblock %}
+    
+<p class="errormsg">An error occurred on the server..</p>
+
+
+    
+   
+   
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="{{ asset('assets_front/bootstrap/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets_front/style.css') }}">
+    <title>page not found</title>
+  </head>
+  <body class="errorpage404">
+  <div class="container-fluid ">
+  <div class="row ">
+  
+  
+  <div class="col-sm-3 col-sm-offset-4">
+       <img src="{{ asset('assets_front/images/photos/mike.jpg') }}"  class=" img-circle center-block">
+    </div>
+  <div class="col-sm-8 col-sm-offset-2 ">
+    <h2 class="h2error404">recherché vous vraiment cela retourné a l'acceuil<h2/>
+    
+  </div>
+  <div class="col-sm-3 col-sm-offset-4 ">
+     <button class="btn btn-lg "><a href="{{ path ('Home') }}">retour sur le site</a></button>
+  </div>
+   
+  </div>
+    
+
+    
+        
+    
+    
+  
+  
+  </div>
+    
+  </body>
+</html>
+

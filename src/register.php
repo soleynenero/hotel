@@ -32,3 +32,5 @@
         ),
     ));   
 
+    $app["mail"] = new PHPMailer(true);
+    

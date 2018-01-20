@@ -368,9 +368,9 @@ $app->post('/admin/gestion_services', function() use($app)
 
 
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
-    if ($app['debug']) {
-        return;
-    }
+    // if ($app['debug']) {
+    //     return;
+    // }
 
     // 404.html, or 40x.html, or 4xx.html, or error.html
     $templates = array(
