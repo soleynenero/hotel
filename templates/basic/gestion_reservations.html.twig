@@ -2,16 +2,16 @@
 
 {% block content %}
 <h3 class="text-center">Gestion des reservations</h3> 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover text-center">
         <tr>
-            <th>N° commande</th>
-            <th>Nom complet</th>
-            <th>N° facture</th>
-            <th>Date commande</th>
-            <th>Date d'arrivée</th>
-            <th>Date départ</th>
-            <th>Nbr de personne</th>
-            <th>Modification</th>
+            <th class="text-center">N° commande</th>
+            <th class="text-center">Nom complet</th>
+            <th class="text-center">N° facture</th>
+            <th class="text-center">Date commande</th>
+            <th class="text-center">Date d'arrivée</th>
+            <th class="text-center">Date départ</th>
+            <th class="text-center">Nbr de personne</th>
+            <th class="text-center">Modification</th>
         </tr>
         
         {# {% for reservation in reservation %}
@@ -30,7 +30,6 @@
                 <td>{{reservation.date_fin | date("d-m-Y")}}</td>
                 <td>{{reservation.nb_personne}}</td>
                 <td><a href=" {{ path('modif_reservation', { 'id_reservation': reservation.id }) }} "><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
-                {# {{  path('modif_reservation', {id_reservation: reservation.id_reservation}) }} #}
             </tr>
             
 

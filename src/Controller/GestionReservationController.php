@@ -21,9 +21,6 @@
             ));
         }
 
-
-        //---------------------------------------Soleyne
-
         public function selectModifReservationAction(Application $app, Request $request , $id_reservation)
         {
             $affichageReservationModifiable = new GestionReservationDAO($app['db']);
@@ -46,73 +43,68 @@
             ));
         }
 
-        // public function updateModifChambreAction(Application $app, Request $request , int $id_chambres)
-        // {
-        //     // recuperation de l'insertion de l'utilisateur        
-        //     $id_categorie = $request->get("id_categorie");
-        //     $id_capacite = $request->get("id_capacite"); 
-        //     $statut = $request->get("statut"); 
-        //     $telephone = strip_tags($request->get("telephone"));
-        //     $prix = htmlspecialchars($request->get("prix"));
-
-        //     $errors ="";
-
-
-        //     if(!is_numeric($prix)){
-        //         $errors .= "Le prix doit etre numérique\n";
-        //         }
-
-        //     if(!is_numeric($telephone) || iconv_strlen($telephone) != 10){
-        //         $errors .= "Votre telephone n'est pas au bon format : 0102030405\n";
-        //     }     
-
-        //     // on appelle la classe GestionChambreDAO pour se connecter a la bdd et recupérer les informations des membres
-        //     $voirChambre = new GestionChambreDAO($app['db']);
-        //     // ici je stock les informations de mes utilisateur dans un tableau appelé membre
-        //     // pour voir les lignes affecter
-        //     if(empty($errors))
-        //         $rowAffect = $voirChambre->modifChambre($id_categorie , $id_capacite , $telephone , $prix , $statut, $id_chambres);
-
-        //     $affichageChambreModifiable = new GestionChambreDAO($app['db']);
-        //     $chambre = $affichageChambreModifiable->selectmodifChambre($id_chambres);
-
-        //     $affichageCapacite = new GestionChambreDAO($app['db']);
-        //     $capacite = $affichageCapacite->selectCapacite();
-
-        //     $affichageCategorie = new GestionChambreDAO($app['db']);
-        //     $categorie = $affichageCategorie->selectCategorie();
-
-        //     $affichageStatut = new GestionChambreDAO($app['db']);
-        //     $statut = $affichageStatut->selectStatut();
-
-        //     // s'il y a des erreurs mettre le msg d'erreur
-        //     if(!empty($errors))
-        //     {
-                
-        //         return $app['twig']->render('basic/modification_chambre.html.twig', array(
-        //         "error" => $errors,
-        //         "chambres" =>  $chambre,
-        //         "capacites" => $capacite,
-        //         "categories" => $categorie,
-        //         "statuts" => $statut));
-        //     }
-
-
-        //     // echo "<pre>";
-        //     // print_r($capacite);
-        //     // echo "</pre>";
-        //     // die();
-            
-        //     // j'ai un message de modification de ma chambr
+        public function updateModifReservationAction(Application $app, Request $request , int $id_reservation)
+        {
+            // recuperation de l'insertion de l'utilisateur       
+            $id_reservation = $request->get("numcommande");
+            $user_id = $request->get("nomcomplet"); 
+            $id_facture = $request->get("numeroFacture");
+            $date_commande = $request->get("datecommande");
+            $date_debut = $request->get("datearrivee");
+            $date_fin = $request->get("datedepart");
+            $nb_personne = $request->get("nbpersonne");
+            // echo "<pre>";
+            // print_r($datedepart > $datearrivee);
+            // echo "</pre>";
+            // die();
+            $errors ="";
             
 
+            if($date_fin < $date_debut){
+               
+                $errors .= "La date de départ est toujours ultérieure a la date d'arrivée (Idiot)\n";
+                }
+
+            // on appelle la classe GestionReservationDAO pour se connecter a la bdd 
+
+            $voirReservation = new GestionReservationDAO($app['db']);
             
-        //     return $app['twig']->render('basic/modification_chambre.html.twig', array("chambres" => $chambre,
-        //                                                                             "capacites" => $capacite,
-        //                                                                             "msgValidation" => "Votre chambre a bien été modifié",
-        //                                                                             "categories" => $categorie,
-        //                                                                             "statuts" => $statut));
-        // }
+            // ici je stock les informations 
+
+
+            // pour voir les lignes affecter
+            if(empty($errors))
+                $rowAffect = $voirReservation->modifReservation($id_reservation, $date_debut, $date_fin, $nb_personne);
+                // echo "<pre>";
+                // print_r($rowAffect);
+                // echo "</pre>";
+                // die();
+
+            $affichageReservationModifiable = new GestionReservationDAO($app['db']);
+            $reservation = $affichageReservationModifiable->selectmodifReservation($id_reservation);
+
+            // s'il y a des erreurs mettre le msg d'erreur
+            if(!empty($errors))
+            {
+                return $app['twig']->render('basic/modification_reservation.html.twig', array(
+                "error" => $errors,
+                ));
+            }
+
+            
+            
+            return $app['twig']->render('basic/gestion_reservations.html.twig', array(
+            "msgValidation" => "Le modification de la reservation a bien été pris en compte",
+
+            "numcommande" => $numcommande,
+            "nomcomplet" => "$nomcomplet",
+            "numeroFacture" => "$numeroFacture",
+            "datecommande" => "$datecommande",
+            "datearrivee" => "$datearrivee",
+            "datedepart" => "$datedepart",
+            "nbpersonne" => "$nbpersonne",
+            ));
+        }
 
 
 

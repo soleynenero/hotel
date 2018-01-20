@@ -311,7 +311,7 @@ $app->post('/admin/gestion_membres', function() use($app)
 /********** ROUTE GESTION RESERVATIONS ************/
 /************************************************* */
 
-// permet de voir les reservation
+// permet de voir les reservations
 $app->get('/admin/gestion_reservations', "Hotel\Controller\GestionReservationController::affichageReservationAction")
 ->bind('gestion_reservations');
 
@@ -321,7 +321,7 @@ $app->get('/admin/gestion_reservation/{id_reservation}', "Hotel\Controller\Gesti
 ->bind('modif_reservation');
 
 // permet de modifier les reservations
-$app->post('/admin/gestion_reservation/{id_reservation}', "Hotel\Controller\GestionReservationController::modifReservation");
+$app->post('/admin/gestion_reservation/{id_reservation}', "Hotel\Controller\GestionReservationController::updateModifReservationAction");
 
 
 

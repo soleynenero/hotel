@@ -11,9 +11,9 @@
         </div>
 
         <div class="form-group">
-            <label for="nomComplet" class="control-label">Nom Complet</label>
+            <label for="nomcomplet" class="control-label">Nom Complet</label>
             <div>
-                <input type="text" class="form-control" id="nomComplet" name="nomComplet" value ="{{reservation.Nom}}" disabled="disabled">
+                <input type="text" class="form-control" id="nomcomplet" name="nomcomplet" value ="{{reservation.Nom}}" disabled="disabled">
             </div>
         </div>
 
@@ -35,7 +35,7 @@
         <div class="form-group">
             <label for="datearrivee" class="control-label">Date d'arrivée</label>
             <div>
-                <input type="date" class="form-control" id="datearrivee" name="datearrivee" value ="{{reservation.date_debut | date("d-m-Y")}}">
+                <input type="date" class="form-control" id="datearrivee" name="datearrivee" value ="{{reservation.date_debut}}">
             </div>
         </div>
 
@@ -43,13 +43,13 @@
         <div class="form-group">
             <label for="datedepart" class="control-label">Date de départ</label>
             <div>
-                <input type="date" class="form-control" id="datedepart" name="datedepart" value ="{{reservation.date_fin | date("d-m-Y")}}" >
+                <input type="date" class="form-control" id="datedepart" name="datedepart" value ="{{reservation.date_fin}}" >
             </div>
         </div>
 
         <div class="form-group">
-                <label for="capacite" class="control-label">Capacite</label>
-                <select id="capacite" class="form-control" name="id_capacite">             
+                <label for="capacite" class="control-label">Nombre de personne(s)</label>
+                <select id="nbpersonne" class="form-control" name="nbpersonne">             
                     {% for capacite in 1..4 %}
 
                         <option value="{{capacite}}" {% if capacite == reservation.nb_personne %} selected {% endif %}>{{capacite}}</option>

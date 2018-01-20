@@ -32,11 +32,25 @@
             return $reservation;
         }
 
-        public function selectCapacite()
+        public function selectNumCommande()
         {
-            $sql = "SELECT * FROM capacite_chambre";
-            $capacite = $this->db->fetchAll($sql);
-            return $capacite;
+            $sql = "SELECT * FROM id_reservation";
+            $numCommande = $this->db->fetchAll($sql);
+            return $numCommande;
+        }
+
+        public function selectNomComplet()
+        {
+            $sql = "SELECT CONCAT(prenom, ' ', nom) FROM user";
+            $nomComplet = $this->db->fetchAll($sql);
+            return $nomComplet;
+        }
+
+        public function selectNumeroFacture()
+        {
+            $sql = "SELECT * FROM id_factures";
+            $numeroFacture = $this->db->fetchAll($sql);
+            return $numeroFacture;
         }
         
 
@@ -48,11 +62,11 @@
             return $reservation ;
         }
 
-        public function modifReservation($id_reservation , $user_id , $id_facture , $date_commande , $date_debut, $date_fin, $nb_personne)
+        public function modifReservation($id_reservation, $date_debut, $date_fin, $nb_personne)
         {
-            $sql = "UPDATE reservation SET id_reservation = ?, user_id = ?, id_facture = ?, date_commande = ?, date_debut = ?, date_fin = ?, nb_personne= ?   WHERE id_reservation = ?";
+            $sql = "UPDATE reservation SET date_debut = ?, date_fin = ?, nb_personne= ? WHERE id_reservation = ?";
 
-            $reservationModif = $this->db->executeUpdate($sql, array($id_reservation , $user_id , $id_facture , $date_commande , $date_debut, $date_fin, $nb_personne));
+            $reservationModif = $this->db->executeUpdate($sql, array((int)$id_reservation,(string)$date_debut, (string)$date_fin, (int)$nb_personne));
             return $reservationModif;
         }
 
