@@ -187,14 +187,49 @@ body::-webkit-scrollbar {
 
 /* **************css page inscription*********************** */
 
-.inscription .alert .alert-danger .col-md-8 .col-md-offset-2 .text-center {
+.forminscription{
+    border: 10px groove #bfa145;
+    padding: 20px;
+    margin-bottom: 10px;
+    background: rgba(220, 220, 220, 0.5); 
+}
+.erreurinscription {
     z-index: 10;
 }
 
+.reussiteinscription {
+    z-index: 10;
+}
 
-.inscription input .col-md-12 {
+.inscriptionconnexion {
+    margin-top: 20PX;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.inscriptionsignup {
     background: #bfa145;
     color: white;
+    padding: 5px;
+}
+.inscriptionsignup:hover {
+    background: #b08506;
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+}
+
+#buttoninscription {
+    background: #bfa145 ;
+    color: white;
+    letter-spacing: 10px;
+    font-weight: bold;
+}
+#buttoninscription:hover {
+    background: #b08506 ;
+    color: white;
+    letter-spacing: 10px;
+    font-weight: bold;
 }
 
 
