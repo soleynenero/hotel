@@ -17,13 +17,10 @@ namespace Hotel\Controller;
             $prenom = htmlspecialchars(trim($request->get("prenom"))); 
             $email = htmlspecialchars(trim($request->get("email"))); 
             $cat1 = htmlspecialchars(trim($request->get("id_categorie1"))); 
-            // $cat2 = htmlspecialchars(trim($request->get("id_categorie2"))); 
-            $nbPerson1 = htmlspecialchars(trim($request->get("nb_personne1"))); 
-            // $nbPerson2 = htmlspecialchars(trim($request->get("nb_personne2"))); 
             $debut1 = htmlspecialchars(trim($request->get("date_debut1"))); 
-            // $debut2 = htmlspecialchars(trim($request->get("date_debut2"))); 
+            $nbPerson1 = htmlspecialchars(trim($request->get("nb_personne1"))); 
             $fin1 = htmlspecialchars(trim($request->get("date_fin1"))); 
-            // $fin2 = htmlspecialchars(trim($request->get("date_fin2")));
+
             
             if(empty($idUser)){ // si l'utilisateur n'est pas identifié
                 $this->reserv_error = "Merci de vous connecter avant de réserver une chambre.";
@@ -31,7 +28,7 @@ namespace Hotel\Controller;
                 'reserv_error' => $this->reserv_error));
             }
 
-            if(empty($nom) || empty($prenom) || empty($email) || empty($cat1) || empty($nbPerson1) || empty($debut1) || empty($fin1)) {// si la 1ère chambre réservée est vide
+            if(empty($nom) || empty($prenom) || empty($email) || empty($cat1) || empty($nbPerson1) || empty($debut1) || empty($fin1)) {// si des champs sont vides
                 $this->reserv_error = "Vous devez remplir tous les champs, svp !";
                 return $app['twig']->render('index.html.twig', array(
                     'reserv_error' => $this->reserv_error,
@@ -91,24 +88,21 @@ namespace Hotel\Controller;
             else{
                 $idserv = []; // si aucun service n'est demandé on créé un array vide
             }
-       
-            // echo '<pre>'; var_dump($idserv); echo '</pre>';
 
-            $insert = new ReservDAO($app['db']);
-            $resultat = $insert->recupEmail($idUser, $email);
+            $insert = new ReservDAO($app['db']); // appel du modèle ReservDAO
+            $resultat = $insert->recupEmail($idUser, $email); // on récupère en bdd l'email de l'user
 
             if($resultat['email'] == $email) { // si l'id correspond au mail renseigné
 
-                $req = $insert->insertReserv($idUser, $nbPerson1, $debut1, $fin1, $cat1, $idserv);
-                // echo '<p style="color: black">Validation OK<p>';
-                if($req != "erreur"){
+                $req = $insert->insertReserv($idUser, $nbPerson1, $debut1, $fin1, $cat1, $idserv); // on créé la réservation en bdd
+                if($req != "erreur"){ // si la réservation est possible (chambre dispo)
 
-                    $insert->factureReserv();
-                    $reserv = $insert->recapReserv();
+                    $insert->factureReserv(); // on génère la facture
+                    $reserv = $insert->recapReserv(); // on passe les infos dans la page de recap avant paiement
                     return $app['twig']->render('basic/validation_reservation.html.twig', array('reserv' => $reserv));
                 }
 
-                else {
+                else { // si pas de chambre, retour à la réservation 
                     $this->reserv_error = "Il n'y a plus de chambre disponible. Changez de catégorie de chambre, de date de séjour ou le nombre de personne.";
                     return $app['twig']->render('index.html.twig', array(
                     'reserv_error' => $this->reserv_error,
@@ -120,18 +114,17 @@ namespace Hotel\Controller;
                     "date_fin" => $fin1,
                     "nbPersonne" => $nbPerson1,
                     "categorie" => $cat1
-                    )); // retour à la réservation 
+                    )); 
                 }
 
-                // echo '<pre>'; echo var_dump($reserv); echo '</pre>';
             }
-            else{
+            else{ // si problème d'email ou d'id_user, retour à la réservation
                 $this->reserv_error = "Vos identifiants sont incorrects, veuillez renseigner votre mail de connexion. Si le problème persiste, déconnectez-vous et reconnectez-vous.";
                 return $app['twig']->render('index.html.twig', array(
                     'reserv_error' => $this->reserv_error
-                )); // retour à la réservation 
+                ));  
             }
-        }
+        } // fin de verifAction
 
     }
 

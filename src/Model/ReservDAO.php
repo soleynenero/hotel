@@ -7,13 +7,11 @@
 
     class ReservDAO {
 
-        private $db;
+        private $db; // pour stocker la connexion à la bdd
         private $idFacture;
         private $idReserv;
         private $idChbre1;
-        private $idChbre2;
         private $nuits1 = 1;
-        private $nuits2 = 1;
 
         function __construct($connect) {
             $this->db = $connect;
@@ -140,8 +138,8 @@
 
             $sql = $bdd->fetchAssoc("SELECT SUM(prix_total) AS 'totalSejour' FROM detail_factures WHERE id_factures =". $this->idFacture ."");
 
-            $totalSejour = intval($sql['totalSejour']); // on récupère le prix total
-            $ht = $totalSejour - ($totalSejour/(1+(20.6/100)));
+            $totalSejour = intval($sql['totalSejour']); // on récupère le prix total ttc
+            $ht = $totalSejour - ($totalSejour/(1+(20.6/100))); // on calcule le total ht
             $tva = round($ht, 2, PHP_ROUND_HALF_UP); // on calcule la tva
 
             // on complète la table factures, le client n'a plus qu'à payer !
@@ -155,16 +153,19 @@
            
             $bdd = $this->getDb();
 
+            // on récupère les données de la prestation concernant la chambre
             $prestaChbre = $bdd->fetchAll("SELECT dp.*, df.prix_total, df.quantite, df.prix_unitaire, r.date_debut, r.date_fin FROM detail_prestation_chambre dp, detail_factures df, reservation r WHERE dp.id_prestation = df.id_prestation AND dp.id_reservation = r.id_reservation AND dp.id_reservation =". $this->idReserv ."");
 
+            // on récupère les données de la prestationn concernant les services
             $prestaService = $bdd->fetchAll("SELECT * FROM detail_prestation_services WHERE id_reservation =". $this->idReserv ."");
 
+            // on récupère les coûts inscrits sur la facture
             $prestaCout = $bdd->fetchAll("SELECT tva, prix_total FROM factures WHERE id_factures = ". $this->idFacture ."");
 
-            
-            $reserv = array('chambres' => array(), 'services' => array(), 'cout' => array(), 'identifiants' => array('nom' => $_SESSION['user']['nom'], 'prenom' => $_SESSION['user']['prenom']));
+            // on stocke tout dans un array multi avec des index dédiés aux 3 éléments précédents + données personnelles de la session
+            $reserv = array('chambres' => array(), 'services' => array(), 'cout' => array(), 'identifiants' => array('nom' => $_SESSION['user']['nom'], 'prenom' => $_SESSION['user']['prenom'])); // déclaration de l'array
 
-            for($i=0; $i < count($prestaChbre); $i++){
+            for($i=0; $i < count($prestaChbre); $i++){ // stockage des données "chambre" dans l'array
                 $datedebut = new DateTime($prestaChbre[$i]['date_debut']);
                 $datefin = new DateTime($prestaChbre[$i]['date_fin']);
                 $reserv['chambres'][$i] = array(
@@ -179,14 +180,14 @@
                 );
             }
 
-            for($i=0; $i< count($prestaService); $i++){
+            for($i=0; $i< count($prestaService); $i++){ // stockage des données "services" dans l'array
                 $reserv['services'][$i] = array(
                 "service" => $prestaService[$i]['nom_service'],
                 "prixService" => $prestaService[$i]['prix_service'],
                 );
             }
 
-            for($i=0; $i< count($prestaCout); $i++){
+            for($i=0; $i< count($prestaCout); $i++){ // stockage des données "cout" dans l'array
                 $reserv['cout'] = array(
                 "tva" => $prestaCout[$i]['tva'],
                 "prixTTC" => $prestaCout[$i]['prix_total'],
@@ -194,11 +195,8 @@
                 );
             }
 
+            return $reserv; // on renvoit les données stockées au contrôleur
 
-            return $reserv;
-        }
-
-        
-        
-        
+        } // fin de recapReser()
+                
     } // fin de la classe
