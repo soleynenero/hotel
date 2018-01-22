@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hotel\Controller\InfoUserController;
 use Hotel\Controller\Controller;
 use Hotel\Model\InfosAdminDAO;
+use Hotel\Model\ReservDAO;
 use Twig\Extension\AbstractExtension;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
@@ -18,46 +19,33 @@ use Twig\Extension\AbstractExtension;
 // route Home
 $app->get('/', function () use ($app) {
     $isconnectedAnIsAdmin = Controller::isAdmin();
+    $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
     if (isset($_SESSION)) {
-        if(isset($_SESSION['user']) && $_SESSION['user']['statut'] == 'standard')
+        if(isset($_SESSION['user']) && $_SESSION['user']['statut'] == 'standard') // si l'user est un client, on récupère ses données perso pour le préremplissage du form de réservation
             return $app['twig']->render('index.html.twig', array(
                 "id_user" => $_SESSION['user']['user_id'],
                 "prenom" => $_SESSION['user']['prenom'],
                 "nom" => $_SESSION['user']['nom'],
-                "email" => $_SESSION['user']['email']
+                "email" => $_SESSION['user']['email'],
+                "listService" => $listServices
                 ));
         if ($isconnectedAnIsAdmin) {
             return $app['twig']->render('index.html.twig', array(
                 "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
+                "listService" => $listServices
                ));
         }else {
-            return $app['twig']->render('index.html.twig');
+            return $app['twig']->render('index.html.twig', array(
+                "listService" => $listServices
+            ));
         }
     }else{
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('index.html.twig', array(
+            "listService" => $listServices
+        ));
     }
  
 })->bind('Home');
-
-
-
-// $app->get('/', function () use ($app) {
-//     $isconnectedAnIsAdmin = Controller::isAdmin();
-//     if (isset($_SESSION)) {
-//         if ($isconnectedAnIsAdmin) {
-//             return $app['twig']->render('index.html.twig', array(
-//                 "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
-//                ));
-//         }else {
-//             return $app['twig']->render('index.html.twig');
-//         }
-//     }else{
-//         return $app['twig']->render('index.html.twig');
-//     }
-
-// })->bind('Home');
-
-
 
 
 $app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
