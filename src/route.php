@@ -79,7 +79,7 @@ $app->get('/home', function () use ($app) {
 })->bind('home2');
 
 
-$app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
+$app->post('/home', 'Hotel\Controller\ReservationControl::verifAction');
 
 // route roomtarif
 $app->get('/les-chambres-et-tarifs', function () use ($app) {
