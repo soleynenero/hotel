@@ -16,29 +16,69 @@
         <h1 class="title">Chambre {{categorie.type_categorie}}<a type="submit" class="btn btn-default" style="font-family: 'Raleway';font-size:15px;margin-left:3em;" href="{{ path('Home') }}#reservation">Réserver!</a></h1>
 
         <div class="col-sm-12 col-md-12" style="margin: 1em 0; padding-top:2em;">
-            <div id="carousel" class="carousel slide col-md-8" data-ride="carousel" style="padding=1em;">
+            <div id="{{categorie.type_categorie}}" class="carousel slide col-md-8" data-ride="carousel" style="padding=1em;">
+                {% if(categorie.type_categorie == 'Standard') %}
+                    <div class="carousel-inner role="listbox" ">
+                        <div class="item active">
+                            <img src="{{ asset('assets_front/images/photos/STD1.jpg') }}" class="img-responsive" alt="First slide">
+                        </div>
+                        <div class="item">
+                            <img src="{{ asset('assets_front/images/photos/STD2.jpg') }}" class="img-responsive" alt="Second slide">
+                        </div>
+                        <div class="item">
+                            <img src="{{ asset('assets_front/images/photos/STD3.jpg') }}" class="img-responsive" alt="Third slide">
+                        </div>
+                        <div class="item"> 
+                            <img src="{{ asset('assets_front/images/photos/STD4.jpg') }}" class="img-responsive" alt="Fourth slide">
+                        </div>
+                        <div class="item">
+                            <img src="{{ asset('assets_front/images/photos/STD5.jpg') }}" class="img-responsive" alt="Fifth slide">
+                        </div>
+                    </div>
+                {% endif %}
+                {% if(categorie.type_categorie == 'Superieure') %}
                 <div class="carousel-inner role="listbox" ">
                     <div class="item active">
-                        <img src="{{ asset('assets_front/images/photos/STD1.jpg') }}" class="img-responsive" alt="First slide">
+                        <img src="{{ asset('assets_front/images/photos/SUP1.jpg') }}" class="img-responsive" alt="First slide">
                     </div>
                     <div class="item">
-                        <img src="{{ asset('assets_front/images/photos/STD2.jpg') }}" class="img-responsive" alt="Second slide">
+                        <img src="{{ asset('assets_front/images/photos/SUP2.jpg') }}" class="img-responsive" alt="Second slide">
                     </div>
                     <div class="item">
-                        <img src="{{ asset('assets_front/images/photos/STD3.jpg') }}" class="img-responsive" alt="Third slide">
+                        <img src="{{ asset('assets_front/images/photos/SUP3.jpg') }}" class="img-responsive" alt="Third slide">
                     </div>
                     <div class="item"> 
-                        <img src="{{ asset('assets_front/images/photos/STD4.jpg') }}" class="img-responsive" alt="Fourth slide">
+                        <img src="{{ asset('assets_front/images/photos/SUP4.jpg') }}" class="img-responsive" alt="Fourth slide">
                     </div>
                     <div class="item">
-                        <img src="{{ asset('assets_front/images/photos/STD5.jpg') }}" class="img-responsive" alt="Fifth slide">
+                        <img src="{{ asset('assets_front/images/photos/SUP5.jpg') }}" class="img-responsive" alt="Fifth slide">
                     </div>
                 </div>
-                <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+                {% endif %}
+                {% if(categorie.type_categorie == 'Deluxe') %}
+                <div class="carousel-inner role="listbox" ">
+                    <div class="item active">
+                        <img src="{{ asset('assets_front/images/photos/SUITE1.jpg') }}" class="img-responsive" alt="First slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset('assets_front/images/photos/SUITE2.jpg') }}" class="img-responsive" alt="Second slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset('assets_front/images/photos/SUITE3.jpg') }}" class="img-responsive" alt="Third slide">
+                    </div>
+                    <div class="item"> 
+                        <img src="{{ asset('assets_front/images/photos/SUITE4.jpg') }}" class="img-responsive" alt="Fourth slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset('assets_front/images/photos/SUITE5.jpg') }}" class="img-responsive" alt="Fifth slide">
+                    </div>
+                </div>
+                {% endif %}
+                <a class="left carousel-control" href="#{{categorie.type_categorie}}" role="button" data-slide="prev">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <i class="sr-only">Previous</i>
                 </a> 
-                <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+                <a class="right carousel-control" href="#{{categorie.type_categorie}}" role="button" data-slide="next">
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                     <i class="sr-only">Next</i>
                 </a>

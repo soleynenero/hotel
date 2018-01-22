@@ -76,6 +76,9 @@ $app->get('/contacts', function () use ($app) {
     return $app['twig']->render('basic/contacts.html.twig', array());
 })->bind('contacts');
 
+$app->post('/contacts','Hotel\Controller\MessageController::contactFormAction');
+//->before($verifParam);
+
 // route mentions_legales et CGV
 $app->get('/mentions_legales', function () use ($app) {
     return $app['twig']->render('basic/mentions_legales.html.twig', array());

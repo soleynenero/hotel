@@ -14,7 +14,7 @@
         public function verifEmailAction(Application $app, Request $request)
         {
             $errors = ""; // Pour héberger les messages d'erreur
-            
+            $msg ="";
            // 1. Récupération de l'email et Vérification de la sécurité pour l'email
             $email = htmlspecialchars(trim($request->request->get("email"))); // récupération de l'email avec le get et modification des balises html
 
@@ -33,8 +33,8 @@
             //s'il n'y a pas d'email correspondant, on lui demande de réessayer ou d'aller sur page d'inscription
             if($email == $user['email']){
                 //rediriger vers la page connexion
-                $errors .= "Un message vient de vous être envoyé à votre adresse mail avec votre mot de passe. Merci de vous connecter.";
-                return $app['twig']->render('basic/oubli_mdp.html.twig', array("error" => $errors));
+                $msg .= "Un message vient de vous être envoyé à votre adresse mail avec votre mot de passe. Merci de vous connecter.";
+                return $app['twig']->render('basic/oubli_mdp.html.twig', array("msg" => $msg));
             }
             
             else{

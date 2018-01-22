@@ -6,6 +6,7 @@
     use Silex\Provider\ServiceControllerServiceProvider;
     use Silex\Provider\HttpFragmentServiceProvider;
     use Silex\Provider\DoctrineServiceProvider;
+    use PHPMailer\PHPMailer\PHPMailer;
 
     
     $app->register(new ServiceControllerServiceProvider()); // Chargement des Controleur Provider
@@ -32,3 +33,4 @@
         ),
     ));   
 
+    $app['mail'] = new PHPMailer(true);  
