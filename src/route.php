@@ -65,6 +65,7 @@ $app->get('/', function () use ($app) {
     
 })->bind('home');
 $app->get('/home', function () use ($app) {
+    $categorie = $app['db']->fetchAll("SELECT * FROM categorie_chambre"); //permet de voir les catégories de chambres
     $isconnectedAnIsAdmin = Controller::isAdmin();
     // $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
     $listServices = Hotel\Model\ReservDAO::listServices($app['db']);
@@ -75,20 +76,24 @@ $app->get('/home', function () use ($app) {
                 "prenom" => $_SESSION['user']['prenom'],
                 "nom" => $_SESSION['user']['nom'],
                 "email" => $_SESSION['user']['email'],
+                "categories" => $categorie
                 // "listService" => $listServices
                 ));
         if ($isconnectedAnIsAdmin) {
             return $app['twig']->render('index.html.twig', array(
                 "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
+                "categories" => $categorie
                 // "listService" => $listServices
                ));
         }else {
             return $app['twig']->render('index.html.twig', array(
+                "categories" => $categorie
                 // "listService" => $listServices
             ));
         }
     }else{
         return $app['twig']->render('index.html.twig', array(
+            "categories" => $categorie
             // "listService" => $listServices
         ));
     }

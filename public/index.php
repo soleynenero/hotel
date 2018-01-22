@@ -55,6 +55,6 @@
 
     require __DIR__.'/../src/route.php';
 
-    $app['debug'] = false ;
+    $app['debug'] = true ;
     $app->run();
 
