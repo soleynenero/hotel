@@ -5,11 +5,11 @@
     <h3 class="text-center">Modification de la chambre</h3>
     <hr>
     {% if error is defined %}
-        {{ error }}
+        <div class="alert alert-danger text-center">{{ error }}</div>
     {% endif %}
 
     {% if msgValidation is defined %}
-        {{ msgValidation }}
+        <div class="alert alert-success text-center">{{ msgValidation }}</div>
     {% endif %}
     {# <pre><p>{{ dump(chambres)}}</p></pre> #}
 
@@ -62,11 +62,11 @@
             </div>
 
             <div>
-            <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Ajouter une chambre</button>
+            <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Modifier une chambre</button>
             </div>
         </form>
 
-        <a href="{{ path ('gestion_chambres') }}">cliquer ici pour retourner vers la page gestion chambre</a>
+        <a href="{{ path ('gestion_chambres') }}">Cliquer ici pour retourner vers la page gestion chambre</a>
 </div>
 
 {% endblock %}
