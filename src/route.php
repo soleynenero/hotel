@@ -317,11 +317,11 @@ $app->get('/admin/gestion_reservations', "Hotel\Controller\GestionReservationCon
 
 
 // permet d'aller sur la page de modification des reservation
-$app->get('/admin/gestion_reservation/{id_reservation}', "Hotel\Controller\GestionReservationController::selectModifReservationAction")
+$app->get('/admin/gestion_reservations/modification/{id_reservation}', "Hotel\Controller\GestionReservationController::selectModifReservationAction")
 ->bind('modif_reservation');
 
 // permet de modifier les reservations
-$app->post('/admin/gestion_reservation/{id_reservation}', "Hotel\Controller\GestionReservationController::updateModifReservationAction");
+$app->post('/admin/gestion_reservations/modification/{id_reservation}', "Hotel\Controller\GestionReservationController::updateModifReservationAction");
 
 
 

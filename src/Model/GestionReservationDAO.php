@@ -66,7 +66,7 @@
         {
             $sql = "UPDATE reservation SET date_debut = ?, date_fin = ?, nb_personne= ? WHERE id_reservation = ?";
 
-            $reservationModif = $this->db->executeUpdate($sql, array((int)$id_reservation,(string)$date_debut, (string)$date_fin, (int)$nb_personne));
+            $reservationModif = $this->db->executeUpdate($sql, array($date_debut, $date_fin, $nb_personne, (int)$id_reservation));
             return $reservationModif;
         }
 

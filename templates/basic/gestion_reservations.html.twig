@@ -36,5 +36,23 @@
         {% endfor %}
         
     </table>
+        {% if error is defined %}
+            <div class='alert alert-danger text-center' ><p>{{ error|nl2br }}</p></div>
+        {% endif %}
+
+        {# {% if errornb is defined %}
+            <p>{{ errornb|nl2br }}</p>
+        {% endif %} #}
+    
+
+    
+        {% if msgValidation is defined %}
+            <div class='alert alert-success text-center'>{{ msgValidation }} </div>
+        {% endif %}
+   
+
+
+
+
 
 {% endblock %}

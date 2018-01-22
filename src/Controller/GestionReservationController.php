@@ -39,22 +39,25 @@
             
             // je renvoie sur la page du gestion_reservation les informations de ma reservation et des informations dans mon select qui est un array
             return $app['twig']->render('basic/modification_reservation.html.twig', array(
-                "reservation" => $reservation,
+                "reservations" => $reservation,
             ));
         }
 
         public function updateModifReservationAction(Application $app, Request $request , int $id_reservation)
         {
             // recuperation de l'insertion de l'utilisateur       
-            $id_reservation = $request->get("numcommande");
-            $user_id = $request->get("nomcomplet"); 
-            $id_facture = $request->get("numeroFacture");
-            $date_commande = $request->get("datecommande");
-            $date_debut = $request->get("datearrivee");
-            $date_fin = $request->get("datedepart");
-            $nb_personne = $request->get("nbpersonne");
+            $date_debut = $request->get("date_debut");
+            $date_fin = $request->get("date_fin");
+            $nb_personne = $request->get("nb_personne");
+
             // echo "<pre>";
-            // print_r($datedepart > $datearrivee);
+            // print_r($date_debut);
+            // echo "</pre>";
+            // echo "<pre>";
+            // print_r($nb_personne);
+            // echo "</pre>";
+            // echo "<pre>";
+            // print_r($date_fin);
             // echo "</pre>";
             // die();
             $errors ="";
@@ -75,10 +78,7 @@
             // pour voir les lignes affecter
             if(empty($errors))
                 $rowAffect = $voirReservation->modifReservation($id_reservation, $date_debut, $date_fin, $nb_personne);
-                // echo "<pre>";
-                // print_r($rowAffect);
-                // echo "</pre>";
-                // die();
+
 
             $affichageReservationModifiable = new GestionReservationDAO($app['db']);
             $reservation = $affichageReservationModifiable->selectmodifReservation($id_reservation);
@@ -88,21 +88,24 @@
             {
                 return $app['twig']->render('basic/modification_reservation.html.twig', array(
                 "error" => $errors,
+                "reservations" => $reservation,
                 ));
             }
 
-            
+            $affichageReservation = new GestionReservationDAO($app['db']);
+            $reservation = $affichageReservation->selectReservation(false);
             
             return $app['twig']->render('basic/gestion_reservations.html.twig', array(
-            "msgValidation" => "Le modification de la reservation a bien été pris en compte",
+            "msgValidation" => "La modification de la reservation a bien été prise en compte",
 
-            "numcommande" => $numcommande,
-            "nomcomplet" => "$nomcomplet",
-            "numeroFacture" => "$numeroFacture",
-            "datecommande" => "$datecommande",
-            "datearrivee" => "$datearrivee",
-            "datedepart" => "$datedepart",
-            "nbpersonne" => "$nbpersonne",
+            "reservations" => $reservation,
+            // "numcommande" => $numcommande,
+            // "nomcomplet" => "$nomcomplet",
+            // "numeroFacture" => "$numeroFacture",
+            // "datecommande" => "$datecommande",
+            // "datearrivee" => "$datearrivee",
+            // "datedepart" => "$datedepart",
+            // "nbpersonne" => "$nbpersonne",
             ));
         }
 

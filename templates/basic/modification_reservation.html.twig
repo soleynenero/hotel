@@ -2,32 +2,33 @@
 
 {% block content %}
 
+{# <pre>{{ dump(reservations)}}</pre> #}
     <form class="form-horizontal" method="post">
         <div class="form-group">
             <label for="numcommande" class="control-label">Numéro commande</label>
             <div>
-                <input type="text" class="form-control" id="numcommande" name="numcommande" value ="{{ reservation.id }}" disabled="disabled">
+                <input type="text" class="form-control" id="numcommande" name="numcommande" value ="{{ reservations.id }}" disabled="disabled">
             </div>
         </div>
 
         <div class="form-group">
             <label for="nomcomplet" class="control-label">Nom Complet</label>
             <div>
-                <input type="text" class="form-control" id="nomcomplet" name="nomcomplet" value ="{{reservation.Nom}}" disabled="disabled">
+                <input type="text" class="form-control" id="nomcomplet" name="nomcomplet" value ="{{reservations.Nom}}" disabled="disabled">
             </div>
         </div>
 
         <div class="form-group">
             <label for="numeroFacture" class="control-label">Numero facture</label>
             <div>
-                <input type="text" class="form-control" id="numeroFacture" name="numeroFacture" value ="{{reservation.NbFacture}}" disabled="disabled">
+                <input type="text" class="form-control" id="numeroFacture" name="numeroFacture" value ="{{reservations.NbFacture}}" disabled="disabled">
             </div>
         </div>
        
         <div class="form-group">
             <label for="numeroFacture" class="control-label">Date commande</label>
             <div>
-                <input type="text" class="form-control" id="datecommande" name="datecommande" value ="{{reservation.date_commande}}" disabled="disabled">
+                <input type="text" class="form-control" id="datecommande" name="date_commande" value ="{{reservations.date_commande}}" disabled="disabled">
             </div>
         </div>
 
@@ -35,7 +36,7 @@
         <div class="form-group">
             <label for="datearrivee" class="control-label">Date d'arrivée</label>
             <div>
-                <input type="date" class="form-control" id="datearrivee" name="datearrivee" value ="{{reservation.date_debut}}">
+                <input type="date" class="form-control" id="datearrivee" name="date_debut" value ="{{reservations.date_debut}}">
             </div>
         </div>
 
@@ -43,16 +44,16 @@
         <div class="form-group">
             <label for="datedepart" class="control-label">Date de départ</label>
             <div>
-                <input type="date" class="form-control" id="datedepart" name="datedepart" value ="{{reservation.date_fin}}" >
+                <input type="date" class="form-control" id="datedepart" name="date_fin" value ="{{reservations.date_fin}}" >
             </div>
         </div>
 
         <div class="form-group">
-                <label for="capacite" class="control-label">Nombre de personne(s)</label>
-                <select id="nbpersonne" class="form-control" name="nbpersonne">             
+                <label for="nb_personne" class="control-label">Nombre de personne(s)</label>
+                <select id="nb_personne" class="form-control" name="nb_personne">             
                     {% for capacite in 1..4 %}
 
-                        <option value="{{capacite}}" {% if capacite == reservation.nb_personne %} selected {% endif %}>{{capacite}}</option>
+                        <option value="{{capacite}}" {% if capacite == reservations.nb_personne %} selected {% endif %}>{{capacite}}</option>
                     {% endfor %}            
                 </select>
         </div>
@@ -61,7 +62,7 @@
 
 
         <div>
-        <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Modifier la reservation</button>
+        <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Modifier la reservations</button>
         </div>
     </form>
 
