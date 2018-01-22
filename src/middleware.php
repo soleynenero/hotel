@@ -26,22 +26,23 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // function verifParam
 
- function verifParam($request, $verifRequest = array()): array{
+ function verifParam(Request $request, $verifRequest = array()): array{
 
     $error = false;
     $messageError = "";
 
-
     foreach($verifRequest as $key => $val) {
         if( !$request->has($val) || trim($request->get($val)) == ""){ // si la $val n'existe pas et qu'elle est vide
             $error = true;
+
             $messageError .= 'Le '.$val.' est vide. \n ';
         } 
+
     }
     return array("error" => $error, "message" => $messageError);
-}
+};
 
-// /* *******midleware******************* */
+// /* *******middleware******************* */
 
 //middleware inscription
 $verifParamInscription = function (Request $request) {
@@ -67,6 +68,7 @@ $verifParamLogin = function (Request $request) {
 };
 
 
+
 // middleware pour modification du profil
 $verifParamModifProfil = function (Request $request) {
     global $app;
@@ -82,6 +84,7 @@ $verifParamModifProfil = function (Request $request) {
 //     if($retour["error"])
 //         return $app['twig']->render('basic/modification_profil.html.twig');
 // };
+
 
 
 //Gestion de COOKIE et SESSION

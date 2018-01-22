@@ -175,7 +175,6 @@
         // fonction me permettant de supprimer une chambre
         public function deleteChambreAction(Application $app, Request $request , $id_chambres)
         {
-
             $suppression = new GestionChambreDAO($app['db']);
             $suppressionChambre = $suppression->deleteChambre($id_chambres);
        

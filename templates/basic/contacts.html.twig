@@ -1,5 +1,9 @@
 {% extends "layout.html.twig" %}
 
+{% block menuNav %}
+    {% include 'include/menu_nav.html.twig' ignore missing %}
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -9,6 +13,12 @@
     <div class="row"  style="padding:2em 0 4em 0;">
         <div class="col-sm-6">
 			<h1 class="title">Nous contacter</h1>
+			{% if error is defined %}
+               <div style="color:red; padding-bottom: 1em;">{{error}}</div>
+  			{% endif %}
+			{% if msg is defined %}
+               <div style="color:green; padding-bottom: 1em;">{{msg}}</div>
+  			{% endif %}
 			<div class="col-sm-12" style="background:url('{{ asset('assets_front/images/photos/banner8.jpg ') }}'); ">
 				<div style="padding:4em 0 4em 0;"> 
 					<div class="col-sm-6 col-sm-offset-0.5" style="background-color:#fff; border:1px solid #bbb; height:250px;padding:1em 1em;"> 
@@ -22,7 +32,7 @@
 						<br>
 						<span>contact@hotel-grandsvoisins.fr</span>
 					</div>	
-					<form role="form" class="col-sm-6 col-sm-offset-0.5" style="padding:0 1em 4em 1em;">
+					<form method="post" class="col-sm-6 col-sm-offset-0.5" style="padding:0 1em 4em 1em;">
 						<div class="form-group">	
 							<input type="text" class="form-control" id="name" name="nom" placeholder="Entrez votre nom">
 						</div>
@@ -30,7 +40,7 @@
 							<input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email">
 						</div>
 						<div class="form-group">
-							<textarea type="email" class="form-control" name="message"  placeholder="Entrez votre message" rows="8"></textarea>
+							<textarea type="email" class="form-control" name="message" placeholder="Entrez votre message" rows="8"></textarea>
 						</div>
 						<button type="submit" class="btn btn-default"> Envoyer</button>
 					</form>

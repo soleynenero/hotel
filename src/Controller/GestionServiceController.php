@@ -18,7 +18,7 @@ class GestionServiceController
         return $app['twig']->render('basic/gestion_services.html.twig', array("services" => $service,));
     }
 
-    public function ajoutChambreAction(Application $app, Request $request)
+    public function ajoutServiceAction(Application $app, Request $request)
     {
 
                 

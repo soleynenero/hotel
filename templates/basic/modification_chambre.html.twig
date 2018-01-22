@@ -5,7 +5,7 @@
     <h3 class="text-center">Modification de la chambre</h3>
     <hr>
     {% if error is defined %}
-        <div class="alert alert-danger text-center">{{ error }}</div>
+        <div class="alert alert-danger text-center">{{ error|nl2br }}</div>
     {% endif %}
 
     {% if msgValidation is defined %}

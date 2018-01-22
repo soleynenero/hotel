@@ -9,53 +9,53 @@
             <input type="hidden" name="standard">
 
             {% if error is defined %}
-                <span style="color: red">{{error}}</span>
+                <span style="color: red">{{error|nl2br}}</span>
             {% endif %}
 
             <div class="form-group">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" placeholder="(2 à 15 caractères)" required="required">
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="(2 à 15 caractères)" >
 
             </div>
             <div class="form-group">
                 <label for="prenom">Prénom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="(2 à 15 caractère)" required="required">
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="(2 à 15 caractère)" >
 
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="votre@email.com" required="required">
+                <input type="email" class="form-control" id="email" name="email" placeholder="votre@email.com">
 
             </div>
 
             <div class="form-group"><br>
                 <label for="ville">Ville</label>
-                <input type="text" class="form-control" id="ville" name="ville"  placeholder="Ville" required="required">
+                <input type="text" class="form-control" id="ville" name="ville"  placeholder="Ville">
 
             </div>
 
             <div class="form-group">
                 <label for="code_postal">Code Postal</label>
-                <input type="text" class="form-control" id="code_postal" name="code_postal" placeholder="Code postal" required="required">
+                <input type="text" class="form-control" id="code_postal" name="code_postal" placeholder="Code postal" >
 
             </div>
 
             <div class="form-group">
                 <label for="telephone">Telephone</label>
-                <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" required="required">
+                <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" >
 
             </div>
 
             <label for="adresse">Adresse</label>
 
-            <textarea class="form-control" rows="3" id="adresse" name="adresse" placeholder="Adresse" required="required"></textarea><br>
+            <textarea class="form-control" rows="3" id="adresse" name="adresse" placeholder="Adresse"></textarea><br>
 
             <div class="form-group">
                 <label for="mdp">Mot de passe</label>
-                <input type="password" class="form-control" id="mdp" name="mdp" required="required">
+                <input type="password" class="form-control" id="mdp" name="mdp" >
             </div>
 
-            <input type="submit" class="btn btn-default col-xs-12 " id="buttoninscription" value="inscription"><br><br><br>
+            <button type="submit" class="btn btn-default col-xs-12 " id="buttoninscription"><span style="font-weight: bold;">Inscription</span></button><br><br><br>
         </form><br>
         </div>
       </div>
