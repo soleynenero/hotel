@@ -19,7 +19,8 @@ use Twig\Extension\AbstractExtension;
 // route Home
 $app->get('/', function () use ($app) {
     $isconnectedAnIsAdmin = Controller::isAdmin();
-    $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+    // $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+    $listServices = Hotel\Model\ReservDAO::listServices($app['db']);
     if (isset($_SESSION)) {
         if(isset($_SESSION['user']) && $_SESSION['user']['statut'] == 'standard') // si l'user est un client, on récupère ses données perso pour le préremplissage du form de réservation
             return $app['twig']->render('index.html.twig', array(
@@ -44,11 +45,41 @@ $app->get('/', function () use ($app) {
             "listService" => $listServices
         ));
     }
- 
-})->bind('Home');
+    
+})->bind('home');
+$app->get('/home', function () use ($app) {
+    $isconnectedAnIsAdmin = Controller::isAdmin();
+    // $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+    $listServices = Hotel\Model\ReservDAO::listServices($app['db']);
+    if (isset($_SESSION)) {
+        if(isset($_SESSION['user']) && $_SESSION['user']['statut'] == 'standard') // si l'user est un client, on récupère ses données perso pour le préremplissage du form de réservation
+            return $app['twig']->render('index.html.twig', array(
+                "id_user" => $_SESSION['user']['user_id'],
+                "prenom" => $_SESSION['user']['prenom'],
+                "nom" => $_SESSION['user']['nom'],
+                "email" => $_SESSION['user']['email'],
+                "listService" => $listServices
+                ));
+        if ($isconnectedAnIsAdmin) {
+            return $app['twig']->render('index.html.twig', array(
+                "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
+                "listService" => $listServices
+               ));
+        }else {
+            return $app['twig']->render('index.html.twig', array(
+                "listService" => $listServices
+            ));
+        }
+    }else{
+        return $app['twig']->render('index.html.twig', array(
+            "listService" => $listServices
+        ));
+    }
+    
+})->bind('home2');
 
 
-$app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
+$app->post('/home', 'Hotel\Controller\ReservationControl::verifAction');
 
 // route roomtarif
 $app->get('/les-chambres-et-tarifs', function () use ($app) {
@@ -188,7 +219,7 @@ $app->get('/deconnexion', function() use($app){
 
     setcookie("hotel");
     session_destroy();
-    return $app->redirect("/hotel/public/");
+    return $app->redirect("home");
 
 })->bind('deconnexion');
 
@@ -308,7 +339,7 @@ $app->get('/admin', function() use($app)
         ));
     } else {// Si l'utilisateur n'est pas admin
         // var_dump($_SESSION);
-        return $app->redirect('/hotel/public/');
+        return $app->redirect('home');
     }
 })->bind('admin');
 

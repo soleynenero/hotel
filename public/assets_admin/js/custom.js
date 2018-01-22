@@ -82,9 +82,9 @@ $(document).ready(function() {
     }).parent().addClass('active');
 
     // recompute content when resizing
-    $(window).smartresize(function(){  
-        setContentHeight();
-    });
+    // $(window).smartresize(function(){  
+    //     setContentHeight();
+    // });
 
     setContentHeight();
 
@@ -5240,6 +5240,3 @@ $(window).on('load', function() {
 		NProgress.done();
 });
 }
-
-	
-
