@@ -7,5 +7,5 @@
         {# ici on fait ce dernier lien pour nous permettre de changer le lien, si l'utilisateur est connecté alors on voit profil sinon on voit inscription #}
         {# il faut aller dans twigfunction pour savoir d'ou vient le connect #}
         <li><a href="{{ connect != false ? path ('profil_membre') : path ('inscription') }}">{{ connect != false ? "Profil" : "Inscription" }}</a></li>
-        <li><a href="{{ connect != false ? path ('deconnexion') : path ('connexion') }}"> {{ connect != false ? "deconnexion" : "Connexion" }}</a></li>
+        <li><a href="{{ connect != false ? path ('deconnexion') : path ('connexion') }}"> {{ connect != false ? "Déconnexion" : "Connexion" }}</a></li>
     </ul>
