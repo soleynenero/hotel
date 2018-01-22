@@ -25,8 +25,12 @@ use Twig\Extension\AbstractExtension;
 // route Home
 $app->get('/', function () use ($app) {
     $isconnectedAnIsAdmin = Controller::isAdmin();
-    $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+
     $categorie = $app['db']->fetchAll("SELECT * FROM categorie_chambre"); //permet de voir les catégories de chambres
+
+    // $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+    $listServices = Hotel\Model\ReservDAO::listServices($app['db']);
+
     if (isset($_SESSION)) {
         if(isset($_SESSION['user']) && $_SESSION['user']['statut'] == 'standard') // si l'user est un client, on récupère ses données perso pour le préremplissage du form de réservation
             return $app['twig']->render('index.html.twig', array(
@@ -55,10 +59,45 @@ $app->get('/', function () use ($app) {
             "categories" => $categorie
         ));
     }
+
 })->bind('Home');
 
+    
+})->bind('home');
+$app->get('/home', function () use ($app) {
+    $isconnectedAnIsAdmin = Controller::isAdmin();
+    // $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+    $listServices = Hotel\Model\ReservDAO::listServices($app['db']);
+    if (isset($_SESSION)) {
+        if(isset($_SESSION['user']) && $_SESSION['user']['statut'] == 'standard') // si l'user est un client, on récupère ses données perso pour le préremplissage du form de réservation
+            return $app['twig']->render('index.html.twig', array(
+                "id_user" => $_SESSION['user']['user_id'],
+                "prenom" => $_SESSION['user']['prenom'],
+                "nom" => $_SESSION['user']['nom'],
+                "email" => $_SESSION['user']['email'],
+                "listService" => $listServices
+                ));
+        if ($isconnectedAnIsAdmin) {
+            return $app['twig']->render('index.html.twig', array(
+                "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
+                "listService" => $listServices
+               ));
+        }else {
+            return $app['twig']->render('index.html.twig', array(
+                "listService" => $listServices
+            ));
+        }
+    }else{
+        return $app['twig']->render('index.html.twig', array(
+            "listService" => $listServices
+        ));
+    }
+    
+})->bind('home2');
 
-$app->post('/', 'Hotel\Controller\ReservationControl::verifAction');
+
+
+$app->post('/home', 'Hotel\Controller\ReservationControl::verifAction');
 
 
 // route introduction
@@ -195,7 +234,7 @@ $app->get('/deconnexion', function() use($app){
 
     setcookie("hotel");
     session_destroy();
-    return $app->redirect("/hotel/public/");
+    return $app->redirect("home");
 
 })->bind('deconnexion');
 
@@ -216,17 +255,6 @@ $app->get('/Chambres' , function() use($app)
 })
 ->bind('categories');
 
-
-/************************************************* */
-/************ ROUTE CHAMBRE SUPERIEURE *************/
-/************************************************* */
-
-$app->get('/chambre_superieure', function() use($app)
-{
-    return $app['twig']->render('basic/chambre_superieure.html.twig', array());
-})->bind('chambre_superieure');
-
-// Uniquement page de description
 
 
 /************************************************* */
@@ -288,7 +316,7 @@ $app->get('/admin', function() use($app)
         ));
     } else {// Si l'utilisateur n'est pas admin
         // var_dump($_SESSION);
-        return $app->redirect('/hotel/public/');
+        return $app->redirect('home');
     }
 })->bind('admin');
 
@@ -346,7 +374,7 @@ $app->post('/admin/gestion_chambres/modification/{id_chambres}', "Hotel\Controll
 
 // permet de supprimer une chambre
 $app->get('/admin/gestion_chambres/suppression/{id_chambres}', "Hotel\Controller\GestionChambreController::deleteChambreAction")
-->bind('suppression');
+->bind('suppression_chambre');
 
 
 /************************************************* */
@@ -355,15 +383,22 @@ $app->get('/admin/gestion_chambres/suppression/{id_chambres}', "Hotel\Controller
 
 
 
-$app->get('/admin/gestion_services', function() use($app)
-{
-    return $app['twig']->render('basic/gestion_services.html.twig', array());
-})->bind('gestion_services');
+$app->get('/admin/gestion_services', "Hotel\Controller\GestionServiceController::affichageServiceAction")
+->bind('gestion_services');
 
-$app->post('/admin/gestion_services', function() use($app)
-{
-// Post à compléter selon la base de données.
-});
+$app->post('/admin/gestion_services', "Hotel\Controller\GestionServiceController::ajoutChambreAction");
+
+
+// // d'aller sur la page de modification des chambres
+$app->get('/admin/gestion_services/modification/{id_services}', "Hotel\Controller\GestionServiceController::selectModifServiceAction")
+->bind('modif_service');
+
+// permet de modifier les chambres
+$app->post('/admin/gestion_services/modification/{id_services}', "Hotel\Controller\GestionServiceController::updateModifServiceAction");
+
+// // permet de supprimer une chambre
+$app->get('/admin/gestion_services/suppression/{id_services}', "Hotel\Controller\GestionServiceController::deleteServiceAction")
+->bind('suppression_service');
 
 
 

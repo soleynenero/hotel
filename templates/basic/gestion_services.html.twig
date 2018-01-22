@@ -1,9 +1,61 @@
 {% extends "layout_admin.html.twig" %}
 
 {% block content %}
-    
-<div class="banner">    	   
-    <p>Ceci est la page Gestion des services.</p>                
-</div>
 
+<h3 class="text-center">Gestion Services</h3>
+
+        {% if error is defined %}
+            <p>{{ error|nl2br }}</p>
+        {% endif %}
+
+        {% if errorsNom is defined %}
+            <p>{{ errorsNom|nl2br }}</p>
+        {% endif %}
+
+
+<table class="table text-center">
+
+    <tr>
+        <th class="text-center">Nom du service</th>
+        <th class="text-center">Prix du service</th>
+        <th class="text-center">Modification</th>
+        <th class="text-center">Suppression</th>
+    </tr>
+
+    {% for service in services %}
+    {# <pre><p>{{dump (service.id_services)}}</p></pre> #}
+        <tr>
+            <td>{{service.nom_service}}</td>
+            <td>{{service.prix_service}}</td>
+
+            <td><a href="{{  path('modif_service', {id_services: service.id_services}) }}"><span class="glyphicon glyphicon-pencil"</span></a></td>
+            <td><a href="{{  path('suppression_service', {id_services: service.id_services}) }}"><span class="glyphicon glyphicon-trash"</span></a></td>
+        </tr>
+
+    {% endfor %}
+
+</table>
+
+    <h4 class="text-center">Ajouter d'un service</h4>
+
+    <div class="message"></div>
+    <form class="form-horizontal" method="post" id="ajout_gestion_services">
+        <div class="form-group">
+            <label for="nom_service" class="control-label">Nom du service</label>
+            <div>
+                <input type="text" class="form-control" id="nom_service" name="nom_service" placeholder ="coursier">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="prix_service" class="control-label">Prix du service</label>
+            <div>
+                <input type="text" class="form-control" id="prix_service" name="prix_service" placeholder ="50">
+            </div>
+        </div>
+
+        <div>
+        <button type="submit" class="btn btn-primary col-sm-12 btn_service">Ajouter un service</button>
+        </div>
+    </form>
 {% endblock %}

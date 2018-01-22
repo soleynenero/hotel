@@ -19,6 +19,9 @@
             return $this->db ;
         }
 
+        // code pareil que pour gestion service
+
+        // on selectionne la chambre
         public function selectChambre()
         {
             $sql = "SELECT c.id_chambres ,c.numero_chambre , cat.type_categorie AS 'Categorie', cap.capacite , c.telephone ,c.prix , s.statut
@@ -31,6 +34,7 @@
             return $chambre ;
         }
 
+        // on selectionne les capacités
         public function selectCapacite()
         {
             $sql = "SELECT * FROM capacite_chambre";
@@ -38,6 +42,7 @@
             return $capacite;
         }
 
+        // on selectionne les catégories
         public function selectCategorie()
         {
             $sql = "SELECT * FROM categorie_chambre";
@@ -45,6 +50,7 @@
             return $categorie;
         }
 
+        // on selectionne le statut
         public function selectStatut()
         {
             $sql = "SELECT * FROM statut";
@@ -52,6 +58,7 @@
             return $statut;
         }
 
+        // on fait l'insert d'une chambre
         public function insertChambre($numero_chambre, $id_categorie, $id_capacite, $telephone, $prix)
         {
             $bdd = $this->getDb() ;
@@ -63,9 +70,12 @@
                 // "statut" => $statut , 
                 "prix" => $prix ,));
 
-            return $chambre ;
+            $id = $bdd->lastInsertId();
+
+            return $id;
         }
 
+        // on selectionne une chambre en fonction de son id
         public function selectmodifChambre($id_chambres)
         {
             $sql = "SELECT c.id_chambres ,c.numero_chambre , cat.type_categorie AS 'Categorie', cap.capacite , c.telephone ,c.prix , s.statut
@@ -78,6 +88,7 @@
             return $chambre ;
         }
 
+        // on fait un update d'une chambre en fonction de son id
         public function modifChambre($id_categorie , $id_capacite , $telephone , $prix , $statut, $id_chambres)
         {
             $sql = "UPDATE chambres SET id_categorie = ?, id_capacite = ?, telephone = ?, prix = ?, id_statut = ?  WHERE id_chambres = ?";
@@ -86,6 +97,7 @@
             return $chambremodif;
         }
 
+        // on supprime une chambre en fonction de son id
         public function deleteChambre($id_chambres)
         {
             $bdd = $this->getDb() ;

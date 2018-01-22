@@ -18,6 +18,8 @@
             return $this->db ;
         }
 
+        // meme code que gestionChambreDAO
+
         public function selectService()
         {
             $sql = "SELECT * FROM services";
@@ -31,8 +33,10 @@
             $service = $bdd->insert('services', array(
                 "nom_service" => $nom_service , 
                 "prix_service" => $prix_service ,));
-    
-            return $service ;
+
+            $id = $bdd->lastInsertId();
+
+            return $id;
         }
 
         public function selectmodifService($id_services)

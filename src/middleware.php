@@ -81,9 +81,9 @@ $isConnectYes = function (Request $request, Application $app) {
             $user['token'] = $token;
             $_SESSION["user"] = $user;
             setcookie("hotel", $token, time()+3600 * 24);
-            return $app->redirect("/hotel/public/");
+            return $app->redirect("home");
         }
     }
     if( isset( $_SESSION["user"] ) )
-        return $app->redirect("Home");
+        return $app->redirect("home");
 };

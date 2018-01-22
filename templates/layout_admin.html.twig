@@ -48,7 +48,7 @@
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
+            {# <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="" alt="..." class="img-circle profile_img">
               </div>
@@ -56,7 +56,7 @@
                 <span>Bienvenue,</span>
                 <h2>Admin</h2>
               </div>
-            </div>
+            </div> #}
             <!-- /menu profile quick info -->
 
             <br />
@@ -69,7 +69,7 @@
 
                   <li><a><i class="fa fa-home"></i>Acces site Front <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ path ('Home') }}">Accéder à l'accueil </a></li>
+                      <li><a href="{{ path ('home') }}">Accéder à l'accueil </a></li>
                       <li><a href="{{ path ('gallery') }}">Accéder à la galerie </a></li>
                       <li><a href="{{ path ('introduction') }}">Accéder à la présentation </a></li>
                     </ul>
@@ -196,6 +196,7 @@
     <script src="{{ asset('assets_admin/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
+    <script src="{{ asset('assets_admin/js/mike.js') }}"></script>
     <script src="{{ asset('assets_admin/js/custom.min.js') }}"></script>
 
 

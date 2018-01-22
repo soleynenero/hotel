@@ -26,12 +26,12 @@
 
             <div class="form-group">
                 <label for="mdp">Ancien mot de passe</label>
-                <input type="text" class="form-control" id="mdp" name="mdpvieux" class="taille_form">
+                <input type="password" class="form-control" id="mdp" name="mdpvieux" class="taille_form">
             </div>
 
             <div class="form-group">
                 <label for="mdp">Nouveau mot de passe</label>
-                <input type="text" class="form-control" id="mdp" name="mdp" class="taille_form">
+                <input type="password" class="form-control" id="mdp" name="mdp" class="taille_form">
             </div>
 
             
@@ -39,13 +39,13 @@
 
             {% if error is defined %}
                 <hr>
-                    {{ error }}
+                    <div class="alert alert-danger text-center">{{ error }}</div>
                 <hr>
             {% endif %}
 
             {% if msgmodif is defined %}
                 <hr>
-                    {{ msgmodif }}
+                    <div class="alert alert-success text-center">{{ msgmodif }}</div>
                 <hr>
             {% endif %}
             
