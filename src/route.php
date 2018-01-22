@@ -75,21 +75,21 @@ $app->get('/home', function () use ($app) {
                 "prenom" => $_SESSION['user']['prenom'],
                 "nom" => $_SESSION['user']['nom'],
                 "email" => $_SESSION['user']['email'],
-                "listService" => $listServices
+                // "listService" => $listServices
                 ));
         if ($isconnectedAnIsAdmin) {
             return $app['twig']->render('index.html.twig', array(
                 "isconnectedAnIsAdmin" => $isconnectedAnIsAdmin,
-                "listService" => $listServices
+                // "listService" => $listServices
                ));
         }else {
             return $app['twig']->render('index.html.twig', array(
-                "listService" => $listServices
+                // "listService" => $listServices
             ));
         }
     }else{
         return $app['twig']->render('index.html.twig', array(
-            "listService" => $listServices
+            // "listService" => $listServices
         ));
     }
     

@@ -47,6 +47,7 @@
     require __DIR__.'/../src/Controller/InfoUserController.php';
     require __DIR__.'/../src/Controller/ForgottenController.php';
     require __DIR__.'/../src/Controller/MailController.php';
+
     require __DIR__.'/../src/Controller/MessageController.php';
     require __DIR__.'/../src/Controller/GestionMembreController.php';
     require __DIR__.'/../src/Controller/GestionChambreController.php';

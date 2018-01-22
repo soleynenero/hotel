@@ -255,3 +255,11 @@ body::-webkit-scrollbar {
     font-size: 2em;
 }
 
+
+#iconeAdminFront {
+    
+    position: fixed;
+    bottom: 1.08em;
+    left: 1.17em;
+}
+
