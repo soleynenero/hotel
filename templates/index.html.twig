@@ -24,7 +24,8 @@
 {# <div class="col-sm-7 col-md-8">
     <div class="embed-responsive embed-responsive-16by9 wowload fadeInLeft"><iframe  class="embed-responsive-item" src="//player.vimeo.com/video/55057393?title=0" width="100%" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 </div> #}
-            <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3" id="reservation">         <h2 style="text-align:center;">#Réservation</h2>
+            <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3" id="reservation">         
+            <h2 style="text-align:center;">#Réservation</h2>
                    
 
                 {% if reserv_error is defined and reserv_error is not empty %}
@@ -110,103 +111,78 @@
 </div>
 <!-- reservation-information -->
 
+
 <!-- Modifié par Sathia -->
 
 <!-- Les Chambres -->
 <div class="services wowload fadeInUp" id="Chambres">
     <div class="container">
-        <h2 style="text-align:center;">#Les Chambres</h2>
+        <h2 style="text-align:center;">#Les Chambres</h2>   
         <div class="row">
+        {% for categorie in categories %}
             <div class="col-sm-4" id="STD" style="margin-bottom: 1.5em">
                 <!-- RoomCarousel -->
-                <div id="Standard" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="{{ asset('assets_front/images/photos/STD1.jpg') }}" class="img-responsive"" alt="slide">
-                    </div>               
-                    <div class="item">
-                        <img src="{{ asset('assets_front/images/photos/STD3.jpg') }}"  class="img-responsive"; alt="slide">
-                    </div>
-                    <div class="item">
-                        <img src="{{ asset  ('assets_front/images/photos/STD4.jpg') }}"  class="img-responsive"; alt="slide"></div>
-                    </div>
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#Standard" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                    <a class="right carousel-control" href="#Standard" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
-                </div>
-                <!-- Description Chambre-->
-                <div class="caption" style="padding: 1.5em 1.5em 3em 1.5em;">
-                    <h4> Chambre Standard </h4>
-                    <p  class="col-md-6" style="padding: 0;">A partir de 120 €</p> 
-                    <button class="pull-right btn btn-default">
-                        <a style="font-family: 'Raleway';font-size:15px;color:#ffff" href="{{ path('chambre_standard') }}" >
-                            Voir Détails
-                        </a>
-                    </button>
-                </div>
-            </div>
+                <div id="{{categorie.type_categorie}}" class="carousel slide" data-ride="carousel">
+                    {% if(categorie.type_categorie == 'Standard') %}
+                        <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="{{ asset('assets_front/images/photos/STD1.jpg') }}" class="img-responsive" alt="slide">
+                        </div>               
+                        <div class="item">
+                            <img src="{{ asset('assets_front/images/photos/STD3.jpg') }}"  class="img-responsive"; alt="slide">
+                        </div>
+                        <div class="item">
+                            <img src="{{ asset  ('assets_front/images/photos/STD4.jpg') }}"  class="img-responsive"; alt="slide"></div>
+                        </div>
+                    {% endif %}
 
-            <div class="col-sm-4" id="SUP" style="margin-bottom: 1.5em">
-                <!-- RoomCarousel -->
-                <div id="Superieure" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="{{ asset('assets_front/images/photos/SUP1.jpg') }}" class="img-responsive"" alt="slide">
-                    </div>               
-                    <div class="item">
-                        <img src="{{ asset('assets_front/images/photos/SUP2.jpg') }}"  class="img-responsive"; alt="slide">
-                    </div>
-                    <div class="item">
-                        <img src="{{ asset  ('assets_front/images/photos/SUP3.jpg') }}"  class="img-responsive"; alt="slide"></div>
-                    </div>
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#Superieure" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                    <a class="right carousel-control" href="#Superieure" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
-                </div>
-                <!-- Description Chambre-->
-                <div class="caption" style="padding: 1.5em 1.5em 3em 1.5em;">
-                    <h4> Chambre Supérieure </h4>
-                    <p  class="col-md-6" style="padding: 0;">A partir de 150 €</p> 
-                    <button class="pull-right btn btn-default">
-                        <a style="font-family: 'Raleway';font-size:15px;color:#ffff" href="{{ path('chambre_superieure') }}" >
-                            Voir Détails
-                        </a>
-                    </button>
-                </div>
-            </div>
+                    {% if(categorie.type_categorie == 'Superieure') %}
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="{{ asset('assets_front/images/photos/SUP1.jpg') }}" class="img-responsive" alt="slide">
+                            </div>               
+                            <div class="item">
+                                <img src="{{ asset('assets_front/images/photos/SUP2.jpg') }}"  class="img-responsive"; alt="slide">
+                            </div>
+                            <div class="item">
+                                <img src="{{ asset  ('assets_front/images/photos/SUP3.jpg') }}"  class="img-responsive"; alt="slide">
+                            </div>
+                        </div>
+                    {% endif %}
 
-            <div class="col-sm-4" id="SUITE" style="margin-bottom: 1.5em">
-                <!-- RoomCarousel -->
-                <div id="Deluxe" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="{{ asset('assets_front/images/photos/SUITE1.jpg') }}" class="img-responsive"" alt="slide">
-                    </div>               
-                    <div class="item">
-                        <img src="{{ asset('assets_front/images/photos/SUITE2.jpg') }}"  class="img-responsive"; alt="slide">
-                    </div>
-                    <div class="item">
-                        <img src="{{ asset  ('assets_front/images/photos/SUITE3.jpg') }}"  class="img-responsive"; alt="slide"></div>
-                    </div>
+                    {% if(categorie.type_categorie == 'Deluxe') %}
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="{{ asset('assets_front/images/photos/SUITE1.jpg') }}" class="img-responsive" alt="slide">
+                            </div>               
+                            <div class="item">
+                                <img src="{{ asset('assets_front/images/photos/SUITE2.jpg') }}"  class="img-responsive"; alt="slide">
+                            </div>
+                            <div class="item">
+                                <img src="{{ asset  ('assets_front/images/photos/SUITE3.jpg') }}"  class="img-responsive"; alt="slide">
+                            </div>
+                        </div>
+                    {% endif %}
+
                     <!-- Controls -->
-                    <a class="left carousel-control" href="#Deluxe" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                    <a class="right carousel-control" href="#Deluxe" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                    <a class="left carousel-control" href="#{{categorie.type_categorie}}" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                    <a class="right carousel-control" href="#{{categorie.type_categorie}}" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
                 </div>
                 <!-- Description Chambre-->
                 <div class="caption" style="padding: 1.5em 1.5em 3em 1.5em;">
-                    <h4> Suite Deluxe </h4>
-                    <p  class="col-md-6" style="padding: 0;">A partir de 180 €</p> 
+                    <h4> Chambre {{categorie.type_categorie}}</h4> 
+                    <p  class="col-md-6" style="padding: 0;">A partir de {{categorie.Prix_min}} €</p> 
                     <button class="pull-right btn btn-default">
-                        <a style="font-family: 'Raleway';font-size:15px;color:#ffff" href="{{ path('chambre_luxe') }}" >
+                        <a style="font-family: 'Raleway';font-size:15px;color:#ffff" href="{{ path('categories') }}#{{categorie.type_categorie}}" >
                             Voir Détails
                         </a>
                     </button>
                 </div>
             </div>
+        {% endfor %}
         </div>
     </div>
 </div>
-
 
 <!-- Les services -->
 <div id="Services" class="services wowload fadeInUp" style="background-color:#ffff;">

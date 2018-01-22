@@ -2,6 +2,7 @@
 
 
 {% block navProfil %}
+<div class="container"style="min-height: 39em; padding-top: 2em;">
 {% if connect != false %}
     <div class="navbar_profil col-md-4 infoProfil">
         <ul class="navbar">
@@ -17,31 +18,32 @@
 {% block infoProfil %}
     <div class="col-md-offset-1 col-md-6 text-center infoProfil">
         {# affichage des infos de mon utilisateur #}
-        <h3>Mes informations</h3>
+        <h3 style="color : #bfa145">Mes informations</h3>
         <hr>
-        <h4>Qui suis-je ?</h4>
+        <div class="row">
+            <div class="col-md-5">Qui suis-je ?</div>
+            <div class="col-md-7" style="font-style:italic">
+                prenom : {{ prenom }} <br>
+                nom : {{ nom }} <br>
+            </div>
+        </div>
         <hr>
-        <p>
-            prenom : {{ prenom }} <br>
-            nom : {{ nom }} <br>
-        </p>
-
-        <hr>  
-        <h4>Me contacter</h4>
+        <div class="row">  
+            <div class="col-md-5">Me contacter</div>
+            <div class="col-md-7" style="font-style:italic">
+                telephone : {{ telephone }} <br>
+                email : {{ email }} <br>
+            </div>
+        </div>
         <hr>
-
-        <p>
-            telephone : {{ telephone }} <br>
-            email : {{ email }} <br>
-        </p>
-
-        <hr>
-        <h4>Mon adresse</h4>
-        <hr>
-        <p>
-            adresse : {{ adresse }} <br>
-            ville : {{ ville }} <br>
-            code postal : {{ code_postal }} <br>
-        </p>
+        <div class="row">  
+            <div class="col-md-5">Mon adresse</div>
+            <div class="col-md-7" style="font-style:italic">
+                adresse : {{ adresse }} <br>
+                ville : {{ ville }} <br>
+                code postal : {{ code_postal }} <br>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}

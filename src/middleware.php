@@ -26,23 +26,23 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // function verifParam
 
- function verifParam($request, $verifRequest = array()): array{
+ function verifParam(Request $request, $verifRequest = array()): array{
 
     $error = false;
     $messageError = "";
 
-
     foreach($verifRequest as $key => $val) {
         if( !$request->has($val) || trim($request->get($val)) == ""){ // si la $val n'existe pas et qu'elle est vide
             $error = true;
-            $messageError .= " $val, ";
-            echo '<div class="alert alert-danger col-md-8 col-md-offset-2 text-center">les champs sont vides</div>';
+
+            $messageError .= 'Le '.$val.' est vide. \n ';
         } 
+
     }
     return array("error" => $error, "message" => $messageError);
-}
+};
 
-// /* *******midleware******************* */
+// /* *******middleware******************* */
 
 //middleware inscription
 $verifParamInscription = function (Request $request) {
@@ -60,12 +60,31 @@ $verifParamInscription = function (Request $request) {
 
 
 // middleware verifie si utilisateur a bien rentré email et password dans le formlaire de co
-// $verifParamLogin = function (Request $request) {
+$verifParamLogin = function (Request $request) {
+    global $app;
+    $retour = verifParam($request->request, array("email","mdp"));
+    if($retour["error"])
+        return new RedirectResponse('connexion');
+};
+
+
+
+// middleware pour modification du profil
+$verifParamModifProfil = function (Request $request) {
+    global $app;
+    $retour = verifParam($request->request, array("prenom","nom","telephone","email","adresse","ville","code_postal"));
+    if($retour["error"])
+        $app["error"] = $retour;
+};
+
+// // middleware pour modification du mdp
+// $verifParamModifProfil = function (Request $request) {
 //     global $app;
-//     $retour = verifParam($request->request, array("email","mdp"));
+//     $retour = verifParam($request->request, array("prenom","nom","telephone","email","adresse","ville","code_postal"));
 //     if($retour["error"])
-//         return new RedirectResponse('connexion');
+//         return $app['twig']->render('basic/modification_profil.html.twig');
 // };
+
 
 
 //Gestion de COOKIE et SESSION
@@ -82,9 +101,9 @@ $isConnectYes = function (Request $request, Application $app) {
             $user['token'] = $token;
             $_SESSION["user"] = $user;
             setcookie("hotel", $token, time()+3600 * 24);
-            return $app->redirect("/hotel/public/");
+            return $app->redirect("home");
         }
     }
     if( isset( $_SESSION["user"] ) )
-        return $app->redirect("Home");
+        return $app->redirect("home");
 };

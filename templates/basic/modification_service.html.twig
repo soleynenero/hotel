@@ -5,11 +5,11 @@
     <h3 class="text-center">Modification du service</h3>
     <hr>
     {% if error is defined %}
-        {{ error|nl2br }}
+        <div class="alert alert-danger text-center">{{ error|nl2br }}</div>
     {% endif %}
 
     {% if msgValidation is defined %}
-        {{ msgValidation|nl2br }}
+        <div class="alert alert-success text-center">{{ msgValidation|nl2br }}</div>
     {% endif %}
 
     <form class="form-horizontal" method="post">

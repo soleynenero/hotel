@@ -1,77 +1,71 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-  <div class="container inscription">
-  
-  <div class="inscriptionconnexion col-xs-6 col-xs-offset-3">
 
-    <small> Vous avez déjà un compte? </small>
-    <a href="{{ path('connexion') }}" class="inscriptionsignup">connexion</a>
+    <div class="container-fluid">
+      <div class="row">
+      <div class="col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-4">
+        <form method="post" action="" class="forminscription col-xs-8 col-xs-offset-2">
+            <input type="hidden" name="standard">
 
-  </div>
+            {% if error is defined %}
+                <span style="color: red">{{error|nl2br}}</span>
+            {% endif %}
 
-            
-<form method="post" action="" class=" forminscription col-xs-6 col-xs-offset-3" >
-	<input type="hidden" name="standard">
+            <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="(2 à 15 caractères)" >
 
-  {% if error is defined %}
-               <span style ="color: red">{{error}}</span>
-  {% endif %}
-  
-  <div class="form-group">
-    <label for="nom">Nom</label>
-    <input type="text" class="form-control" id="nom" name="nom" placeholder="nom de 2 à 15 caractères" required>
-     
-  </div>
-  <div class="form-group">
-    <label for="prenom">Prénom</label>
-    <input type="text" class="form-control"  id="prenom" name="prenom" placeholder="prenom de 2 à 15 caractère" required>
-    
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" id="email"  name="email" placeholder="Veuillez écrire une adresse email valide " required>
-    
-  </div>
- 
- 
-	
-  <div class="form-group"><br>
-    <label for="ville">Ville</label>
-    <input type="text" class="form-control" id="ville" name="ville" placeholder="Veuillez écrire le nom de votre ville" required>
-    
-  </div>
-  
-  <div class="form-group">
-    <label for="code_postal">Code Postal</label>
-    <input type="text" class="form-control" id="code_postal" name="code_postal" placeholder="Code Postal 5 chiffres alphanumérique" required>
-    
-  </div>
-  
-  <div class="form-group">
-    <label for="telephone">Telephone</label>
-    <input type="text" class="form-control" id="telephone" name="telephone" placeholder="telephone 10 chiffres alphanumérique" required>
-   
-  </div>
+            </div>
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="(2 à 15 caractère)" >
 
-  <label for="adresse">Adresse</label>
-  
-  <textarea class="form-control" rows="3" id="adresse" name="adresse" placeholder="Veuillez ecrire votre adresse" required></textarea><br>
-  
-  <div class="form-group">
-    <label for="mdp">Mot de passe</label>
-    <input type="text" class="form-control" id="mdp" name="mdp" placeholder="Veuillez écrire votre mot de passe" required>
-   
-  </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="votre@email.com">
 
-    
- 
+            </div>
 
-  <input type="submit" class="col-xs-12 " id="buttoninscription" value="inscription"><br><br><br>
-</form><br>
+            <div class="form-group"><br>
+                <label for="ville">Ville</label>
+                <input type="text" class="form-control" id="ville" name="ville"  placeholder="Ville">
 
-           
+            </div>
 
+            <div class="form-group">
+                <label for="code_postal">Code Postal</label>
+                <input type="text" class="form-control" id="code_postal" name="code_postal" placeholder="Code postal" >
 
-</div>  
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Telephone</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" >
+
+            </div>
+
+            <label for="adresse">Adresse</label>
+
+            <textarea class="form-control" rows="3" id="adresse" name="adresse" placeholder="Adresse"></textarea><br>
+
+            <div class="form-group">
+                <label for="mdp">Mot de passe</label>
+                <input type="password" class="form-control" id="mdp" name="mdp" >
+            </div>
+
+            <button type="submit" class="btn btn-default col-xs-12 " id="buttoninscription"><span style="font-weight: bold;">Inscription</span></button><br><br><br>
+        </form><br>
+        </div>
+      </div>
+    </div>
+
+    <div class="inscriptionconnexion text-center">
+      <small>
+          Vous avez déjà un compte?
+      </small>
+      <a href="{{ path('connexion') }}" class="inscriptionsignup">connexion</a>
+    </div>
+
 {% endblock %}

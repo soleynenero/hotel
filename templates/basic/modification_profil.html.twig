@@ -1,6 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block navProfil %}
+<div class="container"style="min-height: 39em; padding-top: 2em;">
 {% if connect != false %}
     <div class="navbar_profil col-md-4 infoProfil">
         <ul class="navbar">
@@ -49,20 +50,22 @@
         </form>
 
         {% if error is defined %}
-            
-                <p>{{ error|nl2br }}</p>
+            <br>
+            <hr>
+                <div class="alert alert-danger text-center">{{ error|nl2br }}</div>
             <hr>
         {% endif %}
         
 
         {% if msgmodif is defined %}
+            <br>
             <hr>
-                {{ msgmodif }}
+                <div class="alert alert-success text-center">{{ msgmodif }}</div>
             <hr>
         {% endif %}
 
     </div>
 
 
-
+</div>
 {% endblock %}

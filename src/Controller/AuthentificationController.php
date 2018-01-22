@@ -8,11 +8,9 @@
 
     class AuthentificationController extends Controller{ // par convention, on va nommer les classes xxxxController
        
-       
         public function InscriptionAction(Application $app, Request $request)
         {
-           
-            
+              
             $prenom = strip_tags(trim($request->request->get("prenom")));
             $nom = strip_tags(trim($request->request->get("nom")));
             $adresse = htmlspecialchars(trim($request->request->get("adresse")));
@@ -25,32 +23,32 @@
                 $errors = "";
 
                 if(iconv_strlen($prenom) < 2 || iconv_strlen( $prenom )> 15){
-                 $errors .= ' Erreur de la taille de votre prenom  ;'   ;
+                 $errors .= " Erreur de la taille de votre prenom \n "   ;
                 
                 
                 
                  }
                 if(iconv_strlen($nom) < 2 || iconv_strlen($nom) > 15){
-                 $errors .= ' Erreur de la taille de votre nom  ;';
+                 $errors .= " Erreur de la taille de votre nom \n  ";
                 
                
                 }
     
                 if(!is_numeric($codepostal) || iconv_strlen($codepostal) != 5){
-                $errors .= ' Erreur de format  du code postal  ;';
+                $errors .= " Erreur de format  du code postal  \n ";
                 
                 
                  }
     
                  if(!is_numeric( $telephone) || iconv_strlen( $telephone) != 10){
-                    $errors .= ' Erreur du  format du telephone    ;';
+                    $errors .= "Erreur du  format du telephone \n";
                    
                     
                  }          
             
                 if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     
-                    $errors .= ' Erreur du format du champs email   ; ';
+                    $errors .= "Erreur du format du champs email \n ";
                    
                 }
                
@@ -108,8 +106,6 @@
 
             return $app['twig']->render('basic/inscription.html.twig');
             
-
-
         }
 
 
