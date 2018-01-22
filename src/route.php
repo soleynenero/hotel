@@ -25,7 +25,6 @@ use Twig\Extension\AbstractExtension;
 // route Home
 $app->get('/', function () use ($app) {
     $isconnectedAnIsAdmin = Controller::isAdmin();
-
     $categorie = $app['db']->fetchAll("SELECT * FROM categorie_chambre"); //permet de voir les catégories de chambres
 
     // $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
@@ -60,10 +59,10 @@ $app->get('/', function () use ($app) {
         ));
     }
 
-})->bind('Home');
+})->bind('home');
 
     
-})->bind('home');
+/*})->bind('home');*/
 $app->get('/home', function () use ($app) {
     $isconnectedAnIsAdmin = Controller::isAdmin();
     // $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
