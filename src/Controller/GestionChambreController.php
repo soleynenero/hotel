@@ -81,33 +81,21 @@
 
             foreach($chambre AS $cle => $tab):
                 if($numero_chambre == $tab["numero_chambre"]):
-                    $errorsnb = "Le numero de chambre ". $numero_chambre." est deja pris \n";
+                    $errors .= "Le numero de chambre ". $numero_chambre." est deja pris \n";
                 endif ;
             endforeach ;
                     
                     // var_dump($chambre);
                     // die();
-            if(!empty($errors) || !empty($errorsnb))
-            {
-                
-                return $app['twig']->render('basic/gestion_chambres.html.twig', array(
-                "error" => $errors,
-                "errornb" => $errorsnb,
-                "chambres" =>  $chambre,
-                "capacites" => $capacite,
-                "categories" => $categorie));
-            }
+            if(!empty($errors))
+                return $app->json(array("errors" => true, "message" => $errors));
 
             // on appelle la classe GestionChambreDAO pour se connecter a la bdd et recupérer les informations des membres
             if(empty($errors) || empty($errorsnb))
             {
                 $Chambre = new GestionChambreDAO($app['db']);
-                $nlleChambre = $Chambre->insertChambre($numero_chambre, $id_categorie, $id_capacite, $telephone, $prix);
-                return $app['twig']->render('basic/gestion_chambres.html.twig', array(
-                    "msgValidation" => "Merci d'avoir inséré une nouvelle chambre",
-                    "chambres" =>  $chambre,
-                    "capacites" => $capacite,
-                    "categories" => $categorie));
+                $idChambre = $Chambre->insertChambre($numero_chambre, $id_categorie, $id_capacite, $telephone, $prix);
+                return $app->json( array("errors" => false, "id" => $idChambre) );
             }
 
         }
@@ -203,7 +191,7 @@
                                                                                     "categories" => $categorie,
                                                                                     "statuts" => $statut));
         }
-        public function deleteChambreAction(Application $app, Request $request, $id_chambres)
+        public function deleteChambreAction(Application $app, Request $request , $id_chambres)
         {
 
             
@@ -218,12 +206,14 @@
             // $affichageCategorie = new GestionChambreDAO($app['db']);
             // $categorie = $affichageCategorie->selectCategorie();
 
-            // $suppression = new GestionChambreDAO($app['db']);
-            // $suppressionChambre = $suppression->deleteChambre($id_chambres);
+            $suppression = new GestionChambreDAO($app['db']);
+            $suppressionChambre = $suppression->deleteChambre($id_chambres);
+
 
             
             // $msgValidationSup = "La chambre a bien été supprimé";
 
+            
             return $app->redirect('/hotel/public/admin/gestion_chambres');
             
             // return $app['twig']->render('basic/gestion_chambres.html.twig', array("chambres" => $chambre,

@@ -63,7 +63,9 @@
                 // "statut" => $statut , 
                 "prix" => $prix ,));
 
-            return $chambre ;
+            $id = $bdd->lastInsertId();
+
+            return $id;
         }
 
         public function selectmodifChambre($id_chambres)
