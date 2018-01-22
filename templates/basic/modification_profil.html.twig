@@ -49,15 +49,17 @@
         </form>
 
         {% if error is defined %}
-            
-                <p>{{ error|nl2br }}</p>
+            <br>
+            <hr>
+                <div class="alert alert-danger text-center">{{ error|nl2br }}</div>
             <hr>
         {% endif %}
         
 
         {% if msgmodif is defined %}
+            <br>
             <hr>
-                {{ msgmodif }}
+                <div class="alert alert-success text-center">{{ msgmodif }}</div>
             <hr>
         {% endif %}
 
