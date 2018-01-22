@@ -21,7 +21,7 @@ namespace Hotel\Controller;
             $nbPerson1 = htmlspecialchars(trim($request->get("nb_personne1"))); 
             $fin1 = htmlspecialchars(trim($request->get("date_fin1"))); 
 
-
+            
             if(empty($idUser)){ // si l'utilisateur n'est pas identifié
                 $this->reserv_error = "Merci de vous connecter avant de réserver une chambre.";
                 $listServices = ReservDAO::listServices($app['db']);
