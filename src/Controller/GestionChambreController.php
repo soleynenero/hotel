@@ -218,8 +218,8 @@
             // $affichageCategorie = new GestionChambreDAO($app['db']);
             // $categorie = $affichageCategorie->selectCategorie();
 
-            // $suppression = new GestionChambreDAO($app['db']);
-            // $suppressionChambre = $suppression->deleteChambre($id_chambres);
+            $suppression = new GestionChambreDAO($app['db']);
+            $suppressionChambre = $suppression->deleteChambre($id_chambres);
 
             
             // $msgValidationSup = "La chambre a bien été supprimé";
