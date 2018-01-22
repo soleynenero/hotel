@@ -3,25 +3,33 @@
 {% block content %}
 
 <h3 class="text-center">Gestion Services</h3>
-<table class="table">
+
+        {% if error is defined %}
+            <p>{{ error|nl2br }}</p>
+        {% endif %}
+
+        {% if errorsNom is defined %}
+            <p>{{ errorsNom|nl2br }}</p>
+        {% endif %}
+
+
+<table class="table text-center">
 
     <tr>
-        <th>Nom du service</th>
-        <th>Prix du service</th>
-        <th>Modification</th>
-        <th>Suppression</th>
+        <th class="text-center">Nom du service</th>
+        <th class="text-center">Prix du service</th>
+        <th class="text-center">Modification</th>
+        <th class="text-center">Suppression</th>
     </tr>
 
     {% for service in services %}
-    {# <pre><p>{{dump (service)}}</p></pre> #}
+    {# <pre><p>{{dump (service.id_services)}}</p></pre> #}
         <tr>
             <td>{{service.nom_service}}</td>
             <td>{{service.prix_service}}</td>
 
-            <td><a href=""><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
-            {# a mettre dans le href de a : bien sur il faut remplacer les elements {{  path('modif_chambre', {id_service: chambre.id_chambres}) }} #}
-            {# a mettre dans le href de a : bien sur il faut remplacer les elements {{  path('suppression', {id_chambres: chambre.id_chambres}) }} #}
-            <td><a href=""><span class="glyphicon glyphicon-trash alignement"</span></a></td>
+            <td><a href="{{  path('modif_service', {id_services: service.id_services}) }}"><span class="glyphicon glyphicon-pencil"</span></a></td>
+            <td><a href="{{  path('suppression_service', {id_services: service.id_services}) }}"><span class="glyphicon glyphicon-trash"</span></a></td>
         </tr>
 
     {% endfor %}

@@ -12,6 +12,10 @@
             <p>{{ errornb|nl2br }}</p>
         {% endif %}
 
+        {% if msgValidationSup is defined %}
+            <p>{{ msgValidationSup|nl2br }}</p>
+        {% endif %}
+
 
     {# sachant que c'est un tableau multidimentionnel il faut que je fasse 2 boucles for pour afficher mes informations #}
     <table class="table">
@@ -35,7 +39,7 @@
                 <td>{{chambre.prix}}</td>
                 <td>{{chambre.statut}}</td>
                 <td><a href="{{  path('modif_chambre', {id_chambres: chambre.id_chambres}) }}"><span class="glyphicon glyphicon-pencil alignement"</span></a></td>
-                <td><a href="{{  path('suppression', {id_chambres: chambre.id_chambres}) }}"><span class="glyphicon glyphicon-trash alignement"</span></a></td>
+                <td><a href="{{  path('suppression_chambre', {id_chambres: chambre.id_chambres}) }}"><span class="glyphicon glyphicon-trash alignement"</span></a></td>
             </tr>
 
         {% endfor %}

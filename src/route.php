@@ -336,7 +336,7 @@ $app->post('/admin/gestion_chambres/modification/{id_chambres}', "Hotel\Controll
 
 // permet de supprimer une chambre
 $app->get('/admin/gestion_chambres/suppression/{id_chambres}', "Hotel\Controller\GestionChambreController::deleteChambreAction")
-->bind('suppression');
+->bind('suppression_chambre');
 
 
 /************************************************* */
@@ -348,22 +348,19 @@ $app->get('/admin/gestion_chambres/suppression/{id_chambres}', "Hotel\Controller
 $app->get('/admin/gestion_services', "Hotel\Controller\GestionServiceController::affichageServiceAction")
 ->bind('gestion_services');
 
-$app->post('/admin/gestion_services', function() use($app)
-{
-// Post à compléter selon la base de données.
-});
+$app->post('/admin/gestion_services', "Hotel\Controller\GestionServiceController::ajoutChambreAction");
 
 
 // // d'aller sur la page de modification des chambres
-// $app->get('/admin/gestion_chambres/modification/{id_chambres}', "Hotel\Controller\GestionChambreController::selectModifChambreAction")
-// ->bind('modif_chambre');
+$app->get('/admin/gestion_services/modification/{id_services}', "Hotel\Controller\GestionServiceController::selectModifServiceAction")
+->bind('modif_service');
 
-// // permet de modifier les chambres
-// $app->post('/admin/gestion_chambres/modification/{id_chambres}', "Hotel\Controller\GestionChambreController::updateModifChambreAction");
+// permet de modifier les chambres
+$app->post('/admin/gestion_services/modification/{id_services}', "Hotel\Controller\GestionServiceController::updateModifServiceAction");
 
 // // permet de supprimer une chambre
-// $app->get('/admin/gestion_chambres/suppression/{id_chambres}', "Hotel\Controller\GestionChambreController::deleteChambreAction")
-// ->bind('suppression');
+$app->get('/admin/gestion_services/suppression/{id_services}', "Hotel\Controller\GestionServiceController::deleteServiceAction")
+->bind('suppression_service');
 
 
 
