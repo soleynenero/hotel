@@ -1,5 +1,46 @@
 {% extends "layout.html.twig" %}
 
+{% block menuNav %}
+    {% include 'include/menu_nav.html.twig' ignore missing %}
+{% endblock %}
+
 {% block content %}
-    Page not found.
+
+    <div class="container">
+
+        <div id="containerError" class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div id="oups" class="col-lg-7 text-center">OOPS !</div>
+                        {# <div class="col-lg-offset-4 col-lg-4">4 colonnes</div> #}
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 text-center">
+                            <p id="textErreur">
+                                N'ayez pas cette tête la en voyant cette page.. <br>
+                                Mike a du se perdre en allant la chercher...
+                            </p>
+                            <p>Code erreur: 404</p>
+                            <span>Revenez vers nous:</span> <br>
+                            <a href="{{ path('Home') }}"> Notre page d'accueil</a><br>
+                            <a href="{{ path('introduction') }}"> Présentation de l'hotel</a><br>
+                            <a href="{{ path('gallery') }}"> L'hôtel en images</a>
+                            
+                        </div>
+                        {# <div class="col-lg-offset-4 col-lg-4">4 colonnes</div> #}
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="row">
+                        <img id="imgErreur" class="img-responsive img-rounded col-lg-12" src="{{ asset('assets_front/images/photos/misc0.jpg') }}" alt="tete grimace erreur">
+                        {# <div class="col-lg-4">4 colonnes</div>
+                        <div class="col-lg-8">8 colonnes</div> #}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 {% endblock %}
