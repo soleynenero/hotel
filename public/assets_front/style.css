@@ -236,7 +236,7 @@ body::-webkit-scrollbar {
  
 .navbar_profil
 {
-    padding-top : 75px ;
+    /* padding-top : 75px ; */
     line-height: 20px ;
 }
 
@@ -254,6 +254,7 @@ body::-webkit-scrollbar {
     color: #fff;
     font-size: 2em;
 }
+
 
 /* PAGES ERREUR 4XX 5XX*/
 
@@ -280,3 +281,13 @@ body::-webkit-scrollbar {
  #containerError {
     min-height: 580px;
  }
+
+
+#iconeAdminFront {
+    
+    position: fixed;
+    bottom: 1.08em;
+    left: 1.17em;
+}
+
+

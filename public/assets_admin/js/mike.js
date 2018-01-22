@@ -12,39 +12,41 @@ $(document).ready(function() {
             method: "POST",
             data: $("#ajout_gestion_chambres").serialize() ,
             dataType: "json"
-          })
-          .done(function( data ) {
+        })
+        .done(function( data ) {
             if(!data.errors){
                 let codeHtml = '<tr> <td>'+$("#numchambre").val()+'</td> <td>'+listCategorie[$("#categorie").val()-1]+'</td> <td>'+listCapacite[$("#capacite").val()-1]+'</td> <td>'+$("#telephone").val()+'</td> <td>'+$("#prix").val()+'</td> <td>libre</td> <td><a href="/hotel/public/admin/gestion_chambres/modification/'+data.id+'"><span class="glyphicon glyphicon-pencil alignement" <="" span=""></span></a></td> <td><a href="/hotel/public/admin/gestion_chambres/suppression/'+data.id+'"><span class="glyphicon glyphicon-trash alignement" <="" span=""></span></a></td> </tr>';
-                let validation = "Vous avez bien ajouté une nouvelle chambre "+$("#numchambre").val();
+                let validation = "<div class='alert alert-success text-center'>Vous avez bien ajouté une nouvelle chambre "+$("#numchambre").val()+"</div>";
                 $( "tbody" ).append(codeHtml);
-                $( "tbody" ).append(validation);
+                $( ".message" ).append(validation);
             }
-          })
-          .fail(function(data) {
-            if(data.errors){
-                let pb = "Vous avez une erreur " + data.message ;
-                $("#titre").append(pb);
-          }});
-    })
+            else{
+                let pb = "<div class='alert alert-danger text-center'>Vous avez une erreur,<br><ul> " + data.message +"</ul><br></div>" ;
+                $(".message").html(pb);
+            }
+        });
+    });
 
-    $(".glyphicon-trash").click(function(){
+    // permettant d'ajouter un nouveau service
+    $("#ajout_gestion_services").submit(function(e){
+        e.preventDefault();
         $.ajax({
-            url: "gestion_chambres",
-            method: "get",
-            data: $("#resultat").serialize() ,
-            // dataType: "json"
-          })
-          .done(function( data ) {
-            // if(!data.errors){
-                // let codeHtml = '<tr> <td>'+$("#numchambre").val()+'</td> <td>'+listCategorie[$("#categorie").val()-1]+'</td> <td>'+listCapacite[$("#capacite").val()-1]+'</td> <td>'+$("#telephone").val()+'</td> <td>'+$("#prix").val()+'</td> <td>libre</td> <td><a href="/hotel/public/admin/gestion_chambres/modification/'+data.id+'"><span class="glyphicon glyphicon-pencil alignement" <="" span=""></span></a></td> <td><a href="/hotel/public/admin/gestion_chambres/suppression/'+data.id+'"><span class="glyphicon glyphicon-trash alignement" <="" span=""></span></a></td> </tr>';
-                let validation = "Vous avez bien supprimé une chambre ";
-                // $( "tbody" ).append(codeHtml);
-                $( "tbody" ).append(validation);
-            // }
-          })
-    })
-})
-
-// {error : true, message: "frferfre"}
-// {error : false, id: 2}
+            url: "gestion_services",
+            method: "POST",
+            data: $("#ajout_gestion_services").serialize() ,
+            dataType: "json"
+        })
+        .done(function( data ) {
+            if(!data.errors){
+                let codeHtml = '<tr><td>'+$("#nom_service").val()+'</td><td>'+$("#prix_service").val()+'</td><td><a href="/hotel/public/admin/gestion_services/modification/'+data.id+'"><span class="glyphicon glyphicon-pencil" <="" span=""></span></a></td><td><a href="/hotel/public/admin/gestion_services/suppression/'+data.id+'"><span class="glyphicon glyphicon-trash" <="" span=""></span></a></td></tr>';
+                let validation = "<div class='alert alert-success text-center'>Vous avez bien ajouté un service "+$("#nom_service").val()+"</div>";
+                $( "tbody" ).append(codeHtml);
+                $( "message" ).append(validation);
+            }
+            else{
+                let pb = "<div class='alert alert-danger text-center'>Vous avez une erreur,<br><ul>" + data.message +"</ul><br></div>";
+                $(".message").html(pb);
+            }
+        });
+    });
+});

@@ -63,7 +63,10 @@
                     return $app->redirect('admin');
                 }
                 
+                // return $app->redirect('Home');
+
                 $listServices = ReservDAO::listServices($app['db']);
+                return $app->redirect('home');
                 return $app['twig']->render('index.html.twig', array(
                     "id_user" => $_SESSION['user']['user_id'],
                     "prenom" => $_SESSION['user']['prenom'],
@@ -75,14 +78,11 @@
                 $errors = "email ou mot de passe renseigné incorrect"; // si mauvais mdp on remplit la var errors
             }
 
-
             // possibilité de remonter ça dans le else du desssus ??
             if (!empty($errors)) { 
                 return $app["twig"]->render('basic/connexion.html.twig', array("error" => $errors)); 
                 //Si erreur on renvoi vers la page de co' avec la variable errors
                 }
-
-            // return $app['twig']->render('index.html.twig', array()); //A supprimer ?? doublon de la ligne 58
 
         }
 

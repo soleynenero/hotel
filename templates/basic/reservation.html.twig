@@ -1,67 +1,69 @@
 {% extends "layout.html.twig" %}
 
 {% block navProfil %}
-{% if connect != false %}
-    <div class="navbar_profil col-md-4 infoProfil">
-        <ul class="navbar">
-            <li><a href="{{ path ('profil_membre') }}">Mes Informations</a></li>
-            <li><a href="{{ path ('reservation') }}">Mes Réservations</a></li>
-            <li><a href="{{ path ('modificationInfos') }}">Modification du profil</a></li>
-            <li><a href="{{ path ('modificationMdp') }}">Modification du mot de passe</a></li>
-        </ul>
-    </div>
-{% endif %}
-{% endblock %}
-{% block infoProfil %}
-    <div class="col-md-offset-1 col-md-6 text-center infoProfil">
+<div class="container"style="min-height: 39em; padding-top: 2em;">
+    {% if connect != false %}
+        <div class="navbar_profil col-md-4 infoProfil">
+            <ul class="navbar">
+                <li><a href="{{ path ('profil_membre') }}">Mes Informations</a></li>
+                <li><a href="{{ path ('reservation') }}">Mes Réservations</a></li>
+                <li><a href="{{ path ('modificationInfos') }}">Modification du profil</a></li>
+                <li><a href="{{ path ('modificationMdp') }}">Modification du mot de passe</a></li>
+            </ul>
+        </div>
+    {% endif %}
+    {% endblock %}
+    {% block infoProfil %}
+        <div class="col-md-offset-1 col-md-6 text-center infoProfil">
 
-    <h3 class="text-left">Mes réservations</h3>
-        <table class="table">
-            {% if reservations is defined %}
-                <tr>
-                    <th>Date commande</th>
-                    <th>Date debut</th>
-                    <th>Date fin</th>
-                    <th>Nombre personne</th>
-                    <th>Nom service</th>
-                    <th>Prix service</th>
-                    <th>Prix chambre</th>
-                    <th>Capacite</th>
-                    <th>Categorie</th>
-                </tr>
-            
-                {% for reservation in reservations %}
+        <h3 class="text-left">Mes réservations</h3>
+            <table class="table">
+                {% if reservations is defined %}
                     <tr>
-                    {% for reserv in reservation %}
-                        <td>{{ reserv }}</td>
-                    {% endfor %}
+                        <th>Date commande</th>
+                        <th>Date debut</th>
+                        <th>Date fin</th>
+                        <th>Nombre personne</th>
+                        <th>Nom service</th>
+                        <th>Prix service</th>
+                        <th>Prix chambre</th>
+                        <th>Capacite</th>
+                        <th>Categorie</th>
                     </tr>
-                {% endfor %}
+                
+                    {% for reservation in reservations %}
+                        <tr>
+                        {% for reserv in reservation %}
+                            <td>{{ reserv }}</td>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                {# <tr>
+                    {% for reservation in reservations %}
+                        {% for cle , reserv in reservation %}
+                            <th>{{cle}}</th>
+                        {% endfor %}
+                </tr>
+                <tr>
+                        {% for reserv in reservation %}
+                            <td>{{ reserv }}</td>
+                        {% endfor %}
+                    {% endfor %}
+                </tr> #}
+
+                {# <tr>
+                    {% for reservation in reservations %}
+                        {% for reserv in reservation %}
+                            <td>{{ reserv }}</td>
+                        {% endfor %}
+                    {% endfor %}
+                </tr> #}
+            </table>
+
+            {% if reservations is empty %}
+                <p>{{ noReserv }}</p>
             {% endif %}
-            {# <tr>
-                {% for reservation in reservations %}
-                    {% for cle , reserv in reservation %}
-                        <th>{{cle}}</th>
-                    {% endfor %}
-            </tr>
-            <tr>
-                    {% for reserv in reservation %}
-                        <td>{{ reserv }}</td>
-                    {% endfor %}
-                {% endfor %}
-            </tr> #}
-
-            {# <tr>
-                {% for reservation in reservations %}
-                    {% for reserv in reservation %}
-                        <td>{{ reserv }}</td>
-                    {% endfor %}
-                {% endfor %}
-            </tr> #}
-        </table>
-
-        {% if reservations is empty %}
-            <p>{{ noReserv }}</p>
-        {% endif %}
-    </div>
+        </div>
+</div>
 {% endblock %}

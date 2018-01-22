@@ -58,7 +58,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path ('Home') }}">
+                <a class="navbar-brand" href="{{ path ('home') }}">
                     <img src="{{ asset('assets_front/images/icon2.png') }}" alt="hotel Grands Voisins">
                     </a>
             </div>
@@ -96,7 +96,7 @@
                 <div class="col-sm-3">
                     <h4>Liens utiles</h4>
                     <ul class="list-unstyled">
-                        <li><a href="{{ path ('Home') }}#Chambres"> Chambres & Services</a></li>
+                        <li><a href="{{ path ('home') }}#Chambres"> Chambres & Services</a></li>
                         <li><a href="{{ path ('introduction') }}"> Présentation</a></li>
                         <li><a href="{{ path ('gallery') }}"> Galerie</a></li>
                         <li><a href="{{ path ('contacts') }}"> Contacts</a></li>
@@ -104,11 +104,11 @@
                     </ul>
                 </div>
                 <div class="col-sm-4 subscribe">
-                    <h4>Inscription</h4>
+                    <h4>Inscription à la newsletter</h4>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enter email id here">
+                        <input type="text" class="form-control" placeholder="Merci d'entrer votre email" name="emailNews">
                         <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">S'inscrire</button>
+                    <button class="btn btn-default" type="submit" href="">S'inscrire</button>
                     </span>
                     </div>
                     <div class="social">
@@ -134,7 +134,7 @@
 
     {% if isconnectedAnIsAdmin is defined %}
 
-        <a  id="toFrontBack" href="{{ path ('admin') }}"><i class="fa fa-cog fa-6" aria-hidden="true"></i></a>
+        <a  id="toFrontBack" href="{{ path ('admin') }}"><i id="iconeAdminFront" class="fa fa-cog fa-6" aria-hidden="true"></i></a>
     {% endif %}
 
 
