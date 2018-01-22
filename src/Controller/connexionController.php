@@ -81,7 +81,7 @@
                 //Si erreur on renvoi vers la page de co' avec la variable errors
                 }
 
-            return $app['twig']->render('index.html.twig', array()); //A supprimer ?? doublon de la ligne 58
+            // return $app['twig']->render('index.html.twig', array()); //A supprimer ?? doublon de la ligne 58
 
         }
 
