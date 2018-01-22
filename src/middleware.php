@@ -34,9 +34,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
     foreach($verifRequest as $key => $val) {
         if( !$request->has($val) || trim($request->get($val)) == ""){ // si la $val n'existe pas et qu'elle est vide
             $error = true;
-            $messageError .= " $val, ";
-            echo '<div class="alert alert-danger col-md-8 col-md-offset-2 text-center">les champs sont vides</div>'; 
-        }  
+
+            $messageError .= 'Le '.$val.' est vide. \n ';
+        } 
+
     }
     return array("error" => $error, "message" => $messageError);
 };
@@ -65,6 +66,25 @@ $verifParamLogin = function (Request $request) {
     if($retour["error"])
         return new RedirectResponse('connexion');
 };
+
+
+
+// middleware pour modification du profil
+$verifParamModifProfil = function (Request $request) {
+    global $app;
+    $retour = verifParam($request->request, array("prenom","nom","telephone","email","adresse","ville","code_postal"));
+    if($retour["error"])
+        $app["error"] = $retour;
+};
+
+// // middleware pour modification du mdp
+// $verifParamModifProfil = function (Request $request) {
+//     global $app;
+//     $retour = verifParam($request->request, array("prenom","nom","telephone","email","adresse","ville","code_postal"));
+//     if($retour["error"])
+//         return $app['twig']->render('basic/modification_profil.html.twig');
+// };
+
 
 
 //Gestion de COOKIE et SESSION

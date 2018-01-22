@@ -202,7 +202,9 @@ $app->get('/profil_membre/modificationInfos', "Hotel\Controller\InfoUserControll
 ->bind('modificationInfos')
 // ->before($verifParamLogin)
 ;
-$app->post('/profil_membre/modificationInfos', "Hotel\Controller\InfoUserController::modificationProfilAction");
+
+$app->post('/profil_membre/modificationInfos', "Hotel\Controller\InfoUserController::modificationProfilAction")->before($verifParamModifProfil);
+
 
 
 // modification reservation
@@ -216,7 +218,7 @@ $app->get('/profil_membre/modificationMdp', function() use($app){
 })->bind('modificationMdp')
 // ->before($verifParamLogin)
 ;
-$app->post('/profil_membre/modificationMdp', "Hotel\Controller\InfoUserController::modifMdpAction")//->bind('modificationMdp1')
+$app->post('/profil_membre/modificationMdp', "Hotel\Controller\InfoUserController::modifMdpAction")
 // ->before($verifParamLogin)
 ;
 

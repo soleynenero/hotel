@@ -54,6 +54,23 @@
             $telephone = strip_tags($request->get("telephone"));
             $email = htmlspecialchars($request->get("email")); 
 
+
+            if(isset($app["error"])){
+                if($app["error"]["error"]){
+                
+                return $app['twig']->render('basic/modification_profil.html.twig', array(
+                    "error" => $app["error"]["message"] ,
+                    "prenom" => $prenom , 
+                    "nom" => $nom , 
+                    "email" => $email , 
+                    "telephone" => $telephone , 
+                    "ville" => $ville , 
+                    "code_postal" => $code_postal , 
+                    "adresse" => $adresse,));
+                
+                }
+            }
+
             $errors ="";
             if(iconv_strlen($prenom) < 2 || iconv_strlen( $prenom )> 15){
                 $errors .= "Votre prenom doit être compris entre 2 et 15 caractères\n";
