@@ -197,6 +197,13 @@ body::-webkit-scrollbar {
     color: white;
 }
 
+.forminscription {
+    margin : 40px auto;
+}
+
+.inscriptionconnexion {
+    margin-bottom: 20px;
+}
 
  /* PAGE DE CONNEXION*/
 
