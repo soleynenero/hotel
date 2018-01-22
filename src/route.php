@@ -19,7 +19,8 @@ use Twig\Extension\AbstractExtension;
 // route Home
 $app->get('/', function () use ($app) {
     $isconnectedAnIsAdmin = Controller::isAdmin();
-    $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+    // $listServices = $app['db']->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+    $listServices = Hotel\Model\ReservDAO::listServices($app['db']);
     if (isset($_SESSION)) {
         if(isset($_SESSION['user']) && $_SESSION['user']['statut'] == 'standard') // si l'user est un client, on récupère ses données perso pour le préremplissage du form de réservation
             return $app['twig']->render('index.html.twig', array(

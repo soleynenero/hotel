@@ -18,7 +18,7 @@ p{margin-bottom: 1em;line-height: 1.5em;}
 
 .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{background-color: #bfa145;border-color: #bfa145;}
 .pagination>li>a, .pagination>li>span{color: #bfa145;}
-.spacer{padding:6em 0; }
+.spacer{padding:3em 0; }
 
 /*nav*/
 .navbar{margin: 0;}
