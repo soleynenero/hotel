@@ -1,7 +1,7 @@
 {% extends "layout_admin.html.twig" %}
 
 {% block content %}
-    
+<div class="resultat">    
     <h3 class="text-center">Gestion des chambres</h3><br>
 
         {% if error is defined %}
@@ -48,9 +48,9 @@
 
     <hr>
 
-    <h2 class="text-center">Ajouter une chambre</h2>
+    <h2 class="text-center" id="titre">Ajouter une chambre</h2>
 
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post" id="ajout_gestion_chambres">
         <div class="form-group">
             <label for="numchambre" class="control-label">Numéro de la chambre</label>
             <div>
@@ -96,6 +96,6 @@
         <button type="submit" class="btn btn-primary col-sm-12 btn_chambre">Ajouter une chambre</button>
         </div>
     </form>
-
+</div>
 
 {% endblock %}
