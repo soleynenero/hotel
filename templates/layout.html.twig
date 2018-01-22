@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Hôtel Webforce 3 | Bienvenue</title>
+<title>Hôtel-Projet | Bienvenue</title>
 
 
     <!-- Google fonts -->
@@ -58,7 +58,9 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path ('Home') }}"><img src="{{ asset('assets_front/images/logo.png') }}" alt="holiday crown"></a>
+                <a class="navbar-brand" href="{{ path ('home') }}">
+                    <img src="{{ asset('assets_front/images/icon2.png') }}" alt="hotel Grands Voisins">
+                    </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,7 +70,7 @@
                 {% endblock %}
 
             </div>
-            <!-- Wnavbar-collapse -->
+            <!-- navbar-collapse -->
         </div>
         <!-- container-fluid -->
     </nav>
@@ -86,15 +88,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
-                    <h4>Holiday Crown</h4>
-                    <p>Holiday Crown was these three and songs arose whose. Of in vicinity contempt together in possible branched. Assured company hastily looking garrets in oh. Most have love my gone to this so. Discovered interested prosperous the our
-                        affronting insipidity day. Missed lovers way one vanity wishes nay but. Use shy seemed within twenty wished old few regret passed. Absolute one hastened mrs any sensible. </p>
+                    <h4>Hotel Grands Voisins</h4>
+                    <p>Situé hors des sentiers touristiques, l'Hôtel Grands Voisins se trouve dans un authentique quartier parisien, avec ses cafés et commerces de proximité de qualité. </p>
+                    <p>Grâce aux bonnes connexions de transport disponibles, vous aurez un accès direct aux aéroports d'Orly ou Charles de Gaulle, et à toutes les principales attractions de Paris comme le quartier Saint-Germain, la tour Eiffel, Notre-Dame, le Louvre.</p>
                 </div>
 
                 <div class="col-sm-3">
-                    <h4>Quick Links</h4>
+                    <h4>Liens utiles</h4>
                     <ul class="list-unstyled">
-                        <li><a href="{{ path ('roomtarif') }}"> Chambres & Tarif</a></li>
+                        <li><a href="{{ path ('home') }}#Chambres"> Chambres & Services</a></li>
                         <li><a href="{{ path ('introduction') }}"> Présentation</a></li>
                         <li><a href="{{ path ('gallery') }}"> Galerie</a></li>
                         <li><a href="{{ path ('contacts') }}"> Contacts</a></li>
@@ -129,6 +131,11 @@
     <div class="text-center copyright">Powered by <a href="http://thebootstrapthemes.com">thebootstrapthemes.com</a></div>
 
     <a href="#home" class="toTop scroll"><i class="fa fa-angle-up"></i></a>
+
+    {% if isconnectedAnIsAdmin is defined %}
+
+        <a  id="toFrontBack" href="{{ path ('admin') }}"><i class="fa fa-cog fa-6" aria-hidden="true"></i></a>
+    {% endif %}
 
 
 

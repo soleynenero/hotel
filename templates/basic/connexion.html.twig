@@ -10,8 +10,8 @@
 
 <div id="blockConnexion" class="container-fluid">
     <div class="row">
-        <div class="col-sm-6 col-md-2 col-sm-offset-3 col-md-offset-5">
-            <form method="post">
+        <div class="col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <form method="post" {#action="{{ path('Home') }} #}">
                 <div class="form-group">
                     <label for="emailConnexion">Email</label>
                     <input type="email" class="form-control" id="emailConnexion" name="email" placeholder="Votre adresse mail">
@@ -25,7 +25,7 @@
                 <hr>
 
                 {% if error is defined %}
-                 <span style ="color: red">{{error}}</span>
+                 <div class='alert alert-danger' >{{error}}</div>
                 <hr>
                 {% endif %}
 

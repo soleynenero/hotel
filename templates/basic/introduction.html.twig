@@ -1,50 +1,63 @@
 {% extends "layout.html.twig" %}
 
-
-
-
 {% block content %}
     
 <div class="container">
 
-       <h1 class="title">Présentation de l'hôtel</h1>
-        <h4>Situé hors des sentiers touristiques, l'Hôtel Grands Voisins se trouve dans un authentique quartier parisien, avec ses cafés et commerces de proximité de qualité.
-        </h4>
-       <div class="row spacer">
+  <h1 class="title">Présentation de l'hôtel<a type="submit" class="btn btn-default" style="font-family: 'Raleway';font-size:15px;margin-left:3em;" href="{{ path('home') }}#reservation">Réserver!</a></h1>
 
-              <div class="col-sm-4">
+  <div class="col-md-8">
+    <div class="embed-responsive embed-responsive-16by9">
+      <div id="Hotel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+          <div class="item active">
+              <img src="{{ asset('assets_front/images/photos/misc0.jpg') }}" class="img-responsive"" alt="slide">
+          </div>
+          <div class="item">
+              <img src="{{ asset('assets_front/images/photos/misc1.jpg') }}" class="img-responsive"" alt="slide">
+          </div>                  
+          <div class="item">
+              <img src="{{ asset('assets_front/images/photos/misc2.jpg') }}"  class="img-responsive"; alt="slide">
+          </div>
+          <div class="item">
+              <img src="{{ asset  ('assets_front/images/photos/misc3.jpg') }}"  class="img-responsive"; alt="slide"></div>
+          </div>
+          <!-- Controls -->
+          <a class="left carousel-control" href="#Hotel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+          <a class="right carousel-control" href="#Hotel" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+      </div>
+    </div>
+  </div>
 
-                <p>L'Hôtel Grands Voisins se trouve dans le sud de Paris, juste à côté de la place et station de métro Denfert-Rochereau. Il propose des chambres insonorisées et climatisées dotées de la connexion Wi-Fi gratuite, d'une salle de bains privative et de la télévision satellite
-                </p>
-                <p>Grâce aux bonnes connexions de transport disponibles, vous aurez un accès direct aux aéroports d'Orly ou Charles de Gaulle, et à toutes les principales attractions de Paris comme le quartier Saint-Germain, la tour Eiffel, Notre-Dame, le Louvre.
-                </p>
-              </div>
-              <div class="col-sm-4">
-                <p>L'ensemble des chambres de l'hôtel est équipé d'un téléphone, d'une cafetière et d'un coffre-fort et certaines disposent également et d'un balcon.
-                </p>
-                <p>L'hôtel est aux dernières normes de sécurité et est entièrement accessible aux Personnes à Mobilité Réduites. Un ascenseur central dessert l'ensemble des chambres.
-                </p>
-                <p>Les clients de l'hôtel bénéficient du WIFI gratuit sur l'ensemble des espaces (chambres et parties communes).
-                </p>
-              </div>
-              <div class="col-sm-4">
-                <p>Un petit-déjeuner buffet continental est servi chaque matin à l'hôtel, avec des produits frais. Vous pourrez prendre un verre au bar de l'établissement.
-                </p>
-                <p>La réception ouverte 24h/24 et un ordinateur avec connexion Internet est à votre disposition dans le lobby.
-                </p>
-                <p>Un parking privé est disponible à proximité, sur réservation préalable auprès de la réception. 
-                </p>
-              </div>              
-       </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <p>Situé hors des sentiers touristiques, l'Hôtel Grands Voisins se trouve dans un authentique quartier parisien, avec ses cafés et commerces de proximité de qualité.
+      </p>
+      <p>L'Hôtel Grands Voisins se trouve dans le sud de Paris, juste à côté de la place et station de métro Denfert-Rochereau. Il propose des chambres insonorisées et climatisées dotées de la connexion Wi-Fi gratuite, d'une salle de bains privative et de la télévision satellite
+      </p>
+      <p>Grâce aux bonnes connexions de transport disponibles, vous aurez un accès direct aux aéroports d'Orly ou Charles de Gaulle, et à toutes les principales attractions de Paris comme le quartier Saint-Germain, la tour Eiffel, Notre-Dame, le Louvre.
+      </p>
+    </div>
+  </div>
 
-
-       <div class="">
-       <div class="embed-responsive embed-responsive-16by9"><iframe  class="embed-responsive-item" src="//player.vimeo.com/video/55057393?title=0" width="100%" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
-       </div>
-
-
-
-
+  <div class="row spacer">
+    <div class="col-sm-6">
+      <p>L'ensemble des chambres de l'hôtel est équipé d'un téléphone, d'une cafetière et d'un coffre-fort et certaines disposent également et d'un balcon.
+      </p>
+      <p>L'hôtel est aux dernières normes de sécurité et est entièrement accessible aux Personnes à Mobilité Réduites. Un ascenseur central dessert l'ensemble des chambres.
+      </p>
+      <p>Les clients de l'hôtel bénéficient du WIFI gratuit sur l'ensemble des espaces (chambres et parties communes).
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p>Un petit-déjeuner buffet continental est servi chaque matin à l'hôtel, avec des produits frais. Vous pourrez prendre un verre au bar de l'établissement.
+      </p>
+      <p>La réception ouverte 24h/24 et un ordinateur avec connexion Internet est à votre disposition dans le lobby.
+      </p>
+      <p>Un parking privé est disponible à proximité, sur réservation préalable auprès de la réception. 
+      </p>
+    </div>              
+  </div>
 </div>
 
 {% endblock %}

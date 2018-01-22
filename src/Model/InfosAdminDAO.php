@@ -35,14 +35,14 @@
 
         public function selectAllRoomVacancy()
         {
-            $sql ="SELECT COUNT(*) AS totalRoomVac FROM chambres ";
+            $sql ="SELECT COUNT(*) AS totalRoomVac FROM chambres WHERE id_statut = 1";
             $totalRoom = $this->db->fetchAssoc($sql);
             return $totalRoom;
         }
 
         public function selectAllRoomNoVacancy()
         {
-            $sql ="SELECT COUNT(*) AS totalRoomNoVac FROM chambres ";
+            $sql ="SELECT COUNT(*) AS totalRoomNoVac FROM chambres WHERE id_statut = 2";
             $totalRoomNoVac = $this->db->fetchAssoc($sql);
             return $totalRoomNoVac;
         }
