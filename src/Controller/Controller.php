@@ -15,7 +15,7 @@
                 //Server settings (à récupéer depuis les informations de notre serveur/hébergeur)
                 $mail->SMTPDebug = 0;                                 // Enable verbose debug output
                 $mail->isSMTP();                                      // Set mailer to use SMTP
-                $mail->Host = 'smtp-mail.outlook.com';  // Specify main and backup SMTP servers
+                $mail->Host = 'smtp.live.com';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
                 $mail->Username = 'hotelwebforce@outlook.com';                 // SMTP username
                 $mail->Password = 'webforce18';                           // SMTP password
