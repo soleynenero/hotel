@@ -1,0 +1,38 @@
+{% extends "layout_admin.html.twig" %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center">Modification du service</h3>
+    <hr>
+    {% if error is defined %}
+        {{ error|nl2br }}
+    {% endif %}
+
+    {% if msgValidation is defined %}
+        {{ msgValidation|nl2br }}
+    {% endif %}
+
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label for="nom_service" class="control-label">Nom du service</label>
+            <div>
+                <input type="text" class="form-control" id="nom_service" name="nom_service" value="{{ services.nom_service }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="prix_service" class="control-label">Prix du service</label>
+            <div>
+                <input type="text" class="form-control" id="prix_service" name="prix_service" value="{{ services.prix_service }}">
+            </div>
+        </div>
+
+        <div>
+        <button type="submit" class="btn btn-primary col-sm-12 btn_service">Modifier un service</button>
+        </div>
+    </form>
+
+        <a href="{{ path ('gestion_services') }}">Cliquer ici pour retourner vers la page gestion service</a>
+</div>
+
+{% endblock %}

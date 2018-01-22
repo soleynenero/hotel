@@ -205,27 +205,31 @@
         }
         public function deleteChambreAction(Application $app, Request $request, $id_chambres)
         {
-            $chambresupp = new GestionChambreDAO($app['db']);
-            $suppression = $chambresupp->selectmodifChambre($id_chambres);
-            echo "<pre>";
-            print_r($capacite);
-            echo "</pre>";
-            die();
-            $affichageCategorie = new GestionChambreDAO($app['db']);
-            $categorie = $affichageCategorie->deleteChambre($id_chambres);
-            // echo "<pre>";
-            // print_r($capacite);
-            // echo "</pre>";
-            // die();
+
             
-            $msgValidationSup = "La chambre $numero_chambre a bien été supprimé";
+            // // on appelle la classe GestionChambreDAO pour se connecter a la bdd et recupérer les informations des membres
+            // $affichageChambre = new GestionChambreDAO($app['db']);
+            // // ici je stock les informations de mes utilisateur dans un tableau appelé membre
+            // $chambre = $affichageChambre->selectChambre();
+
+            // $affichageCapacite = new GestionChambreDAO($app['db']);
+            // $capacite = $affichageCapacite->selectCapacite();
+
+            // $affichageCategorie = new GestionChambreDAO($app['db']);
+            // $categorie = $affichageCategorie->selectCategorie();
+
+            // $suppression = new GestionChambreDAO($app['db']);
+            // $suppressionChambre = $suppression->deleteChambre($id_chambres);
+
+            
+            // $msgValidationSup = "La chambre a bien été supprimé";
 
             return $app->redirect('/hotel/public/admin/gestion_chambres');
             
-            return $app['twig']->render('basic/gestion_chambres.html.twig', array("chambres" => $chambre,
-                                                                                    "capacites" => $capacite,
-                                                                                    "categories" => $categorie,
-                                                                                    "msgValidation" => $msgValidation));
+            // return $app['twig']->render('basic/gestion_chambres.html.twig', array("chambres" => $chambre,
+            //                                                                         "capacites" => $capacite,
+            //                                                                         "categories" => $categorie,
+            //                                                                         "msgValidationSup" => $msgValidationSup));
         }
 
     }
