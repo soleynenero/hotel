@@ -22,6 +22,10 @@
             return $this->db;
         }
 
+        public static function listServices($bdd){
+            $listServices = $bdd->fetchAll("SELECT * FROM services"); // liste des services qui seront affichés dans le formulaire de réservation
+            return $listServices;
+        }
 
         public function recupEmail(int $idUser, string $email) {
 

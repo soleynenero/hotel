@@ -24,12 +24,19 @@ namespace Hotel\Controller;
             
             if(empty($idUser)){ // si l'utilisateur n'est pas identifié
                 $this->reserv_error = "Merci de vous connecter avant de réserver une chambre.";
+                $listServices = ReservDAO::listServices($app['db']);
                 return $app['twig']->render('index.html.twig', array(
-                'reserv_error' => $this->reserv_error));
+                'reserv_error' => $this->reserv_error,
+                "date_debut" => $debut1,
+                "date_fin" => $fin1,
+                "nbPersonne" => $nbPerson1,
+                "categorie" => $cat1,
+                "listService" => $listServices));
             }
 
             if(empty($nom) || empty($prenom) || empty($email) || empty($cat1) || empty($nbPerson1) || empty($debut1) || empty($fin1)) {// si des champs sont vides
                 $this->reserv_error = "Vous devez remplir tous les champs, svp !";
+                $listServices = ReservDAO::listServices($app['db']);
                 return $app['twig']->render('index.html.twig', array(
                     'reserv_error' => $this->reserv_error,
                     "id_user" => $_SESSION['user']['user_id'],
@@ -39,7 +46,8 @@ namespace Hotel\Controller;
                     "date_debut" => $debut1,
                     "date_fin" => $fin1,
                     "nbPersonne" => $nbPerson1,
-                    "categorie" => $cat1
+                    "categorie" => $cat1,
+                    "listService" => $listServices
                 )); // retour à la réservation 
             }
 
@@ -48,6 +56,7 @@ namespace Hotel\Controller;
 
             if($debut1 < $today){
                 $this->reserv_error = "Erreur : Le début du séjour est antérieur à la date actuelle";
+                $listServices = ReservDAO::listServices($app['db']);
                 return $app['twig']->render('index.html.twig', array(
                 'reserv_error' => $this->reserv_error,
                 "id_user" => $_SESSION['user']['user_id'],
@@ -57,12 +66,14 @@ namespace Hotel\Controller;
                 "date_debut" => $debut1,
                 "date_fin" => $fin1,
                 "nbPersonne" => $nbPerson1,
-                "categorie" => $cat1
+                "categorie" => $cat1,
+                "listService" => $listServices
                 ));
             }
 
             if($fin1 < $debut1){
                 $this->reserv_error = "Erreur : La fin du séjour est antérieure à la date de début !";
+                $listServices = ReservDAO::listServices($app['db']);
                 return $app['twig']->render('index.html.twig', array(
                 'reserv_error' => $this->reserv_error,
                 "id_user" => $_SESSION['user']['user_id'],
@@ -72,7 +83,8 @@ namespace Hotel\Controller;
                 "date_debut" => $debut1,
                 "date_fin" => $fin1,
                 "nbPersonne" => $nbPerson1,
-                "categorie" => $cat1
+                "categorie" => $cat1,
+                "listService" => $listServices
                 ));
             }
             /* fin contrôle des dates*/
@@ -104,6 +116,7 @@ namespace Hotel\Controller;
 
                 else { // si pas de chambre, retour à la réservation 
                     $this->reserv_error = "Il n'y a plus de chambre disponible. Changez de catégorie de chambre, de date de séjour ou le nombre de personne.";
+                    $listServices = ReservDAO::listServices($app['db']);
                     return $app['twig']->render('index.html.twig', array(
                     'reserv_error' => $this->reserv_error,
                     "id_user" => $_SESSION['user']['user_id'],
@@ -113,7 +126,8 @@ namespace Hotel\Controller;
                     "date_debut" => $debut1,
                     "date_fin" => $fin1,
                     "nbPersonne" => $nbPerson1,
-                    "categorie" => $cat1
+                    "categorie" => $cat1,
+                    "listService" => $listServices
                     )); 
                 }
 
@@ -121,7 +135,8 @@ namespace Hotel\Controller;
             else{ // si problème d'email ou d'id_user, retour à la réservation
                 $this->reserv_error = "Vos identifiants sont incorrects, veuillez renseigner votre mail de connexion. Si le problème persiste, déconnectez-vous et reconnectez-vous.";
                 return $app['twig']->render('index.html.twig', array(
-                    'reserv_error' => $this->reserv_error
+                    'reserv_error' => $this->reserv_error,
+                    // "listService" => $listServices
                 ));  
             }
         } // fin de verifAction

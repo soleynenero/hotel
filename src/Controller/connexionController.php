@@ -6,6 +6,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Hotel\Model\TokensDAO;
     use Hotel\Model\ConnexionDAO;
+    use Hotel\Model\ReservDAO;
     use Silex\Controller;
     use \DateTime;
 
@@ -30,9 +31,7 @@
             // if($user == false)
             //     return $app->redirect("connexion");
 
-
             if($mdp == $user['mdp']){ //Si mdp bdd = mdp rentré par l'utilisateur
-
                 
                 $app['db']->delete('tokens', array('user_id' => 1, "type" =>"connexion")); //on efface le token de type connection de l'utilisateur qui resterait dans la bdd
 
@@ -64,12 +63,14 @@
                     return $app->redirect('admin');
                 }
                 
+                $listServices = ReservDAO::listServices($app['db']);
                 return $app['twig']->render('index.html.twig', array(
                     "id_user" => $_SESSION['user']['user_id'],
                     "prenom" => $_SESSION['user']['prenom'],
                     "nom" => $_SESSION['user']['nom'],
-                    "email" => $_SESSION['user']['email']
-                    )); // Si pas admn retirection vers la home
+                    "email" => $_SESSION['user']['email'],
+                    "listService" => $listServices
+                )); // Si pas admin redirection vers la home
             }else {
                 $errors = "email ou mot de passe renseigné incorrect"; // si mauvais mdp on remplit la var errors
             }
@@ -81,7 +82,7 @@
                 //Si erreur on renvoi vers la page de co' avec la variable errors
                 }
 
-            return $app['twig']->render('index.html.twig', array()); //A supprimer ?? doublon de la ligne 58
+            // return $app['twig']->render('index.html.twig', array()); //A supprimer ?? doublon de la ligne 58
 
         }
 

@@ -96,11 +96,13 @@
                     <hr></hr>
                     <div class="form-group" id="resaServices">
                         <h4 class="text-center">Services souhaités</h4>
+                        {% if listService is defined %}
                         {% for index in listService %}
                         {# {{ dump(index) }}  #}
                         <input type="checkbox" name="idserv[]" value="{{index.id_services}}">{{ index.nom_service}} ({{ index.prix_service}} €)<br>
                     
                         {% endfor %}
+                        {% endif %}
                     </div>
                     <button class="btn btn-default col-xs-12 col-md-6 col-md-offset-3">Réserver</button>
                 </form>    
