@@ -256,10 +256,38 @@ body::-webkit-scrollbar {
 }
 
 
+/* PAGES ERREUR 4XX 5XX*/
+
+#oups {
+    font-weight:bold;
+    text-transform:uppercase;
+    color:#272727;
+    letter-spacing:2pt;
+    word-spacing:0pt;
+    font-size:5em;
+    text-align:left;
+    line-height:4;
+}
+
+#textErreur {
+    color:#272727; 
+    font-size: 1em;
+    font-style: italic;
+}
+
+#imgErreur {
+    margin-top: 8em;
+}
+ #containerError {
+    min-height: 580px;
+ }
+
+
 #iconeAdminFront {
     
     position: fixed;
     bottom: 1.08em;
     left: 1.17em;
 }
+
 
