@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // function verifParam
 
- $verifParam = function (Request $request, $verifRequest = array()): array{
+ function verifParam(Request $request, $verifRequest = array()): array{
 
     $error = false;
     $messageError = "";
@@ -59,12 +59,12 @@ $verifParamInscription = function (Request $request) {
 
 
 // middleware verifie si utilisateur a bien rentré email et password dans le formlaire de co
-// $verifParamLogin = function (Request $request) {
-//     global $app;
-//     $retour = verifParam($request->request, array("email","mdp"));
-//     if($retour["error"])
-//         return new RedirectResponse('connexion');
-// };
+$verifParamLogin = function (Request $request) {
+    global $app;
+    $retour = verifParam($request->request, array("email","mdp"));
+    if($retour["error"])
+        return new RedirectResponse('connexion');
+};
 
 
 //Gestion de COOKIE et SESSION

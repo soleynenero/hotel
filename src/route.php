@@ -60,7 +60,7 @@ $app->get('/', function () use ($app) {
         ));
     }
 
-})->bind('Home');
+// })->bind('Home');
 
     
 })->bind('home');
@@ -144,7 +144,7 @@ $app->get('/inscription', function() use($app)
 })->bind('inscription');
  
 
-$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')->before($verifParamInscription)
+$app->post('/inscription','Hotel\Controller\AuthentificationController::InscriptionAction')
 
 ;
 
@@ -162,7 +162,7 @@ $app->get('/connexion', function() use($app)
 
 
 $app->post('/connexion', "Hotel\Controller\ConnexionController::login")
-//->before($verifParamLogin)
+// ->before($verifParamLogin)
 ;
 
 
@@ -183,9 +183,6 @@ $app->get('/oubli_mdp', function() use($app)
 $app->post('/oubli_mdp','Hotel\Controller\ForgottenController::verifEmailAction')
 ;
 
-// // Envoi du mot de passe : ne fonctionne pas
-// $app->post('/oubli_mdp', 'Hotel\Controller\ForgottenController::sendPasswordAction')
-// ;
 
 /*** LES ROUTES DES PAGES SECONDAIRES ***/
 
@@ -206,12 +203,7 @@ $app->get('/profil_membre/modificationInfos', "Hotel\Controller\InfoUserControll
 // ->before($verifParamLogin)
 ;
 $app->post('/profil_membre/modificationInfos', "Hotel\Controller\InfoUserController::modificationProfilAction");
-    // Post à compléter : nom , prenom ,  adresse , ville , code postal , tel , email , modif mdp
 
-//     // Post à compléter : nom , prenom ,  adresse , ville , code postal , tel , email , modif mdp
-// ->bind('profil_membre1')
-// // ->before($verifParamLogin)
-// ;
 
 // modification reservation
 $app->get('/profil_membre/reservation', "Hotel\Controller\InfoUserController::affichageReservationAction")->bind('reservation')
@@ -242,10 +234,7 @@ $app->get('/deconnexion', function() use($app){
 /************************************************* */
 /****************** ROUTE CHAMBRES *************** */
 /************************************************* */
-// $app->get('/Chambres', function() use($app)
-// {
-// return $app['twig']->render('basic/chambres.html.twig', array());
-// })->bind('chambres');
+
 
 //permet de voir les chambres depuis la page index
 $app->get('/Chambres' , function() use($app)
@@ -331,11 +320,6 @@ $app->get('/admin', function() use($app)
 $app->get('/admin/gestion_membres', "Hotel\Controller\GestionMembreController::affichageMembreAction")
 ->bind('gestion_membres');
 
-$app->post('/admin/gestion_membres', function() use($app)
-{
-// Post à compléter : nom , prenom adresse , ville , code postal , telephone , email, statut
-});
-
 
 /************************************************* */
 /********** ROUTE GESTION RESERVATIONS ************/
@@ -386,7 +370,7 @@ $app->get('/admin/gestion_chambres/suppression/{id_chambres}', "Hotel\Controller
 $app->get('/admin/gestion_services', "Hotel\Controller\GestionServiceController::affichageServiceAction")
 ->bind('gestion_services');
 
-$app->post('/admin/gestion_services', "Hotel\Controller\GestionServiceController::ajoutChambreAction");
+$app->post('/admin/gestion_services', "Hotel\Controller\GestionServiceController::ajoutServiceAction");
 
 
 // // d'aller sur la page de modification des chambres
