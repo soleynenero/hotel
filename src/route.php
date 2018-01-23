@@ -229,7 +229,7 @@ $app->get('/deconnexion', function() use($app){
 
     setcookie("hotel");
     session_destroy();
-    return $app->redirect("home");
+    return $app->redirect("/");
 
 })->bind('deconnexion');
 
