@@ -12,7 +12,7 @@
 
 <div class="container">
     {% for categorie in categories %}
-    <div class="row spacer" id="{{categorie.type_categorie}}" style="padding-bottom: 3em;">
+    <div class="row spacer" id="{{categorie.type_categorie}}" style="padding-bottom: 8em;">
         <h1 class="title">Chambre {{categorie.type_categorie}}<a type="submit" class="btn btn-default" style="font-family: 'Raleway';font-size:15px;margin-left:3em;" href="{{ path ('home') }}#reservation">Réserver!</a></h1>
 
         <div class="col-sm-12 col-md-12" style="margin: 1em 0; padding-top:2em;">
@@ -21,7 +21,7 @@
                     <div class="carousel-inner role="listbox" ">
                         <div class="item active">
                             <img src="{{ asset('assets_front/images/photos/STD1.jpg') }}" class="img-responsive" alt="First slide">
-                        </div>
+                            </div>
                         <div class="item">
                             <img src="{{ asset('assets_front/images/photos/STD2.jpg') }}" class="img-responsive" alt="Second slide">
                         </div>

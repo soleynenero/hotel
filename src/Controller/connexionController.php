@@ -72,7 +72,7 @@
                     "prenom" => $_SESSION['user']['prenom'],
                     "nom" => $_SESSION['user']['nom'],
                     "email" => $_SESSION['user']['email'],
-                    "listService" => $listServices
+                    "listService" => $listServices,
                 )); // Si pas admin redirection vers la home
             }else {
                 $errors = "email ou mot de passe renseigné incorrect"; // si mauvais mdp on remplit la var errors

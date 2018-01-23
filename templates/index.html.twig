@@ -97,11 +97,11 @@
                     <hr></hr>
                     <div class="form-group" id="resaServices">
                         <h4 class="text-center">Services souhaités</h4>
-                        {# {% for index in listService %} #}
-                        {# {{ dump(index) }}  #}
-                            {# <input type="checkbox" name="idserv[]" value="{{index.id_services}}">{{ index.nom_service}} ({{ index.prix_service}} €)<br>
+                        {% for index in listService %}
+
+                            <input type="checkbox" name="idserv[]" value="{{index.id_services}}">{{ index.nom_service}} ({{ index.prix_service}} €)<br>
                         
-                            {% endfor %} #}
+                        {% endfor %}
                     </div>
                     <button class="btn btn-default col-xs-12 col-md-6 col-md-offset-3">Réserver</button>
                 </form>    
@@ -112,7 +112,6 @@
 <!-- reservation-information -->
 
 
-<!-- Modifié par Sathia -->
 
 <!-- Les Chambres -->
 <div class="services wowload fadeInUp" id="Chambres">
@@ -124,7 +123,7 @@
                 <div class="col-sm-4" id="STD" style="margin-bottom: 1.5em">
                     <!-- RoomCarousel -->
                     <div id="{{categorie.type_categorie}}" class="carousel slide" data-ride="carousel">
-                        {% if(categorie.type_categorie == 'Standard') %}
+                        {% if categorie.type_categorie == 'Standard' %}
                             <div class="carousel-inner">
                             <div class="item active">
                                 <img src="{{ asset('assets_front/images/photos/STD1.jpg') }}" class="img-responsive" alt="slide">
@@ -137,7 +136,7 @@
                             </div>
                         {% endif %}
 
-                        {% if(categorie.type_categorie == 'Superieure') %}
+                        {% if categorie.type_categorie == 'Superieure' %}
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <img src="{{ asset('assets_front/images/photos/SUP1.jpg') }}" class="img-responsive" alt="slide">
@@ -151,7 +150,7 @@
                             </div>
                         {% endif %}
 
-                        {% if(categorie.type_categorie == 'Deluxe') %}
+                        {% if categorie.type_categorie == 'Deluxe' %}
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <img src="{{ asset('assets_front/images/photos/SUITE1.jpg') }}" class="img-responsive" alt="slide">

@@ -70,12 +70,12 @@ $verifParamLogin = function (Request $request) {
 
 
 // middleware pour modification du profil
-$verifParamModifProfil = function (Request $request) {
-    global $app;
-    $retour = verifParam($request->request, array("prenom","nom","telephone","email","adresse","ville","code_postal"));
-    if($retour["error"])
-        $app["error"] = $retour;
-};
+// $verifParamModifProfil = function (Request $request) {
+//     global $app;
+//     $retour = verifParam($request->request, array("prenom","nom","telephone","email","adresse","ville","code_postal"));
+//     if($retour["error"])
+//         $app["error"] = $retour;
+// };
 
 // // middleware pour modification du mdp
 // $verifParamModifProfil = function (Request $request) {

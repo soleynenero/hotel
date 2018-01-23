@@ -19,7 +19,8 @@ namespace Hotel\Controller;
             $cat1 = htmlspecialchars(trim($request->get("id_categorie1"))); 
             $debut1 = htmlspecialchars(trim($request->get("date_debut1"))); 
             $nbPerson1 = htmlspecialchars(trim($request->get("nb_personne1"))); 
-            $fin1 = htmlspecialchars(trim($request->get("date_fin1"))); 
+            $fin1 = htmlspecialchars(trim($request->get("date_fin1")));
+            $categorie = $app['db']->fetchAll("SELECT * FROM categorie_chambre"); //permet de voir les catégories de chambres
 
             
             if(empty($idUser)){ // si l'utilisateur n'est pas identifié
@@ -31,6 +32,7 @@ namespace Hotel\Controller;
                 "date_fin" => $fin1,
                 "nbPersonne" => $nbPerson1,
                 "categorie" => $cat1,
+                "categories" => $categorie,
                 "listService" => $listServices));
             }
 
@@ -47,6 +49,7 @@ namespace Hotel\Controller;
                     "date_fin" => $fin1,
                     "nbPersonne" => $nbPerson1,
                     "categorie" => $cat1,
+                    "categories" => $categorie,
                     "listService" => $listServices
                 )); // retour à la réservation 
             }
@@ -67,6 +70,7 @@ namespace Hotel\Controller;
                 "date_fin" => $fin1,
                 "nbPersonne" => $nbPerson1,
                 "categorie" => $cat1,
+                "categories" => $categorie,
                 "listService" => $listServices
                 ));
             }
@@ -84,6 +88,7 @@ namespace Hotel\Controller;
                 "date_fin" => $fin1,
                 "nbPersonne" => $nbPerson1,
                 "categorie" => $cat1,
+                "categories" => $categorie,
                 "listService" => $listServices
                 ));
             }
@@ -127,6 +132,7 @@ namespace Hotel\Controller;
                     "date_fin" => $fin1,
                     "nbPersonne" => $nbPerson1,
                     "categorie" => $cat1,
+                    "categories" => $categorie,
                     "listService" => $listServices
                     )); 
                 }
@@ -136,6 +142,7 @@ namespace Hotel\Controller;
                 $this->reserv_error = "Vos identifiants sont incorrects, veuillez renseigner votre mail de connexion. Si le problème persiste, déconnectez-vous et reconnectez-vous.";
                 return $app['twig']->render('index.html.twig', array(
                     'reserv_error' => $this->reserv_error,
+                    "categories" => $categorie,
                     // "listService" => $listServices
                 ));  
             }
